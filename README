@@ -2,6 +2,8 @@ This is a decoder for K1JT's Weak Signal Propagation Reporter (WSPR) mode.
 The decoder is written in C and is a command-line program that takes
 a single argument which is the name of the .wav file to process.
 
+It requires only two external libraries: libsndfile and libfftw3
+
 The name, wsprcan, is derived from "WSPR" decoder written in "C" by k9"AN".
 
 The motivation for this project was to learn how to demodulate and decode
@@ -15,7 +17,8 @@ it does not decode signals using the 6-digit locator. Also, no provision
 is made for uploading spots to the WSPRnet database. 
 
 The detection algorithm used in wsprcan is less conservative about 
-choosing candidate signals to process.
+choosing candidate signals to process. In initial tests, it appears that 
+wsprcan may decode more signals than wspr on a crowded band, such as 20m.
 
 The algorithm for finding initial estimates of frequency, drift, and time
 shift is almost identical to Joe's.
