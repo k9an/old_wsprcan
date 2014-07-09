@@ -127,8 +127,8 @@ int mode)
     float dt=1.0/375.0, df=375.0/256.0;
     long int i, j, k;
     double pi=4.*atan(1.0);
-    float f0,fp,ss;
-    long int lag;
+    float f0=0.0,fp,ss;
+    int lag;
     
     double
     i0[162],q0[162],
@@ -155,7 +155,7 @@ int mode)
     covmax=-1e30;
     pmax=-1e30;
 
-    int ifmin, ifmax;
+    int ifmin=0, ifmax=0;
 
 // mode is the last argument:
 // 0 no frequency or drift search. find best time lag.
@@ -473,14 +473,12 @@ int floatcomp(const void* elem1, const void* elem2)
 
 int main(int argc, char *argv[])
 {
-	double mebn0,mesn0,mnoise;
-    int i,j,k;
+    long int i,j,k;
     float *buffer;
     double *idat, *qdat;
     double mi, mq, mi2, mq2, miq;
     unsigned char *symbols, *decdata;
     signed char message[]={-9,13,-35,123,57,-39,64,0,0,0,0};
-    FILE *fp;
     int32_t n1,n2;
     char *callsign,*grid;
 
@@ -665,6 +663,12 @@ int main(int argc, char *argv[])
 
 // find all local maxima in smoothed spectrum.
     float freq0[200],snr0[200],drift0[200],shift0[200];
+    for (i=0; i<200; i++) {
+        freq0[i]=0.0;
+        snr0[i]=0.0;
+        drift0[i]=0.0;
+        shift0[i]=0.0;
+    }
     int npk=0;
     df=375.0/256.0/2;
     for(j=1; j<410; j++) {
@@ -675,8 +679,9 @@ int main(int argc, char *argv[])
         }
     }
 
-// do course estimates freq, drift and shift using k1jt's basic approach, more or less.
-    int idrift,ifr,if0,ifd,k0,kindex;
+// do coarse estimates freq, drift and shift using k1jt's basic approach, more or less.
+    int idrift,ifr,if0,ifd,k0;
+    long int kindex;
     float smax, pmax,ss,pow,p0,p1,p2,p3;
     for(j=0; j<npk; j++) {
         smax=-1e30;
@@ -734,7 +739,7 @@ int main(int argc, char *argv[])
 
     nbits=81;
     symbols=malloc(sizeof(char)*nbits*2);
-    
+    memset(symbols,0,sizeof(char)*nbits*2);
     float f1, fstep, sync, drift1;
     int shift1, lagmin, lagmax, lagstep;
     decdata=malloc((nbits+7)/8);
@@ -801,7 +806,7 @@ int main(int argc, char *argv[])
             printf("\n");
         }
  */
-        ierr= fano(&metric,&cycles,decdata,symbols,nbits,mettab,delta,maxcycles);
+        ierr = fano(&metric,&cycles,decdata,symbols,nbits,mettab,delta,maxcycles);
 
 //        printf("ierr %d metric %d  cycles %d\n",ierr,metric,cycles/81);
 
@@ -829,7 +834,7 @@ int main(int argc, char *argv[])
             if( !dupe) {
                 uniques++;
                 strcpy(allcalls[uniques],callsign);
-            printf("%.3d %6.1f %6.1f %6.1f   %4.2f %6.1f  %s %s %d %lu\n",j,f1,drift1,snr0[j],
+            printf("%.3ld %6.1f %6.1f %6.1f   %4.2f %6.1f  %s %s %d %lu\n",j,f1,drift1,snr0[j],
                    sync,shift1*dt-2.0, callsign, grid, ntype, cycles/81);
             }
         } else {
