@@ -1,0 +1,32 @@
+This is a decoder for K1JT's Weak Signal Propagation Reporter (WSPR) mode.
+The decoder is written in C and is a command-line program that takes
+a single argument which is the name of the .wav file to process.
+
+The name, wsprcan, is derived from "WSPR" decoder written in "C" by k9"AN".
+
+The motivation for this project was to learn how to demodulate and decode
+wspr signals and to refresh my C programming skills so that I can help my
+son learn to program in C.
+
+Features:
+The wsprcan program will decode and display signals that are outside of 
+the wspr frequency segment by up to 50 Hz on each side. At present,
+it does not decode signals using the 6-digit locator. Also, no provision
+is made for uploading spots to the WSPRnet database. 
+
+The detection algorithm used in wsprcan is less conservative about 
+choosing candidate signals to process.
+
+The algorithm for finding initial estimates of frequency, drift, and time
+shift is almost identical to Joe's.
+
+The algorithm for refining the estimates of frequency, drift, and time shift
+is a bit different from Joe's.
+
+The sequential Fano decoder used to decode the message is Phil Karn's fano.c
+
+Steve, k9an
+Urbana, Illinois
+s.j.franke@icloud.com
+
+
