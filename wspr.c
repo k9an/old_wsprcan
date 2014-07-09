@@ -296,6 +296,7 @@ int mode)
             for (j=0; j<256; j++)
             {
                 k=best_shift+i*256+j;
+                if( (k>0) & (k<np) ) {
                 phase=2*pi*(fp-1.5*df)*k*dt;
                 i0[i]=i0[i]+id[k]*cos(phase)+qd[k]*sin(phase);
                 q0[i]=q0[i]-id[k]*sin(phase)+qd[k]*cos(phase);
@@ -308,7 +309,7 @@ int mode)
                 phase=2*pi*(fp+1.5*df)*k*dt;
                 i3[i]=i3[i]+id[k]*cos(phase)+qd[k]*sin(phase);
                 q3[i]=q3[i]-id[k]*sin(phase)+qd[k]*cos(phase);
-                
+                }
             }
             
             p0=i0[i]*i0[i]+q0[i]*q0[i];
