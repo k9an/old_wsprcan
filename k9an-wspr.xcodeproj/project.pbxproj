@@ -34,7 +34,7 @@
 		33DF714E196CD90900DCC2E8 /* Makefile.linux */ = {isa = PBXFileReference; lastKnownFileType = text; path = Makefile.linux; sourceTree = "<group>"; };
 		33E53C9519648C400070C73A /* k9an-wspr */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "k9an-wspr"; sourceTree = BUILT_PRODUCTS_DIR; };
 		33E53C9A19648C400070C73A /* k9an_wspr.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = k9an_wspr.1; sourceTree = "<group>"; };
-		33E53CA119648C770070C73A /* wspr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = wspr.c; path = "k9an-wspr/wspr.c"; sourceTree = "<group>"; };
+		33E53CA119648C770070C73A /* wspr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wspr.c; sourceTree = "<group>"; };
 		33E53CA31965E3DD0070C73A /* fano.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fano.c; sourceTree = "<group>"; };
 		33E53CA41965E3DD0070C73A /* fano.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fano.h; sourceTree = "<group>"; };
 		33E53CA61965E3DD0070C73A /* metrics.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = metrics.c; sourceTree = "<group>"; };
