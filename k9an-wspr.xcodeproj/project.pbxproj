@@ -7,8 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		33E53C9919648C400070C73A /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 33E53C9819648C400070C73A /* main.c */; };
+		33DF714C196CA60F00DCC2E8 /* mettab.c in Sources */ = {isa = PBXBuildFile; fileRef = 33DF714B196CA60F00DCC2E8 /* mettab.c */; };
 		33E53C9B19648C400070C73A /* k9an_wspr.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33E53C9A19648C400070C73A /* k9an_wspr.1 */; };
+		33E53CA219648C770070C73A /* wspr.c in Sources */ = {isa = PBXBuildFile; fileRef = 33E53CA119648C770070C73A /* wspr.c */; };
+		33E53CAA1965E3DD0070C73A /* fano.c in Sources */ = {isa = PBXBuildFile; fileRef = 33E53CA31965E3DD0070C73A /* fano.c */; };
+		33E53CAC1965E3DD0070C73A /* metrics.c in Sources */ = {isa = PBXBuildFile; fileRef = 33E53CA61965E3DD0070C73A /* metrics.c */; };
+		33E53CAF1965E3DD0070C73A /* tab.c in Sources */ = {isa = PBXBuildFile; fileRef = 33E53CA91965E3DD0070C73A /* tab.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,9 +29,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		33DF714B196CA60F00DCC2E8 /* mettab.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mettab.c; sourceTree = "<group>"; };
+		33DF714D196CD8C300DCC2E8 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		33DF714E196CD90900DCC2E8 /* Makefile.linux */ = {isa = PBXFileReference; lastKnownFileType = text; path = Makefile.linux; sourceTree = "<group>"; };
 		33E53C9519648C400070C73A /* k9an-wspr */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "k9an-wspr"; sourceTree = BUILT_PRODUCTS_DIR; };
-		33E53C9819648C400070C73A /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		33E53C9A19648C400070C73A /* k9an_wspr.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = k9an_wspr.1; sourceTree = "<group>"; };
+		33E53CA119648C770070C73A /* wspr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = wspr.c; path = "k9an-wspr/wspr.c"; sourceTree = "<group>"; };
+		33E53CA31965E3DD0070C73A /* fano.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fano.c; sourceTree = "<group>"; };
+		33E53CA41965E3DD0070C73A /* fano.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fano.h; sourceTree = "<group>"; };
+		33E53CA61965E3DD0070C73A /* metrics.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = metrics.c; sourceTree = "<group>"; };
+		33E53CA91965E3DD0070C73A /* tab.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tab.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +55,14 @@
 		33E53C8C19648C400070C73A = {
 			isa = PBXGroup;
 			children = (
+				33E53CA119648C770070C73A /* wspr.c */,
+				33DF714B196CA60F00DCC2E8 /* mettab.c */,
+				33E53CA31965E3DD0070C73A /* fano.c */,
+				33E53CA41965E3DD0070C73A /* fano.h */,
+				33E53CA61965E3DD0070C73A /* metrics.c */,
+				33DF714E196CD90900DCC2E8 /* Makefile.linux */,
+				33DF714D196CD8C300DCC2E8 /* Makefile */,
+				33E53CA91965E3DD0070C73A /* tab.c */,
 				33E53C9719648C400070C73A /* k9an-wspr */,
 				33E53C9619648C400070C73A /* Products */,
 			);
@@ -60,7 +79,6 @@
 		33E53C9719648C400070C73A /* k9an-wspr */ = {
 			isa = PBXGroup;
 			children = (
-				33E53C9819648C400070C73A /* main.c */,
 				33E53C9A19648C400070C73A /* k9an_wspr.1 */,
 			);
 			path = "k9an-wspr";
@@ -117,7 +135,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				33E53C9919648C400070C73A /* main.c in Sources */,
+				33E53CA219648C770070C73A /* wspr.c in Sources */,
+				33DF714C196CA60F00DCC2E8 /* mettab.c in Sources */,
+				33E53CAC1965E3DD0070C73A /* metrics.c in Sources */,
+				33E53CAA1965E3DD0070C73A /* fano.c in Sources */,
+				33E53CAF1965E3DD0070C73A /* tab.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,6 +219,11 @@
 		33E53C9F19648C400070C73A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"LIBRARY_SEARCH_PATHS[arch=*]" = /opt/local/lib;
+				"OTHER_LDFLAGS[arch=*]" = (
+					"-lsndfile",
+					"-lfftw3",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -204,6 +231,11 @@
 		33E53CA019648C400070C73A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				LIBRARY_SEARCH_PATHS = /opt/local/lib;
+				"OTHER_LDFLAGS[arch=*]" = (
+					"-lsndfile",
+					"-lfftw3",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -227,6 +259,7 @@
 				33E53CA019648C400070C73A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
