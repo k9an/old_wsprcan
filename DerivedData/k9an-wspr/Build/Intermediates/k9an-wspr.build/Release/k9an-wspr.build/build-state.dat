@@ -1,738 +1,0 @@
-Tk9an-wspr
-v6
-r1
-cCheck dependencies
-cCompileC DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/wspr.o /Users/sfranke/k9an-wspr/wspr.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/mettab.o /Users/sfranke/k9an-wspr/mettab.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/metrics.o /Users/sfranke/k9an-wspr/metrics.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/fano.o /Users/sfranke/k9an-wspr/fano.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/tab.o /Users/sfranke/k9an-wspr/tab.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler
-cLd /Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Products/Release/k9an-wspr normal x86_64
-cGenerateDSYMFile /Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Products/Release/k9an-wspr.dSYM /Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Products/Release/k9an-wspr
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk
-c0000000053495B5800000000000000AA
-t1397316440
-s170
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/SDKSettings.plist
-c00000000526AE0BC000000000000044C
-t1382736060
-s1100
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/CoreServices/SystemVersion.plist
-c000000005327057800000000000001DE
-t1395066232
-s478
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/libSystem.dylib
-c0000000053270579000000000000681C
-t1395066233
-s26652
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libcache.dylib
-c00000000526AE0C20000000000004734
-t1382736066
-s18228
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libcommonCrypto.dylib
-c00000000526AE0C2000000000000FC6C
-t1382736066
-s64620
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libcompiler_rt.dylib
-c00000000526AE0C2000000000000F6A0
-t1382736066
-s63136
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libcopyfile.dylib
-c00000000526AE0C20000000000006254
-t1382736066
-s25172
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libcorecrypto.dylib
-c00000000526AE0C2000000000000E0F8
-t1382736066
-s57592
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libdispatch.dylib
-c0000000053270579000000000000D6DC
-t1395066233
-s55004
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libdyld.dylib
-c00000000532705790000000000006308
-t1395066233
-s25352
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libkeymgr.dylib
-c00000000526AE0C20000000000004050
-t1382736066
-s16464
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/liblaunch.dylib
-c00000000532705790000000000008570
-t1395066233
-s34160
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libmacho.dylib
-c00000000526AE0C20000000000005EA0
-t1382736066
-s24224
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libquarantine.dylib
-c00000000526AE0C20000000000005FAC
-t1382736066
-s24492
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libremovefile.dylib
-c00000000526AE0C20000000000004440
-t1382736066
-s17472
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libsystem_asl.dylib
-c00000000526AE0C2000000000000AA28
-t1382736066
-s43560
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libsystem_blocks.dylib
-c00000000526AE0C20000000000003E2C
-t1382736066
-s15916
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libsystem_c.dylib
-c00000000532705790000000000030B04
-t1395066233
-s199428
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libsystem_configuration.dylib
-c00000000532705790000000000005E54
-t1395066233
-s24148
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libsystem_dnssd.dylib
-c00000000532705790000000000006A90
-t1395066233
-s27280
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libsystem_info.dylib
-c00000000526AE0C200000000000178AC
-t1382736066
-s96428
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libsystem_kernel.dylib
-c0000000053270579000000000001ADC8
-t1395066233
-s110024
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libsystem_m.dylib
-c00000000526AE0C2000000000001028C
-t1382736066
-s66188
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libsystem_malloc.dylib
-c00000000532705790000000000008800
-t1395066233
-s34816
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libsystem_network.dylib
-c00000000526AE0C20000000000011090
-t1382736066
-s69776
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libsystem_notify.dylib
-c00000000526AE0C2000000000000882C
-t1382736066
-s34860
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libsystem_platform.dylib
-c000000005327057900000000000067AC
-t1395066233
-s26540
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libsystem_pthread.dylib
-c00000000526AE0C20000000000008DEC
-t1382736066
-s36332
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libsystem_sandbox.dylib
-c00000000532705790000000000004C08
-t1395066233
-s19464
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libsystem_stats.dylib
-c00000000532705790000000000002428
-t1395066233
-s9256
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libunc.dylib
-c00000000526AE0C2000000000000439C
-t1382736066
-s17308
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libunwind.dylib
-c00000000526AE0C20000000000006768
-t1382736066
-s26472
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libxpc.dylib
-c000000005327057900000000000172F4
-t1395066233
-s94964
-
-N/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/5.1/include/module.map
-c00000000532705790000000000000ADC
-t1395066233
-s2780
-
-N/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/5.1/lib/darwin/libclang_rt.osx.a
-c0000000053495B490000000000001770
-t1397316425
-s6000
-
-N/Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/fano.o
-t1404771607
-s8872
-
-N/Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/k9an-wspr.LinkFileList
-c0000000053BC6EF400000000000002D4
-t1404858100
-s724
-
-N/Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/metrics.o
-t1404746427
-s5832
-
-N/Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/mettab.o
-t1404858100
-s4104
-
-N/Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/tab.o
-t1404746427
-s2312
-
-N/Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/wspr.o
-t1404859762
-s37296
-
-N/Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Products/Release/k9an-wspr
-t1404859762
-s24664
-
-N/Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Products/Release/k9an-wspr.dSYM
-t1404858672
-s102
-
-N/Users/sfranke/Dropbox/k9an-wspr/fano.c
-c0000000053B775A50000000000001A99
-t1404532133
-s6809
-
-N/Users/sfranke/Dropbox/k9an-wspr/fano.h
-c0000000053BB1D17000000000000016F
-t1404771607
-s367
-
-N/Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c
-c0000000053BC75720000000000005F64
-t1404859762
-s24420
-
-N/Users/sfranke/Dropbox/k9an-wspr/metrics.c
-c0000000053B5B9A70000000000000AE9
-t1404418471
-s2793
-
-N/Users/sfranke/Dropbox/k9an-wspr/mettab.c
-c0000000053BC6EF30000000000000B4D
-t1404858099
-s2893
-
-N/Users/sfranke/Dropbox/k9an-wspr/tab.c
-c000000002F67F11B0000000000000376
-t795341083
-s886
-
-N/Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/fano.o
-t1404771607
-s8872
-
-N/Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/k9an-wspr.LinkFileList
-c0000000053BD668B00000000000002AC
-t1404921483
-s684
-
-N/Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/metrics.o
-t1404746427
-s5832
-
-N/Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/mettab.o
-t1404858100
-s4104
-
-N/Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/tab.o
-t1404746427
-s2312
-
-N/Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/wspr.o
-t1404921548
-s37248
-
-N/Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Products/Release/k9an-wspr
-t1404921548
-s24600
-
-N/Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Products/Release/k9an-wspr.dSYM
-t1404859762
-s102
-
-N/Users/sfranke/k9an-wspr/fano.c
-c0000000053B775A50000000000001A99
-t1404532133
-s6809
-
-N/Users/sfranke/k9an-wspr/k9an-wspr/wspr.c
-c00000000000000000000000000000000
-t2
-s0
-
-N/Users/sfranke/k9an-wspr/metrics.c
-c0000000053B5B9A70000000000000AE9
-t1404418471
-s2793
-
-N/Users/sfranke/k9an-wspr/mettab.c
-c0000000053BC6EF30000000000000B4D
-t1404858099
-s2893
-
-N/Users/sfranke/k9an-wspr/tab.c
-c000000002F67F11B0000000000000376
-t795341083
-s886
-
-N/Users/sfranke/k9an-wspr/wspr.c
-c0000000053BC75720000000000005F64
-t1404859762
-s24420
-
-N/opt/local/include/fftw3.h
-c000000005329E39000000000000045EC
-t1395254160
-s17900
-
-N/opt/local/include/sndfile.h
-c000000005292286800000000000054A0
-t1385310312
-s21664
-
-N/opt/local/lib/libfftw3.dylib
-c000000005329E390000000000012D9C4
-t1395254160
-s1235396
-
-N/opt/local/lib/libsndfile.dylib
-c00000000529228670000000000058B3C
-t1385310311
-s363324
-
-CBuild AST from /Users/sfranke/Dropbox/k9an-wspr/fano.c
-r0
-
-CBuild AST from /Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c
-r0
-
-CBuild AST from /Users/sfranke/Dropbox/k9an-wspr/metrics.c
-r0
-
-CBuild AST from /Users/sfranke/Dropbox/k9an-wspr/mettab.c
-r0
-
-CBuild AST from /Users/sfranke/Dropbox/k9an-wspr/tab.c
-r0
-
-CBuild AST from /Users/sfranke/k9an-wspr/fano.c
-r0
-
-CBuild AST from /Users/sfranke/k9an-wspr/k9an-wspr/wspr.c
-r0
-
-CBuild AST from /Users/sfranke/k9an-wspr/metrics.c
-r0
-
-CBuild AST from /Users/sfranke/k9an-wspr/mettab.c
-r0
-
-CBuild AST from /Users/sfranke/k9an-wspr/tab.c
-r0
-
-CBuild AST from /Users/sfranke/k9an-wspr/wspr.c
-r0
-
-CCheck dependencies
-r0
-lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies18"Check dependencies55bf5e4c9e6db941^bfd3644c9e6db941^---0#1#1#--18"Check dependencies36"AF79DFD6-BF6C-495E-8C2B-110AD55A339D-
-
-CCompileC DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/fano.o /Users/sfranke/Dropbox/k9an-wspr/fano.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler
-s426464407.747887
-e426464407.858026
-r1
-xCompileC
-xDerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/fano.o
-x/Users/sfranke/Dropbox/k9an-wspr/fano.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.llvm.clang.1_0.compiler
-d/Users/sfranke/Dropbox/k9an-wspr/fano.c
-d/Users/sfranke/Dropbox/k9an-wspr/fano.h
-o/Users/sfranke/Dropbox/k9an-wspr/fano.c:152:15: warning: implicit conversion loses integer precision: 'long' to 'int' [-Wshorten-64-to-32]
-o                np->tm[0] = m0;
-o                          ~ ^~
-o/Users/sfranke/Dropbox/k9an-wspr/fano.c:153:15: warning: implicit conversion loses integer precision: 'long' to 'int' [-Wshorten-64-to-32]
-o                np->tm[1] = m1;
-o                          ~ ^~
-o/Users/sfranke/Dropbox/k9an-wspr/fano.c:156:15: warning: implicit conversion loses integer precision: 'long' to 'int' [-Wshorten-64-to-32]
-o                np->tm[0] = m1;
-o                          ~ ^~
-o/Users/sfranke/Dropbox/k9an-wspr/fano.c:157:15: warning: implicit conversion loses integer precision: 'long' to 'int' [-Wshorten-64-to-32]
-o                np->tm[1] = m0;
-o                          ~ ^~
-o/Users/sfranke/Dropbox/k9an-wspr/fano.c:205:18: warning: implicit conversion loses integer precision: 'long' to 'int' [-Wshorten-64-to-32]
-o                                        np->tm[0] = m0;
-o                                                  ~ ^~
-o/Users/sfranke/Dropbox/k9an-wspr/fano.c:206:18: warning: implicit conversion loses integer precision: 'long' to 'int' [-Wshorten-64-to-32]
-o                                        np->tm[1] = m1;
-o                                                  ~ ^~
-o/Users/sfranke/Dropbox/k9an-wspr/fano.c:209:18: warning: implicit conversion loses integer precision: 'long' to 'int' [-Wshorten-64-to-32]
-o                                        np->tm[0] = m1;
-o                                                  ~ ^~
-o/Users/sfranke/Dropbox/k9an-wspr/fano.c:210:18: warning: implicit conversion loses integer precision: 'long' to 'int' [-Wshorten-64-to-32]
-o                                        np->tm[1] = m0;
-o                                                  ~ ^~
-o8 warnings generated.
-lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection47"Compile /Users/sfranke/Dropbox/k9an-wspr/fano.c186"CompileC DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/fano.o fano.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler3194bf97546bb941^7905de97546bb941^-1830"/Users/sfranke/Dropbox/k9an-wspr/fano.c:152:15: warning: implicit conversion loses integer precision: 'long' to 'int' [-Wshorten-64-to-32]                np->tm[0] = m0;                          ~ ^~/Users/sfranke/Dropbox/k9an-wspr/fano.c:153:15: warning: implicit conversion loses integer precision: 'long' to 'int' [-Wshorten-64-to-32]                np->tm[1] = m1;                          ~ ^~/Users/sfranke/Dropbox/k9an-wspr/fano.c:156:15: warning: implicit conversion loses integer precision: 'long' to 'int' [-Wshorten-64-to-32]                np->tm[0] = m1;                          ~ ^~/Users/sfranke/Dropbox/k9an-wspr/fano.c:157:15: warning: implicit conversion loses integer precision: 'long' to 'int' [-Wshorten-64-to-32]                np->tm[1] = m0;                          ~ ^~/Users/sfranke/Dropbox/k9an-wspr/fano.c:205:18: warning: implicit conversion loses integer precision: 'long' to 'int' [-Wshorten-64-to-32]                                        np->tm[0] = m0;                                                  ~ ^~/Users/sfranke/Dropbox/k9an-wspr/fano.c:206:18: warning: implicit conversion loses integer precision: 'long' to 'int' [-Wshorten-64-to-32]                                        np->tm[1] = m1;                                                  ~ ^~/Users/sfranke/Dropbox/k9an-wspr/fano.c:209:18: warning: implicit conversion loses integer precision: 'long' to 'int' [-Wshorten-64-to-32]                                        np->tm[0] = m1;                                                  ~ ^~/Users/sfranke/Dropbox/k9an-wspr/fano.c:210:18: warning: implicit conversion loses integer precision: 'long' to 'int' [-Wshorten-64-to-32]                                        np->tm[1] = m0;                                                  ~ ^~8 warnings generated.8(36%IDEClangDiagnosticActivityLogMessage2@60"Implicit conversion loses integer precision: 'long' to 'int'-426464407#18446744073709551615#0#-1#27"com.apple.dt.IDE.diagnostic23%DVTTextDocumentLocation3@46"file:///Users/sfranke/Dropbox/k9an-wspr/fano.c0000000000000000^151#14#151#14#4444#0#22"Value Conversion Issue2(3@46"file:///Users/sfranke/Dropbox/k9an-wspr/fano.c0000000000000000^151#14#151#16#4444#0#3@46"file:///Users/sfranke/Dropbox/k9an-wspr/fano.c0000000000000000^151#12#151#13#4442#0#-2@60"Implicit conversion loses integer precision: 'long' to 'int'-426464407#18446744073709551615#0#-1#27"com.apple.dt.IDE.diagnostic3@46"file:///Users/sfranke/Dropbox/k9an-wspr/fano.c0000000000000000^152#14#152#14#4462#0#22"Value Conversion Issue2(3@46"file:///Users/sfranke/Dropbox/k9an-wspr/fano.c0000000000000000^152#14#152#16#4462#0#3@46"file:///Users/sfranke/Dropbox/k9an-wspr/fano.c0000000000000000^152#12#152#13#4460#0#-2@60"Implicit conversion loses integer precision: 'long' to 'int'-426464407#18446744073709551615#0#-1#27"com.apple.dt.IDE.diagnostic3@46"file:///Users/sfranke/Dropbox/k9an-wspr/fano.c0000000000000000^155#14#155#14#4517#0#22"Value Conversion Issue2(3@46"file:///Users/sfranke/Dropbox/k9an-wspr/fano.c0000000000000000^155#14#155#16#4517#0#3@46"file:///Users/sfranke/Dropbox/k9an-wspr/fano.c0000000000000000^155#12#155#13#4515#0#-2@60"Implicit conversion loses integer precision: 'long' to 'int'-426464407#18446744073709551615#0#-1#27"com.apple.dt.IDE.diagnostic3@46"file:///Users/sfranke/Dropbox/k9an-wspr/fano.c0000000000000000^156#14#156#14#4535#0#22"Value Conversion Issue2(3@46"file:///Users/sfranke/Dropbox/k9an-wspr/fano.c0000000000000000^156#14#156#16#4535#0#3@46"file:///Users/sfranke/Dropbox/k9an-wspr/fano.c0000000000000000^156#12#156#13#4533#0#-2@60"Implicit conversion loses integer precision: 'long' to 'int'-426464407#18446744073709551615#0#-1#27"com.apple.dt.IDE.diagnostic3@46"file:///Users/sfranke/Dropbox/k9an-wspr/fano.c0000000000000000^204#17#204#17#5767#0#22"Value Conversion Issue2(3@46"file:///Users/sfranke/Dropbox/k9an-wspr/fano.c0000000000000000^204#17#204#19#5767#0#3@46"file:///Users/sfranke/Dropbox/k9an-wspr/fano.c0000000000000000^204#15#204#16#5765#0#-2@60"Implicit conversion loses integer precision: 'long' to 'int'-426464407#18446744073709551615#0#-1#27"com.apple.dt.IDE.diagnostic3@46"file:///Users/sfranke/Dropbox/k9an-wspr/fano.c0000000000000000^205#17#205#17#5788#0#22"Value Conversion Issue2(3@46"file:///Users/sfranke/Dropbox/k9an-wspr/fano.c0000000000000000^205#17#205#19#5788#0#3@46"file:///Users/sfranke/Dropbox/k9an-wspr/fano.c0000000000000000^205#15#205#16#5786#0#-2@60"Implicit conversion loses integer precision: 'long' to 'int'-426464407#18446744073709551615#0#-1#27"com.apple.dt.IDE.diagnostic3@46"file:///Users/sfranke/Dropbox/k9an-wspr/fano.c0000000000000000^208#17#208#17#5852#0#22"Value Conversion Issue2(3@46"file:///Users/sfranke/Dropbox/k9an-wspr/fano.c0000000000000000^208#17#208#19#5852#0#3@46"file:///Users/sfranke/Dropbox/k9an-wspr/fano.c0000000000000000^208#15#208#16#5850#0#-2@60"Implicit conversion loses integer precision: 'long' to 'int'-426464407#18446744073709551615#0#-1#27"com.apple.dt.IDE.diagnostic3@46"file:///Users/sfranke/Dropbox/k9an-wspr/fano.c0000000000000000^209#17#209#17#5873#0#22"Value Conversion Issue2(3@46"file:///Users/sfranke/Dropbox/k9an-wspr/fano.c0000000000000000^209#17#209#19#5873#0#3@46"file:///Users/sfranke/Dropbox/k9an-wspr/fano.c0000000000000000^209#15#209#16#5871#0#-0#0#1#-19%DVTDocumentLocation4@46"file:///Users/sfranke/Dropbox/k9an-wspr/fano.c0000000000000000^3008"CompileC DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/fano.o fano.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/sfranke/Dropbox/k9an-wspr    export LANG=en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c -arch x86_64 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=gnu99 -fmodules -fmodules-cache-path=/Users/sfranke/Dropbox/k9an-wspr/DerivedData/ModuleCache -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Werror=return-type -Werror=deprecated-objc-isa-usage -Werror=objc-root-class -Wno-missing-braces -Wparentheses -Wswitch -Wunused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wconditional-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wbool-conversion -Wenum-conversion -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -mmacosx-version-min=10.9 -g -fvisibility=hidden -Wno-sign-conversion -iquote /Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/k9an-wspr-generated-files.hmap -I/Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/k9an-wspr-own-target-headers.hmap -I/Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/k9an-wspr-all-target-headers.hmap -iquote /Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/k9an-wspr-project-headers.hmap -I/Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Products/Release/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/DerivedSources/x86_64 -I/Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/DerivedSources -F/Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Products/Release -MMD -MT dependencies -MF /Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/fano.d --serialize-diagnostics /Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/fano.dia -c /Users/sfranke/Dropbox/k9an-wspr/fano.c -o /Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/fano.o36"DA1BDFE1-4488-4092-B7EA-B402F620D579-
-b338D8676-484A-4A74-AA36-D81E573C461C
-
-CCompileC DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/fano.o /Users/sfranke/k9an-wspr/fano.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler
-r0
-
-CCompileC DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/metrics.o /Users/sfranke/Dropbox/k9an-wspr/metrics.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler
-s426439227.098919
-e426439227.745249
-r1
-xCompileC
-xDerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/metrics.o
-x/Users/sfranke/Dropbox/k9an-wspr/metrics.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.llvm.clang.1_0.compiler
-d/Users/sfranke/Dropbox/k9an-wspr/metrics.c
-o/Users/sfranke/Dropbox/k9an-wspr/metrics.c:36:9: warning: unused variable 'n' [-Wunused-variable]
-o        double n;
-o               ^
-o1 warning generated.
-lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection50"Compile /Users/sfranke/Dropbox/k9an-wspr/metrics.c192"CompileC DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/metrics.o metrics.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compilere6ae193bf26ab941^ebc7be3bf26ab941^-154"/Users/sfranke/Dropbox/k9an-wspr/metrics.c:36:9: warning: unused variable 'n' [-Wunused-variable]        double n;               ^1 warning generated.1(36%IDEClangDiagnosticActivityLogMessage2@19"Unused variable 'n'-426439227#18446744073709551615#0#-1#27"com.apple.dt.IDE.diagnostic23%DVTTextDocumentLocation3@49"file:///Users/sfranke/Dropbox/k9an-wspr/metrics.c0000000000000000^35#8#35#8#1018#0#19"Unused Entity Issue--0#0#1#-19%DVTDocumentLocation4@49"file:///Users/sfranke/Dropbox/k9an-wspr/metrics.c0000000000000000^3026"CompileC DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/metrics.o metrics.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/sfranke/Dropbox/k9an-wspr    export LANG=en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c -arch x86_64 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=gnu99 -fmodules -fmodules-cache-path=/Users/sfranke/Dropbox/k9an-wspr/DerivedData/ModuleCache -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Werror=return-type -Werror=deprecated-objc-isa-usage -Werror=objc-root-class -Wno-missing-braces -Wparentheses -Wswitch -Wunused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wconditional-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wbool-conversion -Wenum-conversion -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -mmacosx-version-min=10.9 -g -fvisibility=hidden -Wno-sign-conversion -iquote /Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/k9an-wspr-generated-files.hmap -I/Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/k9an-wspr-own-target-headers.hmap -I/Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/k9an-wspr-all-target-headers.hmap -iquote /Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/k9an-wspr-project-headers.hmap -I/Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Products/Release/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/DerivedSources/x86_64 -I/Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/DerivedSources -F/Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Products/Release -MMD -MT dependencies -MF /Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/metrics.d --serialize-diagnostics /Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/metrics.dia -c /Users/sfranke/Dropbox/k9an-wspr/metrics.c -o /Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/metrics.o36"77CFEA26-993D-4CE3-855A-BA0DD055001D-
-bFE98E8B4-022B-401B-9037-DD7D3D70DBAC
-
-CCompileC DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/metrics.o /Users/sfranke/k9an-wspr/metrics.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler
-r0
-
-CCompileC DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/mettab.o /Users/sfranke/Dropbox/k9an-wspr/mettab.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler
-s426550900.022621
-e426550900.055929
-r1
-xCompileC
-xDerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/mettab.o
-x/Users/sfranke/Dropbox/k9an-wspr/mettab.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.llvm.clang.1_0.compiler
-d/Users/sfranke/Dropbox/k9an-wspr/mettab.c
-lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection49"Compile /Users/sfranke/Dropbox/k9an-wspr/mettab.c190"CompileC DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/mettab.o mettab.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compilerbce60574a66cb941^5f400f74a66cb941^---0#0#1#-19%DVTDocumentLocation2@48"file:///Users/sfranke/Dropbox/k9an-wspr/mettab.c0000000000000000^3020"CompileC DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/mettab.o mettab.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/sfranke/Dropbox/k9an-wspr    export LANG=en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c -arch x86_64 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=gnu99 -fmodules -fmodules-cache-path=/Users/sfranke/Dropbox/k9an-wspr/DerivedData/ModuleCache -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Werror=return-type -Werror=deprecated-objc-isa-usage -Werror=objc-root-class -Wno-missing-braces -Wparentheses -Wswitch -Wunused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wconditional-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wbool-conversion -Wenum-conversion -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -mmacosx-version-min=10.9 -g -fvisibility=hidden -Wno-sign-conversion -iquote /Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/k9an-wspr-generated-files.hmap -I/Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/k9an-wspr-own-target-headers.hmap -I/Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/k9an-wspr-all-target-headers.hmap -iquote /Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/k9an-wspr-project-headers.hmap -I/Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Products/Release/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/DerivedSources/x86_64 -I/Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/DerivedSources -F/Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Products/Release -MMD -MT dependencies -MF /Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/mettab.d --serialize-diagnostics /Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/mettab.dia -c /Users/sfranke/Dropbox/k9an-wspr/mettab.c -o /Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/mettab.o36"CD013927-6007-4FD4-8B94-23757B2403C5-
-b29632A04-BCD6-4E54-959A-87F0F3285D08
-
-CCompileC DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/mettab.o /Users/sfranke/k9an-wspr/mettab.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler
-r0
-
-CCompileC DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/tab.o /Users/sfranke/Dropbox/k9an-wspr/tab.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler
-s426439227.099535
-e426439227.247742
-r1
-xCompileC
-xDerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/tab.o
-x/Users/sfranke/Dropbox/k9an-wspr/tab.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.llvm.clang.1_0.compiler
-d/Users/sfranke/Dropbox/k9an-wspr/tab.c
-lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection46"Compile /Users/sfranke/Dropbox/k9an-wspr/tab.c184"CompileC DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/tab.o tab.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler18b3193bf26ab941^3c6b3f3bf26ab941^---0#0#1#-19%DVTDocumentLocation2@45"file:///Users/sfranke/Dropbox/k9an-wspr/tab.c0000000000000000^3002"CompileC DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/tab.o tab.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/sfranke/Dropbox/k9an-wspr    export LANG=en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c -arch x86_64 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=gnu99 -fmodules -fmodules-cache-path=/Users/sfranke/Dropbox/k9an-wspr/DerivedData/ModuleCache -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Werror=return-type -Werror=deprecated-objc-isa-usage -Werror=objc-root-class -Wno-missing-braces -Wparentheses -Wswitch -Wunused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wconditional-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wbool-conversion -Wenum-conversion -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -mmacosx-version-min=10.9 -g -fvisibility=hidden -Wno-sign-conversion -iquote /Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/k9an-wspr-generated-files.hmap -I/Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/k9an-wspr-own-target-headers.hmap -I/Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/k9an-wspr-all-target-headers.hmap -iquote /Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/k9an-wspr-project-headers.hmap -I/Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Products/Release/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/DerivedSources/x86_64 -I/Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/DerivedSources -F/Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Products/Release -MMD -MT dependencies -MF /Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/tab.d --serialize-diagnostics /Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/tab.dia -c /Users/sfranke/Dropbox/k9an-wspr/tab.c -o /Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/tab.o36"683E1CFB-C20C-45D6-9B09-C3455F862F7E-
-bFE98E8B4-022B-401B-9037-DD7D3D70DBAC
-
-CCompileC DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/tab.o /Users/sfranke/k9an-wspr/tab.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler
-r0
-
-CCompileC DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/wspr.o /Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler
-s426552562.663635
-e426552562.910652
-r1
-xCompileC
-xDerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/wspr.o
-x/Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.llvm.clang.1_0.compiler
-d/Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c
-d/opt/local/include/sndfile.h
-d/opt/local/include/fftw3.h
-o/Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c:266:28: warning: implicit conversion loses integer precision: 'long' to 'int' [-Wshorten-64-to-32]
-o                best_shift=lag;
-o                          ~^~~
-o/Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c:295:16: warning: variable 'f0' may be uninitialized when used here [-Wconditional-uninitialized]
-o            fp=f0+(*drift1/2.0)*(i-81.0)/81.0;
-o               ^~
-o/Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c:130:13: note: initialize the variable 'f0' to silence this warning
-o    float f0,fp,ss;
-o            ^
-o             = 0.0
-o/Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c:183:29: warning: variable 'ifmax' may be uninitialized when used here [-Wconditional-uninitialized]
-o    for(ifreq=ifmin; ifreq<=ifmax; ifreq++)
-o                            ^~~~~
-o/Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c:158:21: note: initialize the variable 'ifmax' to silence this warning
-o    int ifmin, ifmax;
-o                    ^
-o                     = 0
-o/Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c:183:15: warning: variable 'ifmin' may be uninitialized when used here [-Wconditional-uninitialized]
-o    for(ifreq=ifmin; ifreq<=ifmax; ifreq++)
-o              ^~~~~
-o/Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c:158:14: note: initialize the variable 'ifmin' to silence this warning
-o    int ifmin, ifmax;
-o             ^
-o              = 0
-o/Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c:804:15: warning: implicit declaration of function 'fano' is invalid in C99 [-Wimplicit-function-declaration]
-o        ierr= fano(&metric,&cycles,decdata,symbols,nbits,mettab,delta,maxcycles);
-o              ^
-o/Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c:483:11: warning: unused variable 'fp' [-Wunused-variable]
-o    FILE *fp;
-o          ^
-o/Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c:476:9: warning: unused variable 'mebn0' [-Wunused-variable]
-o        double mebn0,mesn0,mnoise;
-o               ^
-o/Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c:476:15: warning: unused variable 'mesn0' [-Wunused-variable]
-o        double mebn0,mesn0,mnoise;
-o                     ^
-o/Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c:476:21: warning: unused variable 'mnoise' [-Wunused-variable]
-o        double mebn0,mesn0,mnoise;
-o                           ^
-o/Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c:562:12: warning: implicit conversion loses integer precision: 'unsigned long' to 'int' [-Wshorten-64-to-32]
-o    for (i=npoints; i<nfft1; i++) {
-o          ~^~~~~~~
-o10 warnings generated.
-lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection57"Compile /Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c196"CompileC DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/wspr.o k9an-wspr/wspr.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler8107aaf2ac6cb941^3a23f6f2ac6cb941^-2534"/Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c:266:28: warning: implicit conversion loses integer precision: 'long' to 'int' [-Wshorten-64-to-32]                best_shift=lag;                          ~^~~/Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c:295:16: warning: variable 'f0' may be uninitialized when used here [-Wconditional-uninitialized]            fp=f0+(*drift1/2.0)*(i-81.0)/81.0;               ^~/Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c:130:13: note: initialize the variable 'f0' to silence this warning    float f0,fp,ss;            ^             = 0.0/Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c:183:29: warning: variable 'ifmax' may be uninitialized when used here [-Wconditional-uninitialized]    for(ifreq=ifmin; ifreq<=ifmax; ifreq++)                            ^~~~~/Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c:158:21: note: initialize the variable 'ifmax' to silence this warning    int ifmin, ifmax;                    ^                     = 0/Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c:183:15: warning: variable 'ifmin' may be uninitialized when used here [-Wconditional-uninitialized]    for(ifreq=ifmin; ifreq<=ifmax; ifreq++)              ^~~~~/Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c:158:14: note: initialize the variable 'ifmin' to silence this warning    int ifmin, ifmax;             ^              = 0/Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c:804:15: warning: implicit declaration of function 'fano' is invalid in C99 [-Wimplicit-function-declaration]        ierr= fano(&metric,&cycles,decdata,symbols,nbits,mettab,delta,maxcycles);              ^/Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c:483:11: warning: unused variable 'fp' [-Wunused-variable]    FILE *fp;          ^/Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c:476:9: warning: unused variable 'mebn0' [-Wunused-variable]        double mebn0,mesn0,mnoise;               ^/Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c:476:15: warning: unused variable 'mesn0' [-Wunused-variable]        double mebn0,mesn0,mnoise;                     ^/Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c:476:21: warning: unused variable 'mnoise' [-Wunused-variable]        double mebn0,mesn0,mnoise;                           ^/Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c:562:12: warning: implicit conversion loses integer precision: 'unsigned long' to 'int' [-Wshorten-64-to-32]    for (i=npoints; i<nfft1; i++) {          ~^~~~~~~10 warnings generated.10(36%IDEClangDiagnosticActivityLogMessage2@60"Implicit conversion loses integer precision: 'long' to 'int'-426552562#18446744073709551615#0#-1#27"com.apple.dt.IDE.diagnostic23%DVTTextDocumentLocation3@56"file:///Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c0000000000000000^265#27#265#27#7172#0#22"Value Conversion Issue2(3@56"file:///Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c0000000000000000^265#27#265#30#7172#0#3@56"file:///Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c0000000000000000^265#26#265#27#7171#0#-2@49"Variable 'f0' may be uninitialized when used here-426552562#18446744073709551615#0#1(2@52"Initialize the variable 'f0' to silence this warning-426552562#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@56"file:///Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c0000000000000000^129#12#129#12#3272#0#14"Semantic Issue1(3@56"file:///Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c0000000000000000^129#12#129#12#3272#0#-1#27"com.apple.dt.IDE.diagnostic3@56"file:///Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c0000000000000000^294#15#294#15#7734#0#14"Semantic Issue1(3@56"file:///Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c0000000000000000^294#15#294#17#7734#0#-2@52"Variable 'ifmax' may be uninitialized when used here-426552562#18446744073709551615#0#1(2@55"Initialize the variable 'ifmax' to silence this warning-426552562#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@56"file:///Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c0000000000000000^157#20#157#20#3813#0#14"Semantic Issue1(3@56"file:///Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c0000000000000000^157#20#157#20#3813#0#-1#27"com.apple.dt.IDE.diagnostic3@56"file:///Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c0000000000000000^182#28#182#28#4360#0#14"Semantic Issue1(3@56"file:///Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c0000000000000000^182#28#182#33#4360#0#-2@52"Variable 'ifmin' may be uninitialized when used here-426552562#18446744073709551615#0#1(2@55"Initialize the variable 'ifmin' to silence this warning-426552562#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@56"file:///Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c0000000000000000^157#13#157#13#3806#0#14"Semantic Issue1(3@56"file:///Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c0000000000000000^157#13#157#13#3806#0#-1#27"com.apple.dt.IDE.diagnostic3@56"file:///Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c0000000000000000^182#14#182#14#4346#0#14"Semantic Issue1(3@56"file:///Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c0000000000000000^182#14#182#19#4346#0#-2@57"Implicit declaration of function 'fano' is invalid in C99-426552562#18446744073709551615#0#-1#27"com.apple.dt.IDE.diagnostic3@56"file:///Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c0000000000000000^803#14#803#14#23348#0#14"Semantic Issue--2@20"Unused variable 'fp'-426552562#18446744073709551615#0#-1#27"com.apple.dt.IDE.diagnostic3@56"file:///Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c0000000000000000^482#10#482#10#12366#0#19"Unused Entity Issue--2@23"Unused variable 'mebn0'-426552562#18446744073709551615#0#-1#27"com.apple.dt.IDE.diagnostic3@56"file:///Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c0000000000000000^475#8#475#8#12144#0#19"Unused Entity Issue--2@23"Unused variable 'mesn0'-426552562#18446744073709551615#0#-1#27"com.apple.dt.IDE.diagnostic3@56"file:///Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c0000000000000000^475#14#475#14#12150#0#19"Unused Entity Issue--2@24"Unused variable 'mnoise'-426552562#18446744073709551615#0#-1#27"com.apple.dt.IDE.diagnostic3@56"file:///Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c0000000000000000^475#20#475#20#12156#0#19"Unused Entity Issue--2@69"Implicit conversion loses integer precision: 'unsigned long' to 'int'-426552562#18446744073709551615#0#-1#27"com.apple.dt.IDE.diagnostic3@56"file:///Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c0000000000000000^561#11#561#11#16033#0#22"Value Conversion Issue2(3@56"file:///Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c0000000000000000^561#11#561#18#16033#0#3@56"file:///Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c0000000000000000^561#10#561#11#16032#0#-0#0#1#-19%DVTDocumentLocation4@56"file:///Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c0000000000000000^3028"CompileC DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/wspr.o k9an-wspr/wspr.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/sfranke/Dropbox/k9an-wspr    export LANG=en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c -arch x86_64 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=gnu99 -fmodules -fmodules-cache-path=/Users/sfranke/Dropbox/k9an-wspr/DerivedData/ModuleCache -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Werror=return-type -Werror=deprecated-objc-isa-usage -Werror=objc-root-class -Wno-missing-braces -Wparentheses -Wswitch -Wunused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wconditional-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wbool-conversion -Wenum-conversion -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -mmacosx-version-min=10.9 -g -fvisibility=hidden -Wno-sign-conversion -iquote /Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/k9an-wspr-generated-files.hmap -I/Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/k9an-wspr-own-target-headers.hmap -I/Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/k9an-wspr-all-target-headers.hmap -iquote /Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/k9an-wspr-project-headers.hmap -I/Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Products/Release/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/DerivedSources/x86_64 -I/Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/DerivedSources -F/Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Products/Release -MMD -MT dependencies -MF /Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/wspr.d --serialize-diagnostics /Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/wspr.dia -c /Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c -o /Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/wspr.o36"30A92E7C-B6B7-4B0C-81A2-9C6B68EC998E-
-bCF5C8CAE-4339-46D5-AB9E-C5E78936576E
-
-CCompileC DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/wspr.o /Users/sfranke/k9an-wspr/k9an-wspr/wspr.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler
-s426614283.992200
-e426614284.011842
-r0
-xCompileC
-xDerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/wspr.o
-x/Users/sfranke/k9an-wspr/k9an-wspr/wspr.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.llvm.clang.1_0.compiler
-d/Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c
-d/opt/local/include/sndfile.h
-d/opt/local/include/fftw3.h
-oclang: error: no such file or directory: '/Users/sfranke/k9an-wspr/k9an-wspr/wspr.c'
-oclang: error: no input files
-lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection49"Compile /Users/sfranke/k9an-wspr/k9an-wspr/wspr.c196"CompileC DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/wspr.o k9an-wspr/wspr.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler6c23fe0b9e6db941^7808030c9e6db941^-239"clang: error: no such file or directory: '/Users/sfranke/k9an-wspr/k9an-wspr/wspr.c'clang: error: no input filesCommand /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang failed with exit code 111(36%IDEClangDiagnosticActivityLogMessage2@60"Implicit conversion loses integer precision: 'long' to 'int'-426614284#18446744073709551615#0#-1#27"com.apple.dt.IDE.diagnostic23%DVTTextDocumentLocation3@56"file:///Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c0000000000000000^265#27#265#27#7172#0#22"Value Conversion Issue2(3@56"file:///Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c0000000000000000^265#27#265#30#7172#0#3@56"file:///Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c0000000000000000^265#26#265#27#7171#0#-2@49"Variable 'f0' may be uninitialized when used here-426614284#18446744073709551615#0#1(2@52"Initialize the variable 'f0' to silence this warning-426614284#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@56"file:///Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c0000000000000000^129#12#129#12#3272#0#14"Semantic Issue1(3@56"file:///Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c0000000000000000^129#12#129#12#3272#0#-1#27"com.apple.dt.IDE.diagnostic3@56"file:///Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c0000000000000000^294#15#294#15#7734#0#14"Semantic Issue1(3@56"file:///Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c0000000000000000^294#15#294#17#7734#0#-2@52"Variable 'ifmax' may be uninitialized when used here-426614284#18446744073709551615#0#1(2@55"Initialize the variable 'ifmax' to silence this warning-426614284#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@56"file:///Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c0000000000000000^157#20#157#20#3813#0#14"Semantic Issue1(3@56"file:///Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c0000000000000000^157#20#157#20#3813#0#-1#27"com.apple.dt.IDE.diagnostic3@56"file:///Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c0000000000000000^182#28#182#28#4360#0#14"Semantic Issue1(3@56"file:///Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c0000000000000000^182#28#182#33#4360#0#-2@52"Variable 'ifmin' may be uninitialized when used here-426614284#18446744073709551615#0#1(2@55"Initialize the variable 'ifmin' to silence this warning-426614284#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@56"file:///Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c0000000000000000^157#13#157#13#3806#0#14"Semantic Issue1(3@56"file:///Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c0000000000000000^157#13#157#13#3806#0#-1#27"com.apple.dt.IDE.diagnostic3@56"file:///Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c0000000000000000^182#14#182#14#4346#0#14"Semantic Issue1(3@56"file:///Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c0000000000000000^182#14#182#19#4346#0#-2@57"Implicit declaration of function 'fano' is invalid in C99-426614284#18446744073709551615#0#-1#27"com.apple.dt.IDE.diagnostic3@56"file:///Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c0000000000000000^803#14#803#14#23348#0#14"Semantic Issue--2@20"Unused variable 'fp'-426614284#18446744073709551615#0#-1#27"com.apple.dt.IDE.diagnostic3@56"file:///Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c0000000000000000^482#10#482#10#12366#0#19"Unused Entity Issue--2@23"Unused variable 'mebn0'-426614284#18446744073709551615#0#-1#27"com.apple.dt.IDE.diagnostic3@56"file:///Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c0000000000000000^475#8#475#8#12144#0#19"Unused Entity Issue--2@23"Unused variable 'mesn0'-426614284#18446744073709551615#0#-1#27"com.apple.dt.IDE.diagnostic3@56"file:///Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c0000000000000000^475#14#475#14#12150#0#19"Unused Entity Issue--2@24"Unused variable 'mnoise'-426614284#18446744073709551615#0#-1#27"com.apple.dt.IDE.diagnostic3@56"file:///Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c0000000000000000^475#20#475#20#12156#0#19"Unused Entity Issue--2@69"Implicit conversion loses integer precision: 'unsigned long' to 'int'-426614284#18446744073709551615#0#-1#27"com.apple.dt.IDE.diagnostic3@56"file:///Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c0000000000000000^561#11#561#11#16033#0#22"Value Conversion Issue2(3@56"file:///Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c0000000000000000^561#11#561#18#16033#0#3@56"file:///Users/sfranke/Dropbox/k9an-wspr/k9an-wspr/wspr.c0000000000000000^561#10#561#11#16032#0#-21%IDEActivityLogMessage4@124"Command /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang failed with exit code 1-426614284#18446744073709551615#0#-2#--20"Apple LLVM 5.0 Error--0#0#1#-19%DVTDocumentLocation5@48"file:///Users/sfranke/k9an-wspr/k9an-wspr/wspr.c00348cedddffdf42^2916"CompileC DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/wspr.o k9an-wspr/wspr.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/sfranke/k9an-wspr    export LANG=en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c -arch x86_64 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=gnu99 -fmodules -fmodules-cache-path=/Users/sfranke/k9an-wspr/DerivedData/ModuleCache -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Werror=return-type -Werror=deprecated-objc-isa-usage -Werror=objc-root-class -Wno-missing-braces -Wparentheses -Wswitch -Wunused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wconditional-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wbool-conversion -Wenum-conversion -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -mmacosx-version-min=10.9 -g -fvisibility=hidden -Wno-sign-conversion -iquote /Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/k9an-wspr-generated-files.hmap -I/Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/k9an-wspr-own-target-headers.hmap -I/Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/k9an-wspr-all-target-headers.hmap -iquote /Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/k9an-wspr-project-headers.hmap -I/Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Products/Release/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/DerivedSources/x86_64 -I/Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/DerivedSources -F/Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Products/Release -MMD -MT dependencies -MF /Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/wspr.d --serialize-diagnostics /Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/wspr.dia -c /Users/sfranke/k9an-wspr/k9an-wspr/wspr.c -o /Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/wspr.o36"DF0F85A6-9747-4DF6-ACD4-0CB3DB867521-
-b23A0BDA4-5EDA-44AF-A44B-5A1FC1F577D8
-
-CCompileC DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/wspr.o /Users/sfranke/k9an-wspr/wspr.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler
-s426614348.394408
-e426614348.856065
-r1
-xCompileC
-xDerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/wspr.o
-x/Users/sfranke/k9an-wspr/wspr.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.llvm.clang.1_0.compiler
-d/Users/sfranke/k9an-wspr/wspr.c
-d/opt/local/include/sndfile.h
-d/opt/local/include/fftw3.h
-o/Users/sfranke/k9an-wspr/wspr.c:266:28: warning: implicit conversion loses integer precision: 'long' to 'int' [-Wshorten-64-to-32]
-o                best_shift=lag;
-o                          ~^~~
-o/Users/sfranke/k9an-wspr/wspr.c:295:16: warning: variable 'f0' may be uninitialized when used here [-Wconditional-uninitialized]
-o            fp=f0+(*drift1/2.0)*(i-81.0)/81.0;
-o               ^~
-o/Users/sfranke/k9an-wspr/wspr.c:130:13: note: initialize the variable 'f0' to silence this warning
-o    float f0,fp,ss;
-o            ^
-o             = 0.0
-o/Users/sfranke/k9an-wspr/wspr.c:183:29: warning: variable 'ifmax' may be uninitialized when used here [-Wconditional-uninitialized]
-o    for(ifreq=ifmin; ifreq<=ifmax; ifreq++)
-o                            ^~~~~
-o/Users/sfranke/k9an-wspr/wspr.c:158:21: note: initialize the variable 'ifmax' to silence this warning
-o    int ifmin, ifmax;
-o                    ^
-o                     = 0
-o/Users/sfranke/k9an-wspr/wspr.c:183:15: warning: variable 'ifmin' may be uninitialized when used here [-Wconditional-uninitialized]
-o    for(ifreq=ifmin; ifreq<=ifmax; ifreq++)
-o              ^~~~~
-o/Users/sfranke/k9an-wspr/wspr.c:158:14: note: initialize the variable 'ifmin' to silence this warning
-o    int ifmin, ifmax;
-o             ^
-o              = 0
-o/Users/sfranke/k9an-wspr/wspr.c:804:15: warning: implicit declaration of function 'fano' is invalid in C99 [-Wimplicit-function-declaration]
-o        ierr= fano(&metric,&cycles,decdata,symbols,nbits,mettab,delta,maxcycles);
-o              ^
-o/Users/sfranke/k9an-wspr/wspr.c:483:11: warning: unused variable 'fp' [-Wunused-variable]
-o    FILE *fp;
-o          ^
-o/Users/sfranke/k9an-wspr/wspr.c:476:21: warning: unused variable 'mnoise' [-Wunused-variable]
-o        double mebn0,mesn0,mnoise;
-o                           ^
-o/Users/sfranke/k9an-wspr/wspr.c:476:9: warning: unused variable 'mebn0' [-Wunused-variable]
-o        double mebn0,mesn0,mnoise;
-o               ^
-o/Users/sfranke/k9an-wspr/wspr.c:476:15: warning: unused variable 'mesn0' [-Wunused-variable]
-o        double mebn0,mesn0,mnoise;
-o                     ^
-o/Users/sfranke/k9an-wspr/wspr.c:562:12: warning: implicit conversion loses integer precision: 'unsigned long' to 'int' [-Wshorten-64-to-32]
-o    for (i=npoints; i<nfft1; i++) {
-o          ~^~~~~~~
-o10 warnings generated.
-lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection39"Compile /Users/sfranke/k9an-wspr/wspr.c186"CompileC DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/wspr.o wspr.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler0a10654c9e6db941^8d26db4c9e6db941^-2300"/Users/sfranke/k9an-wspr/wspr.c:266:28: warning: implicit conversion loses integer precision: 'long' to 'int' [-Wshorten-64-to-32]                best_shift=lag;                          ~^~~/Users/sfranke/k9an-wspr/wspr.c:295:16: warning: variable 'f0' may be uninitialized when used here [-Wconditional-uninitialized]            fp=f0+(*drift1/2.0)*(i-81.0)/81.0;               ^~/Users/sfranke/k9an-wspr/wspr.c:130:13: note: initialize the variable 'f0' to silence this warning    float f0,fp,ss;            ^             = 0.0/Users/sfranke/k9an-wspr/wspr.c:183:29: warning: variable 'ifmax' may be uninitialized when used here [-Wconditional-uninitialized]    for(ifreq=ifmin; ifreq<=ifmax; ifreq++)                            ^~~~~/Users/sfranke/k9an-wspr/wspr.c:158:21: note: initialize the variable 'ifmax' to silence this warning    int ifmin, ifmax;                    ^                     = 0/Users/sfranke/k9an-wspr/wspr.c:183:15: warning: variable 'ifmin' may be uninitialized when used here [-Wconditional-uninitialized]    for(ifreq=ifmin; ifreq<=ifmax; ifreq++)              ^~~~~/Users/sfranke/k9an-wspr/wspr.c:158:14: note: initialize the variable 'ifmin' to silence this warning    int ifmin, ifmax;             ^              = 0/Users/sfranke/k9an-wspr/wspr.c:804:15: warning: implicit declaration of function 'fano' is invalid in C99 [-Wimplicit-function-declaration]        ierr= fano(&metric,&cycles,decdata,symbols,nbits,mettab,delta,maxcycles);              ^/Users/sfranke/k9an-wspr/wspr.c:483:11: warning: unused variable 'fp' [-Wunused-variable]    FILE *fp;          ^/Users/sfranke/k9an-wspr/wspr.c:476:21: warning: unused variable 'mnoise' [-Wunused-variable]        double mebn0,mesn0,mnoise;                           ^/Users/sfranke/k9an-wspr/wspr.c:476:9: warning: unused variable 'mebn0' [-Wunused-variable]        double mebn0,mesn0,mnoise;               ^/Users/sfranke/k9an-wspr/wspr.c:476:15: warning: unused variable 'mesn0' [-Wunused-variable]        double mebn0,mesn0,mnoise;                     ^/Users/sfranke/k9an-wspr/wspr.c:562:12: warning: implicit conversion loses integer precision: 'unsigned long' to 'int' [-Wshorten-64-to-32]    for (i=npoints; i<nfft1; i++) {          ~^~~~~~~10 warnings generated.10(36%IDEClangDiagnosticActivityLogMessage2@60"Implicit conversion loses integer precision: 'long' to 'int'-426614348#18446744073709551615#0#-1#27"com.apple.dt.IDE.diagnostic23%DVTTextDocumentLocation3@38"file:///Users/sfranke/k9an-wspr/wspr.c0000000000000000^265#27#265#27#7172#0#22"Value Conversion Issue2(3@38"file:///Users/sfranke/k9an-wspr/wspr.c0000000000000000^265#27#265#30#7172#0#3@38"file:///Users/sfranke/k9an-wspr/wspr.c0000000000000000^265#26#265#27#7171#0#-2@49"Variable 'f0' may be uninitialized when used here-426614348#18446744073709551615#0#1(2@52"Initialize the variable 'f0' to silence this warning-426614348#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@38"file:///Users/sfranke/k9an-wspr/wspr.c0000000000000000^129#12#129#12#3272#0#14"Semantic Issue1(3@38"file:///Users/sfranke/k9an-wspr/wspr.c0000000000000000^129#12#129#12#3272#0#-1#27"com.apple.dt.IDE.diagnostic3@38"file:///Users/sfranke/k9an-wspr/wspr.c0000000000000000^294#15#294#15#7734#0#14"Semantic Issue1(3@38"file:///Users/sfranke/k9an-wspr/wspr.c0000000000000000^294#15#294#17#7734#0#-2@52"Variable 'ifmax' may be uninitialized when used here-426614348#18446744073709551615#0#1(2@55"Initialize the variable 'ifmax' to silence this warning-426614348#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@38"file:///Users/sfranke/k9an-wspr/wspr.c0000000000000000^157#20#157#20#3813#0#14"Semantic Issue1(3@38"file:///Users/sfranke/k9an-wspr/wspr.c0000000000000000^157#20#157#20#3813#0#-1#27"com.apple.dt.IDE.diagnostic3@38"file:///Users/sfranke/k9an-wspr/wspr.c0000000000000000^182#28#182#28#4360#0#14"Semantic Issue1(3@38"file:///Users/sfranke/k9an-wspr/wspr.c0000000000000000^182#28#182#33#4360#0#-2@52"Variable 'ifmin' may be uninitialized when used here-426614348#18446744073709551615#0#1(2@55"Initialize the variable 'ifmin' to silence this warning-426614348#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@38"file:///Users/sfranke/k9an-wspr/wspr.c0000000000000000^157#13#157#13#3806#0#14"Semantic Issue1(3@38"file:///Users/sfranke/k9an-wspr/wspr.c0000000000000000^157#13#157#13#3806#0#-1#27"com.apple.dt.IDE.diagnostic3@38"file:///Users/sfranke/k9an-wspr/wspr.c0000000000000000^182#14#182#14#4346#0#14"Semantic Issue1(3@38"file:///Users/sfranke/k9an-wspr/wspr.c0000000000000000^182#14#182#19#4346#0#-2@57"Implicit declaration of function 'fano' is invalid in C99-426614348#18446744073709551615#0#-1#27"com.apple.dt.IDE.diagnostic3@38"file:///Users/sfranke/k9an-wspr/wspr.c0000000000000000^803#14#803#14#23348#0#14"Semantic Issue--2@20"Unused variable 'fp'-426614348#18446744073709551615#0#-1#27"com.apple.dt.IDE.diagnostic3@38"file:///Users/sfranke/k9an-wspr/wspr.c0000000000000000^482#10#482#10#12366#0#19"Unused Entity Issue--2@24"Unused variable 'mnoise'-426614348#18446744073709551615#0#-1#27"com.apple.dt.IDE.diagnostic3@38"file:///Users/sfranke/k9an-wspr/wspr.c0000000000000000^475#20#475#20#12156#0#19"Unused Entity Issue--2@23"Unused variable 'mebn0'-426614348#18446744073709551615#0#-1#27"com.apple.dt.IDE.diagnostic3@38"file:///Users/sfranke/k9an-wspr/wspr.c0000000000000000^475#8#475#8#12144#0#19"Unused Entity Issue--2@23"Unused variable 'mesn0'-426614348#18446744073709551615#0#-1#27"com.apple.dt.IDE.diagnostic3@38"file:///Users/sfranke/k9an-wspr/wspr.c0000000000000000^475#14#475#14#12150#0#19"Unused Entity Issue--2@69"Implicit conversion loses integer precision: 'unsigned long' to 'int'-426614348#18446744073709551615#0#-1#27"com.apple.dt.IDE.diagnostic3@38"file:///Users/sfranke/k9an-wspr/wspr.c0000000000000000^561#11#561#11#16033#0#22"Value Conversion Issue2(3@38"file:///Users/sfranke/k9an-wspr/wspr.c0000000000000000^561#11#561#18#16033#0#3@38"file:///Users/sfranke/k9an-wspr/wspr.c0000000000000000^561#10#561#11#16032#0#-0#0#1#-19%DVTDocumentLocation4@38"file:///Users/sfranke/k9an-wspr/wspr.c0000000000000000^2896"CompileC DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/wspr.o wspr.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/sfranke/k9an-wspr    export LANG=en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c -arch x86_64 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=gnu99 -fmodules -fmodules-cache-path=/Users/sfranke/k9an-wspr/DerivedData/ModuleCache -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Werror=return-type -Werror=deprecated-objc-isa-usage -Werror=objc-root-class -Wno-missing-braces -Wparentheses -Wswitch -Wunused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wconditional-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wbool-conversion -Wenum-conversion -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -mmacosx-version-min=10.9 -g -fvisibility=hidden -Wno-sign-conversion -iquote /Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/k9an-wspr-generated-files.hmap -I/Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/k9an-wspr-own-target-headers.hmap -I/Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/k9an-wspr-all-target-headers.hmap -iquote /Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/k9an-wspr-project-headers.hmap -I/Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Products/Release/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/DerivedSources/x86_64 -I/Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/DerivedSources -F/Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Products/Release -MMD -MT dependencies -MF /Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/wspr.d --serialize-diagnostics /Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/wspr.dia -c /Users/sfranke/k9an-wspr/wspr.c -o /Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/wspr.o36"833BF616-05A7-45AA-8A6E-FDB7B7F60616-
-b48559721-C042-405E-B6A4-784D6EE598F2
-
-CGenerateDSYMFile /Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Products/Release/k9an-wspr.dSYM /Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Products/Release/k9an-wspr
-s426552562.943848
-e426552562.955592
-r1
-xGenerateDSYMFile
-x/Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Products/Release/k9an-wspr.dSYM
-x/Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Products/Release/k9an-wspr
-lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection101"Generate /Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Products/Release/k9an-wspr.dSYM131"GenerateDSYMFile DerivedData/k9an-wspr/Build/Products/Release/k9an-wspr.dSYM DerivedData/k9an-wspr/Build/Products/Release/k9an-wspreba9f1f2ac6cb941^936ff6f2ac6cb941^---0#0#1#-19%DVTDocumentLocation2@100"file:///Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Products/Release/k9an-wspr.dSYM/0000000000000000^456"GenerateDSYMFile DerivedData/k9an-wspr/Build/Products/Release/k9an-wspr.dSYM DerivedData/k9an-wspr/Build/Products/Release/k9an-wspr    cd /Users/sfranke/Dropbox/k9an-wspr    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/dsymutil /Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Products/Release/k9an-wspr -o /Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Products/Release/k9an-wspr.dSYM36"C61B3B74-E457-4A3B-B18D-D25BE5EA63A4-
-bCF5C8CAE-4339-46D5-AB9E-C5E78936576E
-
-CGenerateDSYMFile /Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Products/Release/k9an-wspr.dSYM /Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Products/Release/k9an-wspr
-s426614348.926315
-e426614348.937189
-r1
-xGenerateDSYMFile
-x/Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Products/Release/k9an-wspr.dSYM
-x/Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Products/Release/k9an-wspr
-lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection93"Generate /Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Products/Release/k9an-wspr.dSYM131"GenerateDSYMFile DerivedData/k9an-wspr/Build/Products/Release/k9an-wspr.dSYM DerivedData/k9an-wspr/Build/Products/Release/k9an-wspr7c2ced4c9e6db941^31edef4c9e6db941^---0#0#1#-19%DVTDocumentLocation2@92"file:///Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Products/Release/k9an-wspr.dSYM/0000000000000000^432"GenerateDSYMFile DerivedData/k9an-wspr/Build/Products/Release/k9an-wspr.dSYM DerivedData/k9an-wspr/Build/Products/Release/k9an-wspr    cd /Users/sfranke/k9an-wspr    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/dsymutil /Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Products/Release/k9an-wspr -o /Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Products/Release/k9an-wspr.dSYM36"AF5474FD-DFDC-4770-94E0-B458ED457E93-
-b48559721-C042-405E-B6A4-784D6EE598F2
-
-CLd /Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Products/Release/k9an-wspr normal x86_64
-s426552562.912676
-e426552562.943110
-r1
-xLd
-x/Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Products/Release/k9an-wspr
-xnormal
-xx86_64
-d/Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/k9an-wspr.LinkFileList
-d/Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/wspr.o
-d/Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/mettab.o
-d/Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/metrics.o
-d/Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/fano.o
-d/Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/tab.o
-d/opt/local/lib/libsndfile.dylib
-d/opt/local/lib/libfftw3.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/libSystem.dylib
-d/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/5.1/lib/darwin/libclang_rt.osx.a
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libcache.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libcommonCrypto.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libcompiler_rt.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libcopyfile.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libcorecrypto.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libdispatch.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libdyld.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libkeymgr.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/liblaunch.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libmacho.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libquarantine.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libremovefile.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libsystem_asl.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libsystem_blocks.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libsystem_c.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libsystem_configuration.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libsystem_dnssd.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libsystem_info.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libsystem_kernel.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libsystem_m.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libsystem_malloc.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libsystem_network.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libsystem_notify.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libsystem_platform.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libsystem_pthread.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libsystem_sandbox.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libsystem_stats.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libunc.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libunwind.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libxpc.dylib
-lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection92"Link /Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Products/Release/k9an-wspr71"Ld DerivedData/k9an-wspr/Build/Products/Release/k9an-wspr normal x86_6439b7e9f2ac6cb941^f227f6f2ac6cb941^---0#0#1#--1056"Ld DerivedData/k9an-wspr/Build/Products/Release/k9an-wspr normal x86_64    cd /Users/sfranke/Dropbox/k9an-wspr    export MACOSX_DEPLOYMENT_TARGET=10.9    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -arch x86_64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk -L/Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Products/Release -L/opt/local/lib -F/Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Products/Release -filelist /Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/k9an-wspr.LinkFileList -mmacosx-version-min=10.9 -lsndfile -lfftw3 -Xlinker -dependency_info -Xlinker /Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/k9an-wspr_dependency_info.dat -o /Users/sfranke/Dropbox/k9an-wspr/DerivedData/k9an-wspr/Build/Products/Release/k9an-wspr36"3662396D-35F4-43B4-94B0-A74B9B82E3B8-
-bCF5C8CAE-4339-46D5-AB9E-C5E78936576E
-
-CLd /Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Products/Release/k9an-wspr normal x86_64
-s426614348.857012
-e426614348.925595
-r1
-xLd
-x/Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Products/Release/k9an-wspr
-xnormal
-xx86_64
-d/Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/k9an-wspr.LinkFileList
-d/Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/wspr.o
-d/Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/mettab.o
-d/Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/metrics.o
-d/Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/fano.o
-d/Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/tab.o
-d/opt/local/lib/libsndfile.dylib
-d/opt/local/lib/libfftw3.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/libSystem.dylib
-d/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/5.1/lib/darwin/libclang_rt.osx.a
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libcache.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libcommonCrypto.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libcompiler_rt.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libcopyfile.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libcorecrypto.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libdispatch.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libdyld.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libkeymgr.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/liblaunch.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libmacho.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libquarantine.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libremovefile.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libsystem_asl.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libsystem_blocks.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libsystem_c.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libsystem_configuration.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libsystem_dnssd.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libsystem_info.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libsystem_kernel.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libsystem_m.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libsystem_malloc.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libsystem_network.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libsystem_notify.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libsystem_platform.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libsystem_pthread.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libsystem_sandbox.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libsystem_stats.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libunc.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libunwind.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/system/libxpc.dylib
-lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection84"Link /Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Products/Release/k9an-wspr71"Ld DerivedData/k9an-wspr/Build/Products/Release/k9an-wspr normal x86_64fa7ddb4c9e6db941^a5f4ec4c9e6db941^---0#0#1#--1008"Ld DerivedData/k9an-wspr/Build/Products/Release/k9an-wspr normal x86_64    cd /Users/sfranke/k9an-wspr    export MACOSX_DEPLOYMENT_TARGET=10.9    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -arch x86_64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk -L/Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Products/Release -L/opt/local/lib -F/Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Products/Release -filelist /Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/k9an-wspr.LinkFileList -mmacosx-version-min=10.9 -lsndfile -lfftw3 -Xlinker -dependency_info -Xlinker /Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Intermediates/k9an-wspr.build/Release/k9an-wspr.build/Objects-normal/x86_64/k9an-wspr_dependency_info.dat -o /Users/sfranke/k9an-wspr/DerivedData/k9an-wspr/Build/Products/Release/k9an-wspr36"9F86BD6A-A5AA-4DD5-B708-63B22677800D-
-b48559721-C042-405E-B6A4-784D6EE598F2
-
