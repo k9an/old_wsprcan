@@ -4,10 +4,10 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include </opt/local/include/sndfile.h>
+#include <sndfile.h>
 #include <math.h>
 #include <strings.h>
-#include "/opt/local/include/fftw3.h"
+#include <fftw3.h>
 
 
 unsigned char pr3[162]=
@@ -457,11 +457,6 @@ void deinterleave(unsigned char *sym)
     for (i=0; i<162; i++)
         sym[i]=tmp[i];
 }
-
-
-#include <complex.h>
-#include "/opt/local/include/fftw3.h"
-
 
 // used by qsort
 int floatcomp(const void* elem1, const void* elem2)
