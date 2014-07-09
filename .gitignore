@@ -1,2 +1,5 @@
 *.wav
+*.o
+k9an-wspr/
+k9an-wspr.xcodeproj
 DerivedData/
