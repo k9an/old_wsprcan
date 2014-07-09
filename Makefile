@@ -1,6 +1,6 @@
-CC=clang
-CFLAGS= -I/opt/local/include -Wall 
-LDFLAGS = -L/opt/local/lib 
+CC=gcc
+CFLAGS= -I/usr/include -Wall 
+LDFLAGS = -L/usr/lib 
 LIBS = -lsndfile -lfftw3
 
 DEPS = fano.h

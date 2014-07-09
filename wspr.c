@@ -742,6 +742,8 @@ int main(int argc, char *argv[])
     callsign=malloc(sizeof(char)*7);
     char allcalls[npk][7];
     memset(allcalls,0,sizeof(char)*npk*7);
+    memset(grid,0,sizeof(char)*5);
+    memset(callsign,0,sizeof(char)*7);
     
     printf(" n    freq   drift  snr    sync     dt                 cycles\n");
     int uniques=0;
