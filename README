@@ -1,42 +1,43 @@
+wsprcan is a "W"eak "S"ignal "P"ropagation "R"eporter 
+detector/demodulator/decoder written in "C" by k9"AN"
+
 This is a decoder for K1JT's Weak Signal Propagation Reporter (WSPR) mode.
-The decoder is written in C and is a command-line program that takes
-a single argument which is the name of the .wav file to process.
+The decoder is written in C and is a command-line program that
+reads from a .wav file and writes output to the console.
 
-It requires only two external libraries: libsndfile and libfftw3
+wsprcan requires only two external libraries: libsndfile and libfftw3
 
-The name, wsprcan, is derived from "WSPR" decoder written in "C" by k9"AN".
-
-The motivation for this project was to learn how to demodulate and decode
-wspr signals and to refresh my C programming skills so that I can help my
-son learn to program in C.
-
-Compiling:
+COMPILING:
 A bare-bones Makefile is included. Change include and lib directories 
 and it should just work, provided that the header files and library
 files for sndfile and fftw3 are available. Test on OS X 10.8 and 
 Ubuntu 12.04.
 
-Usage:
+USAGE:
 wsprcan freq file.wav
 
 e.g. 
 ./wsprcan 14.0971 140709_2258.wav
 
-Features:
+FEATURES:
 The wsprcan program will decode and display signals that are outside of 
 the wspr frequency segment by up to 50 Hz on each side. At present,
 it does not decode signals using the 6-digit locator. Also, no provision
 is made for uploading spots to the WSPRnet database. 
 
+wsprcan was optimized to maximize the number of decodes on a crowded band,
+such as 20m or 30m. Initial tests suggest that wsprcan may decode more 
+callsigns than wspr or wspr-x under certain conditions. 
+
 The detection, synchronization, and symbol estimation algorithms are all 
 based, more-or-less, on K1JT's wspr and wspr-x programs. Based on my 
 understanding of how things should work, I prototyped the algorithms 
-in gnu octave first, and then translated by octave code to C. 
+in gnu octave first, and then translated my octave code to C. 
 The symbols are decoded using Phil Karn's sequential decoder routine, 
 fano.c. 
 
 Steve, k9an
-Urbana, Illinois
+Urbana, Illinois 
 s.j.franke@icloud.com
 
 
