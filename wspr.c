@@ -24,17 +24,16 @@ unsigned char pr3[162]=
 unsigned long readwavfile(int argc, char *argv[], float **buffer )
 {
 
-    printf("k9an-wspr\n");
-	if (argc != 2) {
-		fprintf(stderr, "Expecting wav file as argument\n");
+	if (argc != 3) {
+		fprintf(stderr, "Expecting 2 arguments\n");
 		return 1;
 	}
     
 // Open sound file
     SF_INFO sndInfo;
-    SNDFILE *sndFile = sf_open(argv[1], SFM_READ, &sndInfo);
+    SNDFILE *sndFile = sf_open(argv[2], SFM_READ, &sndInfo);
     if (sndFile == NULL) {
-        fprintf(stderr, "Error reading source file '%s': %s\n", argv[1], sf_strerror(sndFile));
+        fprintf(stderr, "Error reading source file '%s': %s\n", argv[2], sf_strerror(sndFile));
     return 1;
     }
 
@@ -76,7 +75,7 @@ unsigned long readwavfile(int argc, char *argv[], float **buffer )
            numFrames, argv[1], sndInfo.samplerate, (float)numFrames/sndInfo.samplerate);
  */
 
-    printf("Read %ld frames from %s \n",nframes, argv[1]);
+//    printf("Read %ld frames from %s \n",nframes, argv[2]);
 
     sf_close(sndFile);
 
@@ -535,7 +534,12 @@ int main(int argc, char *argv[])
     unsigned int nbits;
     unsigned long metric, maxcycles, cycles;
     unsigned long npoints=readwavfile(argc, argv, &buffer);
-
+    char uttime[5],date[7];
+    strncpy(date,argv[2],6);
+    strncpy(uttime,argv[2]+7,4);
+    float rx_freq=strtof(argv[1],NULL);
+//    printf("rx_freq is %f \n",rx_freq);
+    
     fftw_complex *fftin, *fftout;
     fftw_plan MYPLAN;
     int nfft1=2*1024*1024;
@@ -595,7 +599,7 @@ int main(int argc, char *argv[])
 
     
     getStats(idat, qdat, nfft2, &mi, &mq, &mi2, &mq2, &miq);
-    printf("total power: %4.1f dB\n",10*log10(mi2+mq2));
+//    printf("total power: %4.1f dB\n",10*log10(mi2+mq2));
 
 // Do ffts over 2 symbols, stepped by half symbols
     int nffts=4*floor((npoints/32.0)/512)-1;
@@ -647,8 +651,12 @@ int main(int argc, char *argv[])
     for (j=0; j<411; j++)
         tmpsort[j]=smspec[j];
     qsort(tmpsort, 411, sizeof(float), floatcomp);
-    
-    float noise_level = tmpsort[120];
+
+// noise level of spectrum is estimated as 123/411= 30'th percentile
+// of the spectrum. on a very crowded band, estimated noise level will be
+// too high, reducing estimated snr's.
+
+    float noise_level = tmpsort[122];
     
     for (j=0; j<411; j++) {
         smspec[j]=smspec[j]/noise_level - 1.0;
@@ -657,7 +665,9 @@ int main(int argc, char *argv[])
             continue;
     }
 
-// find all local maxima in smoothed spectrum.
+/* find all local maxima in smoothed spectrum. this is looser/lazier
+ than K1JT's algorithm */
+    
     float freq0[200],snr0[200],drift0[200],shift0[200];
     for (i=0; i<200; i++) {
         freq0[i]=0.0;
@@ -675,30 +685,40 @@ int main(int argc, char *argv[])
         }
     }
 
-// do coarse estimates freq, drift and shift using k1jt's basic approach, more or less.
+/* do coarse estimates of freq, drift and shift using k1jt's basic approach, 
+more or less.
+
+- look for time offsets of up to +/- 6 symbols relative to the nominal start
+ time, which is 2 seconds into the file
+- this program calculates shift relative to the beginning of the file
+- negative shifts mean that the signal started before the beginning of the 
+ file
+- The program prints shift-2 seconds to give values consistent with K1JT's
+definition
+- shifts that cause the sync vector to fall off of an end of the data vector 
+ are accommodated by "partial decoding", such that symbols that cannot be 
+ decoded due to missing data produce a soft-decision symbol value of 128 
+ for the fano decoder.*/
+
     int idrift,ifr,if0,ifd,k0;
     long int kindex;
     float smax, pmax,ss,pow,p0,p1,p2,p3;
     for(j=0; j<npk; j++) {
         smax=-1e30;
         if0=freq0[j]/df+256;
-
-// look for time offsets of up to +/- 4 seconds
-// nominal start time is 2 seconds into the file
-
         for (ifr=if0-1; ifr<=if0+1; ifr++) {
         for( k0=-6; k0<18; k0++)
         {
             // drift model is linear, deviation of +/- drift/2 over the
             // span of 162 symbols.
             
-            for (idrift=-14; idrift<=14; idrift++)
+            for (idrift=-4; idrift<=4; idrift++)
             {
                 ss=0.0;
                 pow=0.0;
                 for (k=0; k<162; k++)
                 {
-                    ifd=ifr+((float)k-81.0)/81.0*idrift/(8*df);
+                    ifd=ifr+((float)k-81.0)/81.0*( (float)idrift )/(2.0*df);
                     kindex=k0+2*k;
                     if( kindex < nffts ) {
                     p0=ps[ifd-3][kindex];
@@ -713,7 +733,7 @@ int main(int argc, char *argv[])
                     smax=ss;
                     pmax=pow;
                     shift0[j]=128*(k0+1)*dt;
-                    drift0[j]=idrift/4.0;
+                    drift0[j]=idrift;
                     freq0[j]=(ifr-256)*df;
                 }
 //                printf("drift %d  k0 %d  sync %f\n",idrift,k0,ss/pow);
@@ -746,7 +766,9 @@ int main(int argc, char *argv[])
     memset(grid,0,sizeof(char)*5);
     memset(callsign,0,sizeof(char)*7);
     
-    printf(" n    freq   drift  snr    sync     dt                 cycles\n");
+    printf(" Date   UTC Sync dB   DT    Freq       Message     Drift Cycles\n");
+    printf("------------------------------------------------------------------\n");
+
     int uniques=0;
     
     for (j=0; j<npk; j++) {
@@ -779,31 +801,9 @@ int main(int argc, char *argv[])
         
         deinterleave(symbols);
 
-// for now, we just use a fixed metric table rather than generating one based
-// on snr.
-//        amp=100;
-//        mebn0=5.0;
-//        mesn0=mebn0+10*log10(0.5);
-//        mnoise=sqrt(0.5/pow(10.,mesn0/10.));
-    
-//    ierr = gen_met( mettab, amp, mnoise, 0.5, 10);
-//    printf("after gen_met %d\n",ierr);
-//    for (i=0; i<256; i++) {
-//        printf("%d %d %d\n",i,mettab[0][i],mettab[1][i]);
-//    }
-
         delta=50;
         maxcycles=10000;
 
-/*        printf("\n");
-        for (i=0; i<162; i=i+9)
-        {
-            for (int m=0; m<9;m++) {
-                printf("%4d ",symbols[i+m]);
-            }
-            printf("\n");
-        }
- */
         ierr = fano(&metric,&cycles,decdata,symbols,nbits,mettab,delta,maxcycles);
 
 //        printf("ierr %d metric %d  cycles %d\n",ierr,metric,cycles/81);
@@ -832,8 +832,10 @@ int main(int argc, char *argv[])
             if( !dupe) {
                 uniques++;
                 strcpy(allcalls[uniques],callsign);
-            printf("%.3ld %6.1f %6.1f %6.1f   %4.2f %6.1f  %s %s %d %lu\n",j,f1,drift1,snr0[j],
-                   sync,shift1*dt-2.0, callsign, grid, ntype, cycles/81);
+            printf("%6s %4s %3.1f %3.0f %4.1f %10.6f %6s %4s %2d %4.1f     %lu\n",
+                   date,uttime,sync,snr0[j],
+                   shift1*dt-2.0, rx_freq+f1/1e6,
+                   callsign, grid, ntype, drift1, cycles/81);
             }
         } else {
         }
