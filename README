@@ -1,11 +1,8 @@
-wsprcan is a "W"eak "S"ignal "P"ropagation "R"eporter 
-detector/demodulator/decoder written in "C" by k9"AN"
-
 This is a decoder for K1JT's Weak Signal Propagation Reporter (WSPR) mode.
 The decoder is written in C and is a command-line program that
 reads from a .wav file and writes output to the console.
 
-wsprcan requires only two external libraries: libsndfile and libfftw3
+k9an-wspr requires only two external libraries: libsndfile and libfftw3
 
 COMPILING:
 A bare-bones Makefile is included. Change include and lib directories 
@@ -14,20 +11,19 @@ files for sndfile and fftw3 are available. Test on OS X 10.8 and
 Ubuntu 12.04.
 
 USAGE:
-wsprcan freq file.wav
+k9an-wspr freq file.wav
 
 e.g. 
-./wsprcan 14.0971 140709_2258.wav
+./k9an-wspr 14.0971 140709_2258.wav
 
 FEATURES:
-The wsprcan program will decode and display signals that are outside of 
+The k9an-wspr program will decode and display signals that are outside of 
 the wspr frequency segment by up to 50 Hz on each side. At present,
 it does not decode signals using the 6-digit locator. Also, no provision
 is made for uploading spots to the WSPRnet database. 
 
-wsprcan was optimized to maximize the number of decodes on a crowded band,
-such as 20m or 30m. Initial tests suggest that wsprcan may decode more 
-callsigns than wspr or wspr-x under certain conditions. 
+k9an-wspr was optimized to maximize the number of decodes on a crowded band,
+such as 20m or 30m. testing is needed to see if this goal was accomplished. 
 
 The detection, synchronization, and symbol estimation algorithms are all 
 based, more-or-less, on K1JT's wspr and wspr-x programs. Based on my 
