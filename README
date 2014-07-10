@@ -10,23 +10,30 @@ The motivation for this project was to learn how to demodulate and decode
 wspr signals and to refresh my C programming skills so that I can help my
 son learn to program in C.
 
+Compiling:
+A bare-bones Makefile is included. Change include and lib directories 
+and it should just work, provided that the header files and library
+files for sndfile and fftw3 are available. Test on OS X 10.8 and 
+Ubuntu 12.04.
+
+Usage:
+wsprcan freq file.wav
+
+e.g. 
+./wsprcan 14.0971 140709_2258.wav
+
 Features:
 The wsprcan program will decode and display signals that are outside of 
 the wspr frequency segment by up to 50 Hz on each side. At present,
 it does not decode signals using the 6-digit locator. Also, no provision
 is made for uploading spots to the WSPRnet database. 
 
-The detection algorithm used in wsprcan is less conservative about 
-choosing candidate signals to process. In initial tests, it appears that 
-wsprcan may decode more signals than wspr on a crowded band, such as 20m.
-
-The algorithm for finding initial estimates of frequency, drift, and time
-shift is almost identical to Joe's.
-
-The algorithm for refining the estimates of frequency, drift, and time shift
-is a bit different from Joe's.
-
-The sequential Fano decoder used to decode the message is Phil Karn's fano.c
+The detection, synchronization, and symbol estimation algorithms are all 
+based, more-or-less, on K1JT's wspr and wspr-x programs. Based on my 
+understanding of how things should work, I prototyped the algorithms 
+in gnu octave first, and then translated by octave code to C. 
+The symbols are decoded using Phil Karn's sequential decoder routine, 
+fano.c. 
 
 Steve, k9an
 Urbana, Illinois
