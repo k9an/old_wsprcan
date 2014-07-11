@@ -585,7 +585,7 @@ int main(int argc, char *argv[])
     if( npoints == 1 ) {
         return 1;
     } else if ( npoints < 12000*110 ) {
-        printf("file length is only %d seconds\n",npoints/12000);
+        printf("file length is only %lu seconds\n",npoints/12000);
         return 1;
     }
     
