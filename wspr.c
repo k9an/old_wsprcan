@@ -578,6 +578,8 @@ int main(int argc, char *argv[])
     
     strncpy(date,ptr_to_wav-11,6);
     strncpy(uttime,ptr_to_wav-4,4);
+    date[6]='\0';
+    uttime[4]='\0';
     float rx_freq=strtof(argv[2],NULL);
 //    printf("date %s uttime %s rx_freq %f \n",date, uttime, rx_freq);
 
