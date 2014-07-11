@@ -9,7 +9,6 @@
 #include <strings.h>
 #include <fftw3.h>
 
-
 unsigned char pr3[162]=
 {1,1,0,0,0,0,0,0,1,0,0,0,1,1,1,0,0,0,1,0,
     0,1,0,1,1,1,1,0,0,0,0,0,0,0,1,0,0,1,0,1,
@@ -84,6 +83,8 @@ void getStats(double *id, double *qd, long np, double *mi, double *mq, double *m
     double sumi2=0.0;
     double sumq2=0.0;
     double sumiq=0.0;
+    float imax=-1e30, imin=1e30, qmax=-1e30, qmin=1e30;
+    
     int i;
     
     for (i=0; i<np; i++) {
@@ -92,12 +93,18 @@ void getStats(double *id, double *qd, long np, double *mi, double *mq, double *m
         sumq=sumq+qd[i];
         sumq2=sumq2+qd[i]*qd[i];
         sumiq=sumiq+id[i]*qd[i];
+        if( id[i]>imax ) imax=id[i];
+        if( id[i]<imin ) imin=id[i];
+        if( qd[i]>qmax ) qmax=qd[i];
+        if( qd[i]<qmin ) qmin=qd[i];
     }
     *mi=sumi/np;
     *mq=sumq/np;
     *mi2=sumi2/np;
     *mq2=sumq2/np;
     *miq=sumiq/np;
+    
+//    printf("imax %f  imin %f    qmax %f  qmin %f\n",imax, imin, qmax, qmin);
 }
 
 void sync_and_demodulate(
@@ -558,14 +565,29 @@ int main(int argc, char *argv[])
         usage();
         return 1;
     }
-    
-    unsigned long npoints=readwavfile(argc, argv, &buffer);
 
+/* parse the date and time from the given filename
+ for now, assume that the filname ends in ".wav". Find that, and then
+ work backwards to determine date and time. This avoids having to figure
+ out the path.*/
+
+    char *ptr_to_wav;
     char uttime[5],date[7];
-    strncpy(date,argv[3],6);
-    strncpy(uttime,argv[3]+7,4);
+    
+    ptr_to_wav=strstr(argv[3],".wav");
+    
+    strncpy(date,ptr_to_wav-11,6);
+    strncpy(uttime,ptr_to_wav-4,4);
     float rx_freq=strtof(argv[2],NULL);
-//    printf("rx_freq is %f \n",rx_freq);
+//    printf("date %s uttime %s rx_freq %f \n",date, uttime, rx_freq);
+
+    unsigned long npoints=readwavfile(argc, argv, &buffer);
+    if( npoints == 1 ) {
+        return 1;
+    } else if ( npoints < 12000*110 ) {
+        printf("file length is only %d seconds\n",npoints/12000);
+        return 1;
+    }
     
     fftw_complex *fftin, *fftout;
     fftw_plan MYPLAN;
