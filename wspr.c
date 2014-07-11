@@ -418,7 +418,7 @@ void unpackcall( int32_t ncall, char *call )
 // remove trailing whitespace
         for(i=0; i<6; i++) {
             if( call[i] == c[36] ) {
-                sprintf(&call[i],"\0");
+                call[i]='\0';
             }
         }
     }
