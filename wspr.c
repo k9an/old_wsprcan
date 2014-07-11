@@ -23,17 +23,12 @@ unsigned char pr3[162]=
 
 unsigned long readwavfile(int argc, char *argv[], float **buffer )
 {
-
-	if (argc != 3) {
-		fprintf(stderr, "Expecting 2 arguments\n");
-		return 1;
-	}
     
 // Open sound file
     SF_INFO sndInfo;
-    SNDFILE *sndFile = sf_open(argv[2], SFM_READ, &sndInfo);
+    SNDFILE *sndFile = sf_open(argv[3], SFM_READ, &sndInfo);
     if (sndFile == NULL) {
-        fprintf(stderr, "Error reading source file '%s': %s\n", argv[2], sf_strerror(sndFile));
+        fprintf(stderr, "Error reading source file '%s': %s\n", argv[3], sf_strerror(sndFile));
     return 1;
     }
 
@@ -382,28 +377,43 @@ void unpackcall( int32_t ncall, char *call )
 {
     char c[]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',' '};
     int32_t n;
-    int i;
+    int i,j;
+    char tmp[6];
     
     n=ncall;
     
+    strcpy(call,"......");
     if (n < 262177560 ) {
         i=n%27+10;
-        call[5]=c[i];
+        tmp[5]=c[i];
         n=n/27;
         i=n%27+10;
-        call[4]=c[i];
+        tmp[4]=c[i];
         n=n/27;
         i=n%27+10;
-        call[3]=c[i];
+        tmp[3]=c[i];
         n=n/27;
         i=n%10;
-        call[2]=c[i];
+        tmp[2]=c[i];
         n=n/10;
         i=n%36;
-        call[1]=c[i];
+        tmp[1]=c[i];
         n=n/36;
         i=n;
-        call[0]=c[i];
+        tmp[0]=c[i];
+        j=0;
+// remove leadig whitespace
+        for(i=0; i<5; i++) {
+            if( tmp[i] != c[36] )
+                break;
+        }
+        sprintf(call,"%-6s",&tmp[i]);
+// remove trailing whitespace
+        for(i=0; i<6; i++) {
+            if( call[i] == c[36] ) {
+                sprintf(&call[i],"\0");
+            }
+        }
     }
     
 }
@@ -465,6 +475,15 @@ int floatcomp(const void* elem1, const void* elem2)
         return -1;
     return *(const float*)elem1 > *(const float*)elem2;
 }
+
+void usage(void)
+{
+    printf("K9AN wsprd v0.1\n");
+    printf("Usage:\n");
+    printf("wsprd -f 14.0956 140710_1822.wav\n");
+}
+
+
 
 int main(int argc, char *argv[])
 {
@@ -533,11 +552,19 @@ int main(int argc, char *argv[])
     int ierr, delta;
     unsigned int nbits;
     unsigned long metric, maxcycles, cycles;
+
+    if( argc != 4 || strcmp(argv[1],"-f") ) {
+        printf("%s\n",argv[1]);
+        usage();
+        return 1;
+    }
+    
     unsigned long npoints=readwavfile(argc, argv, &buffer);
+
     char uttime[5],date[7];
-    strncpy(date,argv[2],6);
-    strncpy(uttime,argv[2]+7,4);
-    float rx_freq=strtof(argv[1],NULL);
+    strncpy(date,argv[3],6);
+    strncpy(uttime,argv[3]+7,4);
+    float rx_freq=strtof(argv[2],NULL);
 //    printf("rx_freq is %f \n",rx_freq);
     
     fftw_complex *fftin, *fftout;
@@ -653,8 +680,10 @@ int main(int argc, char *argv[])
     qsort(tmpsort, 411, sizeof(float), floatcomp);
 
 // noise level of spectrum is estimated as 123/411= 30'th percentile
-// of the spectrum. on a very crowded band, estimated noise level will be
+// of the smoothed spectrum. on a very crowded band, estimated noise level will be
 // too high, reducing estimated snr's.
+// need to investigate why my SNRs differ from wspr/wspr-x when there are strong
+// signals in the band. One of us is biased.
 
     float noise_level = tmpsort[122];
     
@@ -688,7 +717,7 @@ int main(int argc, char *argv[])
 /* do coarse estimates of freq, drift and shift using k1jt's basic approach, 
 more or less.
 
-- look for time offsets of up to +/- 6 symbols relative to the nominal start
+- look for time offsets of up to +/- 8 symbols relative to the nominal start
  time, which is 2 seconds into the file
 - this program calculates shift relative to the beginning of the file
 - negative shifts mean that the signal started before the beginning of the 
@@ -698,7 +727,12 @@ definition
 - shifts that cause the sync vector to fall off of an end of the data vector 
  are accommodated by "partial decoding", such that symbols that cannot be 
  decoded due to missing data produce a soft-decision symbol value of 128 
- for the fano decoder.*/
+ for the fano decoder.
+- the frequency drift model is linear, deviation of +/- drift/2 over the
+  span of 162 symbols, with deviation equal to 0 at the center of the signal
+  vector (should be consistent with K1JT def). 
+*/
+
 
     int idrift,ifr,if0,ifd,k0;
     long int kindex;
@@ -707,11 +741,8 @@ definition
         smax=-1e30;
         if0=freq0[j]/df+256;
         for (ifr=if0-1; ifr<=if0+1; ifr++) {
-        for( k0=-6; k0<18; k0++)
+        for( k0=-10; k0<22; k0++)
         {
-            // drift model is linear, deviation of +/- drift/2 over the
-            // span of 162 symbols.
-            
             for (idrift=-4; idrift<=4; idrift++)
             {
                 ss=0.0;
@@ -743,16 +774,6 @@ definition
 //        printf("npk %d freq %.1f drift %.1f t0 %.1f sync %.2f\n",j,freq0[j],drift0[j],shift0[j],smax/pmax);
     }
 
-/*
-    FILE *spf=fopen("spec","w");
-    for(j=0; j<512; j++) {
-        for(k=0; k<nffts; k++) {
-            fprintf(spf,"%f\n",ps[j][k]);
-        }
-    }
-    fclose(spf);
-*/
-
     nbits=81;
     symbols=malloc(sizeof(char)*nbits*2);
     memset(symbols,0,sizeof(char)*nbits*2);
@@ -765,11 +786,12 @@ definition
     memset(allcalls,0,sizeof(char)*npk*7);
     memset(grid,0,sizeof(char)*5);
     memset(callsign,0,sizeof(char)*7);
-    
-    printf(" Date   UTC Sync dB   DT    Freq       Message     Drift Cycles\n");
-    printf("------------------------------------------------------------------\n");
 
-    int uniques=0;
+    FILE *fall_wspr, *fwsprd;
+    fall_wspr=fopen("ALL_WSPR.TXT","a");
+    fwsprd=fopen("wsprd.out","w");
+    
+    int uniques=0, noprint=0;
     
     for (j=0; j<npk; j++) {
 
@@ -818,10 +840,25 @@ definition
                     message[i]=decdata[i];
                 }
             }
+
             unpack50(message,&n1,&n2);
             unpackcall(n1,callsign);
             unpackgrid(n2, grid);
             int ntype = (n2&127) - 64;
+
+// this is where the extended messages would be taken care of
+            if( (ntype >= 0) && (ntype <= 62) ) {
+                int nu=ntype%10;
+                if( nu == 0 || nu == 3 || nu == 7 ) {
+                    noprint=0;
+                } else {
+                    noprint=1;
+                }
+            } else if ( ntype < 0 ) {
+                noprint=1;
+            }
+            
+            
 
 // de-dupe using callsign
             int dupe=0;
@@ -829,16 +866,27 @@ definition
                 if( !strcmp(callsign,allcalls[i]) )
                     dupe=1;
             }
-            if( !dupe) {
+            if( !dupe && !noprint) {
                 uniques++;
                 strcpy(allcalls[uniques],callsign);
-            printf("%6s %4s %3.1f %3.0f %4.1f %10.6f %6s %4s %2d %4.1f     %lu\n",
-                   date,uttime,sync,snr0[j],
-                   shift1*dt-2.0, rx_freq+f1/1e6,
-                   callsign, grid, ntype, drift1, cycles/81);
+            printf("%4s %3.0f %4.1f %10.6f %2d  %-s %4s %2d\n",
+                   uttime, snr0[j],(shift1*dt-2.0), rx_freq+(1500+f1)/1e6,
+                   (int)drift1, callsign, grid, ntype);
+            fprintf(fall_wspr,"%6s %4s %3.0f %3.0f %4.1f %10.6f  %-s %4s %2d          %2.0f     %lu\n",
+                       date,uttime,sync*10,snr0[j],
+                       shift1*dt-2.0, rx_freq+(1500+f1)/1e6,
+                       callsign, grid, ntype, drift1, cycles/81);
+            fprintf(fwsprd,"%6s %4s %3d %3.0f %4.1f %10.6f  %-s %4s %2d          %2d     %lu\n",
+                        date,uttime,(int)(sync*10),snr0[j],
+                        shift1*dt-2.0, rx_freq+(1500+f1)/1e6,
+                        callsign, grid, ntype, (int)drift1, cycles/81);
+
             }
-        } else {
         }
     }
+    printf("<DecodeFinished>\n");
+    fclose(fall_wspr);
+    fclose(fwsprd);
 	return 0;
+
 }

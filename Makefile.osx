@@ -9,5 +9,5 @@ OBJ = wspr.o fano.o tab.o
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-wsprcan: $(OBJ) 
+k9an-wspr: $(OBJ) 
 	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS) $(LIBS)
