@@ -869,7 +869,7 @@ definition
             if( !dupe && !noprint) {
                 uniques++;
                 strcpy(allcalls[uniques],callsign);
-            printf("%4s %3.0f %4.1f %10.6f %2d  %-s %4s %2d\n",
+            printf("%4s %3.0f %4.1f %10.6f %2d  %-s %4s %2d \n",
                    uttime, snr0[j],(shift1*dt-2.0), dialfreq+(1500+f1)/1e6,
                    (int)drift1, callsign, grid, ntype);
             fprintf(fall_wspr,"%6s %4s %3.0f %3.0f %4.1f %10.6f  %-s %4s %2d          %2.0f     %lu\n",
