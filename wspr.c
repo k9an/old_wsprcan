@@ -20,14 +20,50 @@ unsigned char pr3[162]=
     0,0,0,0,0,0,0,1,1,0,1,0,1,1,0,0,0,1,1,0,
     0,0};
 
-unsigned long readwavfile(int argc, char *argv[], float **buffer )
+unsigned long readc2file(char *ptr_to_infile, double *idat, double *qdat, float *freq)
 {
+    float buffer[2*65536];
+    double dfreq;
+    int i,ntrmin;
+    char *c2file[15];
+    FILE* c2fh;
+    
+    c2fh=fopen(ptr_to_infile,"r");
+    unsigned long nread=fread(c2file,sizeof(char),14,c2fh);
+    nread=fread(&ntrmin,sizeof(int),1,c2fh);
+    nread=fread(&dfreq,sizeof(double),1,c2fh);
+    *freq=(float)dfreq;
+    nread=fread(buffer,sizeof(float),2*45000,c2fh);
+    
+    for(i=0; i<45000; i++) {
+        idat[i]=buffer[2*i];
+        qdat[i]=-buffer[2*i+1];
+    }
+    
+    if( nread == 2*45000 ) {
+        return nread/2;
+    } else {
+        return 1;
+    }
+}
+
+unsigned long readwavfile(char *ptr_to_infile, double *idat, double *qdat )
+{
+    float *buffer;
+    int i, j;
+    int nfft1=2*1024*1024;
+    int nfft2=nfft1/32; //65536, only the first 45000 points are nonzero
+    int nh2=nfft2/2;
+    double df=12000.0/nfft1;
+    int i0=1500.0/df+0.5;
+    fftw_complex *fftin, *fftout;
+    fftw_plan MYPLAN;
     
 // Open sound file
     SF_INFO sndInfo;
-    SNDFILE *sndFile = sf_open(argv[3], SFM_READ, &sndInfo);
+    SNDFILE *sndFile = sf_open(ptr_to_infile, SFM_READ, &sndInfo);
     if (sndFile == NULL) {
-        fprintf(stderr, "Error reading source file '%s': %s\n", argv[3], sf_strerror(sndFile));
+        fprintf(stderr, "Error reading source file '%s': %s\n", ptr_to_infile, sf_strerror(sndFile));
     return 1;
     }
 
@@ -46,7 +82,7 @@ unsigned long readwavfile(int argc, char *argv[], float **buffer )
     }
 
 // Allocate memory
-    *buffer = malloc(sndInfo.frames * 2 * sizeof(float));
+    buffer = malloc(sndInfo.frames * 2 * sizeof(float));
     if (buffer == NULL) {
         fprintf(stderr, "Could not allocate memory for file\n");
         sf_close(sndFile);
@@ -54,10 +90,10 @@ unsigned long readwavfile(int argc, char *argv[], float **buffer )
     }
 
 // Load data
-    unsigned long nframes = sf_readf_float(sndFile, *buffer, sndInfo.frames);
+    unsigned long npoints = sf_readf_float(sndFile, buffer, sndInfo.frames);
 
 // Check correct number of samples loaded
-    if (nframes != sndInfo.frames) {
+    if (npoints != sndInfo.frames) {
         fprintf(stderr, "Did not read enough frames for source\n");
         sf_close(sndFile);
         free(buffer);
@@ -69,11 +105,58 @@ unsigned long readwavfile(int argc, char *argv[], float **buffer )
            numFrames, argv[1], sndInfo.samplerate, (float)numFrames/sndInfo.samplerate);
  */
 
-//    printf("Read %ld frames from %s \n",nframes, argv[2]);
+//    printf("Read %ld frames from %s \n",npoints, argv[3]);
 
     sf_close(sndFile);
 
-    return nframes;
+    if ( npoints < 12000*110 ) {
+        printf("file length is only %lu seconds\n",npoints/12000);
+        return 1;
+    }
+
+//    printf("%d %d %d %d\n",i0, nfft1, nfft2, npoints);
+    fftin=(fftw_complex*) fftw_malloc(sizeof(fftw_complex)*nfft1);
+    fftout=(fftw_complex*) fftw_malloc(sizeof(fftw_complex)*nfft1);
+    MYPLAN = fftw_plan_dft_1d(nfft1, fftin, fftout, FFTW_FORWARD, FFTW_ESTIMATE);
+    
+    for (i=0; i<npoints; i++) {
+        fftin[i][0]=buffer[i];
+        fftin[i][1]=0.0;
+    }
+    for (i=npoints; i<nfft1; i++) {
+        fftin[i][0]=0.0;
+        fftin[i][1]=0.0;
+    }
+    
+    fftw_execute(MYPLAN);
+    
+    fftw_free(fftin);
+    fftw_destroy_plan(MYPLAN);
+    
+    fftin=(fftw_complex*) fftw_malloc(sizeof(fftw_complex)*nfft2);
+    for (i=0; i<nfft2; i++){
+        j=i0+i;
+        if( i>nh2 )
+        j=j-nfft2;
+        fftin[i][0]=fftout[j][0];
+        fftin[i][1]=fftout[j][1];
+    }
+
+    fftw_free(fftout);
+    fftout=(fftw_complex*) fftw_malloc(sizeof(fftw_complex)*nfft2);
+    MYPLAN = fftw_plan_dft_1d(nfft2, fftin, fftout, FFTW_BACKWARD, FFTW_ESTIMATE);
+    fftw_execute(MYPLAN);
+    
+    for (i=0; i<nfft2; i++) {
+        idat[i]=fftout[i][0]/1000.0;
+        qdat[i]=fftout[i][1]/1000.0;
+    }
+
+    fftw_free(fftin);
+    fftw_free(fftout);
+    fftw_destroy_plan(MYPLAN);
+
+    return nfft2;
 }
 
 void getStats(double *id, double *qd, long np, double *mi, double *mq, double *mi2, double *mq2, double *miq)
@@ -495,165 +578,62 @@ void usage(void)
 int main(int argc, char *argv[])
 {
     long int i,j,k;
-    float *buffer;
     double *idat, *qdat;
     double mi, mq, mi2, mq2, miq;
     unsigned char *symbols, *decdata;
     signed char message[]={-9,13,-35,123,57,-39,64,0,0,0,0};
     int32_t n1,n2;
     char *callsign,*grid;
-
-    int mettab[2][256]={
-       5,   5,   5,   5,   5,   5,   5,   5,   5,   5,
-       5,   5,   5,   5,   5,   5,   5,   5,   5,   5,
-       5,   5,   5,   5,   5,   5,   5,   5,   5,   5,
-       5,   5,   5,   5,   5,   5,   5,   5,   5,   5,
-       5,   5,   5,   5,   5,   5,   5,   5,   5,   5,
-       5,   5,   5,   5,   5,   5,   5,   5,   5,   5,
-       5,   5,   5,   5,   5,   5,   5,   5,   5,   5,
-       5,   5,   5,   5,   5,   5,   5,   5,   5,   4,
-       4,   4,   4,   4,   4,   4,   4,   4,   4,   4,
-       4,   4,   4,   4,   4,   4,   4,   4,   4,   4,
-       3,   3,   3,   3,   3,   3,   3,   3,   3,   2,
-       2,   2,   2,   2,   1,   1,   1,   1,   0,   0,
-      -1,  -1,  -1,  -2,  -2,  -3,  -4,  -4,  -5,  -6,
-      -7,  -7,  -8,  -9, -10, -11, -12, -12, -13, -14,
-     -15, -16, -17, -17, -18, -19, -20, -21, -22, -22,
-     -23, -24, -25, -26, -26, -27, -28, -29, -30, -30,
-     -31, -32, -33, -33, -34, -35, -36, -36, -37, -38,
-     -38, -39, -40, -41, -41, -42, -43, -43, -44, -45,
-     -45, -46, -47, -47, -48, -49, -49, -50, -51, -51,
-     -52, -53, -53, -54, -54, -55, -56, -56, -57, -57,
-     -58, -59, -59, -60, -60, -61, -62, -62, -62, -63,
-     -64, -64, -65, -65, -66, -67, -67, -67, -68, -69,
-     -69, -70, -70, -71, -72, -72, -72, -72, -73, -74,
-     -75, -75, -75, -77, -76, -76, -78, -78, -80, -81,
-     -80, -79, -83, -82, -81, -82, -82, -83, -84, -84,
-     -84, -87, -86, -87, -88, -89, -89, -89, -88, -87,
-     -86, -87, -84, -84, -84, -83, -82, -82, -81, -82,
-     -83, -79, -80, -81, -80, -78, -78, -76, -76, -77,
-     -75, -75, -75, -74, -73, -72, -72, -72, -72, -71,
-     -70, -70, -69, -69, -68, -67, -67, -67, -66, -65,
-     -65, -64, -64, -63, -62, -62, -62, -61, -60, -60,
-     -59, -59, -58, -57, -57, -56, -56, -55, -54, -54,
-     -53, -53, -52, -51, -51, -50, -49, -49, -48, -47,
-     -47, -46, -45, -45, -44, -43, -43, -42, -41, -41,
-     -40, -39, -38, -38, -37, -36, -36, -35, -34, -33,
-     -33, -32, -31, -30, -30, -29, -28, -27, -26, -26,
-     -25, -24, -23, -22, -22, -21, -20, -19, -18, -17,
-     -17, -16, -15, -14, -13, -12, -12, -11, -10,  -9,
-      -8,  -7,  -7,  -6,  -5,  -4,  -4,  -3,  -2,  -2,
-      -1,  -1,  -1,   0,   0,   1,   1,   1,   1,   2,
-       2,   2,   2,   2,   3,   3,   3,   3,   3,   3,
-       3,   3,   3,   4,   4,   4,   4,   4,   4,   4,
-       4,   4,   4,   4,   4,   4,   4,   4,   4,   4,
-       4,   4,   4,   4,   5,   5,   5,   5,   5,   5,
-       5,   5,   5,   5,   5,   5,   5,   5,   5,   5,
-       5,   5,   5,   5,   5,   5,   5,   5,   5,   5,
-       5,   5,   5,   5,   5,   5,   5,   5,   5,   5,
-       5,   5,   5,   5,   5,   5,   5,   5,   5,   5,
-       5,   5,   5,   5,   5,   5,   5,   5,   5,   5,
-       5,   5,   5,   5,   5,   5,   5,   5,   5,   5,
-       5,   5,   5,   5,   5,   5,   5,   5,   5,   5,
-       5,   5};
     int ierr, delta;
     unsigned int nbits;
-    unsigned long metric, maxcycles, cycles;
-
-    if( argc != 4 || strcmp(argv[1],"-f") ) {
-        printf("%s\n",argv[1]);
-        usage();
-        return 1;
-    }
-
-/* parse the date and time from the given filename
- for now, assume that the filname ends in ".wav". Find that, and then
- work backwards to determine date and time. This avoids having to figure
- out the path.*/
-
-    char *ptr_to_wav;
+    unsigned long npoints, metric, maxcycles, cycles;
+    float df=375.0/256.0/2;
+    float freq0[200],snr0[200],drift0[200],shift0[200];
+    int nfft2=65536;
+    char *ptr_to_infile,*ptr_to_infile_suffix;
     char uttime[5],date[7];
-    
-    ptr_to_wav=strstr(argv[3],".wav");
-    
-    strncpy(date,ptr_to_wav-11,6);
-    strncpy(uttime,ptr_to_wav-4,4);
-    date[6]='\0';
-    uttime[4]='\0';
-    float rx_freq=strtof(argv[2],NULL);
-//    printf("date %s uttime %s rx_freq %f \n",date, uttime, rx_freq);
+    float dt=1.0/375.0;
+    float dialfreq_cmdline=0.0, dialfreq;
 
-    unsigned long npoints=readwavfile(argc, argv, &buffer);
-    if( npoints == 1 ) {
-        return 1;
-    } else if ( npoints < 12000*110 ) {
-        printf("file length is only %lu seconds\n",npoints/12000);
-        return 1;
-    }
-    
     fftw_complex *fftin, *fftout;
     fftw_plan MYPLAN;
-    int nfft1=2*1024*1024;
-    int nfft2=nfft1/32;
-    int nh2=nfft2/2;
-    double df=12000.0/nfft1;
-    int i0=1500.0/df+0.5;
-    
-//    printf("%d %d %d %d\n",i0, nfft1, nfft2, npoints);
-    fftin=(fftw_complex*) fftw_malloc(sizeof(fftw_complex)*nfft1);
-    fftout=(fftw_complex*) fftw_malloc(sizeof(fftw_complex)*nfft1);
-    MYPLAN = fftw_plan_dft_1d(nfft1, fftin, fftout, FFTW_FORWARD, FFTW_ESTIMATE);
+#include "./mettab.c"
 
-    for (i=0; i<npoints; i++) {
-        fftin[i][0]=buffer[i];
-        fftin[i][1]=0.0;
-    }
-    for (i=npoints; i<nfft1; i++) {
-        fftin[i][0]=0.0;
-        fftin[i][1]=0.0;
-    }
-
-    fftw_execute(MYPLAN);
-
-    fftw_free(fftin);
-    fftw_destroy_plan(MYPLAN);
-    
-    fftin=(fftw_complex*) fftw_malloc(sizeof(fftw_complex)*nfft2);
-    for (i=0; i<nfft2; i++){
-        j=i0+i;
-        if( i>nh2 )
-            j=j-nfft2;
-        fftin[i][0]=fftout[j][0];
-        fftin[i][1]=fftout[j][1];
-    }
-    
-    fftw_free(fftout);
-    fftout=(fftw_complex*) fftw_malloc(sizeof(fftw_complex)*nfft2);
-    MYPLAN = fftw_plan_dft_1d(nfft2, fftin, fftout, FFTW_BACKWARD, FFTW_ESTIMATE);
-    fftw_execute(MYPLAN);
-    
-//    npoints=nfft2;
-    
-    float dt=1.0/375.0;
 
     idat=malloc(sizeof(double)*nfft2);
     qdat=malloc(sizeof(double)*nfft2);
 
-    for (i=0; i<nfft2; i++) {
-        idat[i]=fftout[i][0]/1000.0;
-        qdat[i]=fftout[i][1]/1000.0;
+    if( argc ==2 && (strstr(argv[1],".wav") || strstr(argv[1],".c2") ) ) {
+        ptr_to_infile=argv[1];
+    } else if ( argc == 4 && !strcmp(argv[1],"-f") ) {
+        ptr_to_infile=argv[3];
+        dialfreq_cmdline=strtof(argv[2],NULL);
+    } else {
+        usage();
+        return 1;
     }
     
-    fftw_free(fftin);
-    fftw_free(fftout);
-    fftw_destroy_plan(MYPLAN);
+    if( strstr(ptr_to_infile,".wav") ) {
+        ptr_to_infile_suffix=strstr(ptr_to_infile,".wav");
+        npoints=readwavfile(ptr_to_infile, idat, qdat);
+        dialfreq=dialfreq_cmdline;
+    } else {
+        ptr_to_infile_suffix=strstr(ptr_to_infile,".c2");
+        npoints=readc2file(ptr_to_infile, idat, qdat, &dialfreq);
+    }
 
+// parse the date and time from the given filename
+    strncpy(date,ptr_to_infile_suffix-11,6);
+    strncpy(uttime,ptr_to_infile_suffix-4,4);
+    date[6]='\0';
+    uttime[4]='\0';
+//    printf("date %s uttime %s dialfreq %f \n",date, uttime, dialfreq);
     
-    getStats(idat, qdat, nfft2, &mi, &mq, &mi2, &mq2, &miq);
+    getStats(idat, qdat, npoints, &mi, &mq, &mi2, &mq2, &miq);
 //    printf("total power: %4.1f dB\n",10*log10(mi2+mq2));
 
 // Do ffts over 2 symbols, stepped by half symbols
-    int nffts=4*floor((npoints/32.0)/512)-1;
+    int nffts=4*floor(npoints/512)-1;
     fftin=(fftw_complex*) fftw_malloc(sizeof(fftw_complex)*512);
     fftout=(fftw_complex*) fftw_malloc(sizeof(fftw_complex)*512);
     MYPLAN = fftw_plan_dft_1d(512, fftin, fftout, FFTW_FORWARD, FFTW_ESTIMATE);
@@ -721,7 +701,6 @@ int main(int argc, char *argv[])
 /* find all local maxima in smoothed spectrum. this is looser/lazier
  than K1JT's algorithm */
     
-    float freq0[200],snr0[200],drift0[200],shift0[200];
     for (i=0; i<200; i++) {
         freq0[i]=0.0;
         snr0[i]=0.0;
@@ -729,7 +708,6 @@ int main(int argc, char *argv[])
         shift0[i]=0.0;
     }
     int npk=0;
-    df=375.0/256.0/2;
     for(j=1; j<410; j++) {
         if((smspec[j]>smspec[j-1]) & (smspec[j]>smspec[j+1])) {
             freq0[npk]=(j-205)*df;
@@ -882,8 +860,6 @@ definition
                 noprint=1;
             }
             
-            
-
 // de-dupe using callsign
             int dupe=0;
             for (i=0; i<npk; i++) {
@@ -894,15 +870,15 @@ definition
                 uniques++;
                 strcpy(allcalls[uniques],callsign);
             printf("%4s %3.0f %4.1f %10.6f %2d  %-s %4s %2d\n",
-                   uttime, snr0[j],(shift1*dt-2.0), rx_freq+(1500+f1)/1e6,
+                   uttime, snr0[j],(shift1*dt-2.0), dialfreq+(1500+f1)/1e6,
                    (int)drift1, callsign, grid, ntype);
             fprintf(fall_wspr,"%6s %4s %3.0f %3.0f %4.1f %10.6f  %-s %4s %2d          %2.0f     %lu\n",
                        date,uttime,sync*10,snr0[j],
-                       shift1*dt-2.0, rx_freq+(1500+f1)/1e6,
+                       shift1*dt-2.0, dialfreq+(1500+f1)/1e6,
                        callsign, grid, ntype, drift1, cycles/81);
             fprintf(fwsprd,"%6s %4s %3d %3.0f %4.1f %10.6f  %-s %4s %2d          %2d     %lu\n",
                         date,uttime,(int)(sync*10),snr0[j],
-                        shift1*dt-2.0, rx_freq+(1500+f1)/1e6,
+                        shift1*dt-2.0, dialfreq+(1500+f1)/1e6,
                         callsign, grid, ntype, (int)drift1, cycles/81);
 
             }
