@@ -568,58 +568,81 @@ int floatcomp(const void* elem1, const void* elem2)
 
 void usage(void)
 {
-    printf("K9AN wsprd v0.1\n");
-    printf("Usage:\n");
-    printf("wsprd -f 14.0956 140710_1822.wav\n");
+    printf("Usage: k9an-wspr [options...] infile\n");
+    printf("\n");
+    printf("Options:\n");
+    printf("       -f x Transceiver dial frequency is x (MHz)\n");
+    printf("       -v verbose mode\n");
+    printf("       -w decode signals outside of the subband\n");
 }
 
 
 
 int main(int argc, char *argv[])
 {
+    extern char *optarg;
+    extern int optind;
     long int i,j,k;
-    double *idat, *qdat;
-    double mi, mq, mi2, mq2, miq;
     unsigned char *symbols, *decdata;
     signed char message[]={-9,13,-35,123,57,-39,64,0,0,0,0};
-    int32_t n1,n2;
     char *callsign,*grid;
-    int ierr, delta;
+    char *ptr_to_infile,*ptr_to_infile_suffix;
+    char uttime[5],date[7];
+    int c, delta, ierr, nfft2=65536, verbose;
+    int32_t n1,n2;
     unsigned int nbits;
     unsigned long npoints, metric, maxcycles, cycles;
     float df=375.0/256.0/2;
     float freq0[200],snr0[200],drift0[200],shift0[200];
-    int nfft2=65536;
-    char *ptr_to_infile,*ptr_to_infile_suffix;
-    char uttime[5],date[7];
     float dt=1.0/375.0;
     float dialfreq_cmdline=0.0, dialfreq;
+    float fmin=-105, fmax=105;
+    double *idat, *qdat;
+    double mi, mq, mi2, mq2, miq;
 
     fftw_complex *fftin, *fftout;
     fftw_plan MYPLAN;
 #include "./mettab.c"
 
-
     idat=malloc(sizeof(double)*nfft2);
     qdat=malloc(sizeof(double)*nfft2);
+    
+    while ( (c = getopt(argc, argv, "f:wv")) !=-1 ) {
+        switch (c) {
+                case 'v':
+                verbose = 1;
+                break;
+                case 'f':
+                dialfreq_cmdline = strtof(optarg,NULL);
+                break;
+                case 'w':
+                fmin=-150.0;
+                fmax=150.0;
+                break;
+                case '?':
+                usage();
+                return 1;
+        }
+    }
 
-    if( argc ==2 && (strstr(argv[1],".wav") || strstr(argv[1],".c2") ) ) {
-        ptr_to_infile=argv[1];
-    } else if ( argc == 4 && !strcmp(argv[1],"-f") ) {
-        ptr_to_infile=argv[3];
-        dialfreq_cmdline=strtof(argv[2],NULL);
-    } else {
+    if( optind+1 > argc ) {
+        printf("Error: missing filename\n");
         usage();
         return 1;
+    } else {
+        ptr_to_infile=argv[optind];
     }
     
     if( strstr(ptr_to_infile,".wav") ) {
         ptr_to_infile_suffix=strstr(ptr_to_infile,".wav");
         npoints=readwavfile(ptr_to_infile, idat, qdat);
         dialfreq=dialfreq_cmdline;
-    } else {
+    }    else if ( strstr(ptr_to_infile,".c2") !=0 )  {
         ptr_to_infile_suffix=strstr(ptr_to_infile,".c2");
         npoints=readc2file(ptr_to_infile, idat, qdat, &dialfreq);
+    }   else {
+        printf("Error: infile must have suffice .wav or .c2\n");
+        return 1;
     }
 
 // parse the date and time from the given filename
@@ -659,6 +682,7 @@ int main(int argc, char *argv[])
     fftw_free(fftin);
     fftw_free(fftout);
 
+// get average spectrum
     float psavg[512];
     memset(psavg,0.0, sizeof(float)*512);
     for (i=0; i<nffts; i++) {
@@ -667,7 +691,7 @@ int main(int argc, char *argv[])
         }
     }
     
-// smooth with 7-point window
+// smooth with 7-point window and limit the spectrum to +/-150 Hz
     int window[7]={1,1,1,1,1,1,1};
     float smspec[411];
     for (i=0; i<411; i++) {
@@ -678,6 +702,7 @@ int main(int argc, char *argv[])
         }
     }
 
+// sort spectrum values so that we can pick off noise level as a percentile
     float tmpsort[411];
     for (j=0; j<411; j++)
         tmpsort[j]=smspec[j];
@@ -688,9 +713,9 @@ int main(int argc, char *argv[])
 // too high, reducing estimated snr's.
 // need to investigate why my SNRs differ from wspr/wspr-x when there are strong
 // signals in the band. One of us is biased.
-
     float noise_level = tmpsort[122];
     
+// renormalize spectrum so that (large) peaks represent an estimate of snr
     for (j=0; j<411; j++) {
         smspec[j]=smspec[j]/noise_level - 1.0;
         if( smspec[j] < pow(10.0,(-33+26.5)/10))
@@ -698,9 +723,7 @@ int main(int argc, char *argv[])
             continue;
     }
 
-/* find all local maxima in smoothed spectrum. this is looser/lazier
- than K1JT's algorithm */
-    
+// find all local maxima in smoothed spectrum.
     for (i=0; i<200; i++) {
         freq0[i]=0.0;
         snr0[i]=0.0;
@@ -709,7 +732,7 @@ int main(int argc, char *argv[])
     }
     int npk=0;
     for(j=1; j<410; j++) {
-        if((smspec[j]>smspec[j-1]) & (smspec[j]>smspec[j+1])) {
+        if((smspec[j]>smspec[j-1]) && (smspec[j]>smspec[j+1]) && (npk<200)) {
             freq0[npk]=(j-205)*df;
             snr0[npk]=10*log10(smspec[j])-26.5;
             npk++;
@@ -798,12 +821,12 @@ definition
     for (j=0; j<npk; j++) {
 
 // now refine the estimates of freq, shift using sync (0<sync<1) as a metric.
-// assume that optimization over freq and shift can be done sequentially
 // use function sync_and_demodulate - it has three modes of operation:
 // mode is the last argument:
 // 0 no frequency or drift search. find best time lag.
 // 1 no time lag or drift search. find best frequency.
-// 2 no frequency or time lag search. calculate soft-decision symbols using passed frequency and shift.
+// 2 no frequency or time lag search. calculate soft-decision symbols
+//   using passed frequency and shift.
         f1=freq0[j];
         drift1=drift0[j];
 
@@ -866,7 +889,7 @@ definition
                 if( !strcmp(callsign,allcalls[i]) )
                     dupe=1;
             }
-            if( !dupe && !noprint) {
+            if( !dupe && !noprint && f1>fmin && f1<fmax ) {
                 uniques++;
                 strcpy(allcalls[uniques],callsign);
             printf("%4s %3.0f %4.1f %10.6f %2d  %-s %4s %2d \n",

@@ -1,39 +1,44 @@
-This is a decoder for K1JT's Weak Signal Propagation Reporter (WSPR) mode.
-The decoder is written in C and is a command-line program that
-reads from a .wav file and writes output to the console.
+k9an-wspr is a decoder for K1JT's Weak Signal Propagation Reporter (WSPR) mode.
+
+The program is written in C and is a command-line program that reads from a
+.c2 file or .wav file and writes output to the console. It is designed so that
+it can be used as a drop-in replacement for the wsprd program that wspr-x uses 
+for decoding. 
 
 k9an-wspr requires only two external libraries: libsndfile and libfftw3
 
 COMPILING:
-A bare-bones Makefile is included. Change include and lib directories 
-and it should just work, provided that the header files and library
-files for sndfile and fftw3 are available. Test on OS X 10.8 and 
-Ubuntu 12.04.
+A bare-bones Makefile is included. The program is known to compile on OS X 10.8
+with clang and on Ubuntu 12.04 with gcc.
 
 USAGE:
-k9an-wspr freq file.wav
+k9an-wspr [-wv] [-f freq] infile
+
+    -w wideband mode prints displays decoded signals within +/- 150 Hz 
+    -v verbose
+
+infile can be either .wav or .c2
 
 e.g. 
-./k9an-wspr 14.0971 140709_2258.wav
+./k9an-wspr -f 14.0956 140709_2258.wav
+
+Note that for .c2 files, the frequency within the file overrides the command
+line value.
 
 FEATURES:
-The k9an-wspr program will decode and display signals that are outside of 
-the wspr frequency segment by up to 50 Hz on each side. At present,
-it does not decode signals using the 6-digit locator. Also, no provision
-is made for uploading spots to the WSPRnet database. 
+By default, k9an-wspr reports signals that are within +/- 105 Hz of the 
+subband center frequency. The wideband option (-w) extends this to +/- 150 Hz.
 
-k9an-wspr was optimized to maximize the number of decodes on a crowded band,
-such as 20m or 30m. testing is needed to see if this goal was accomplished. 
+At present, k9an-wspr does not maintain a hashtable, nor does it decode 
+signals using the 6-digit locator.
 
-The detection, synchronization, and symbol estimation algorithms are all 
-based, more-or-less, on K1JT's wspr and wspr-x programs. Based on my 
-understanding of how things should work, I prototyped the algorithms 
-in gnu octave first, and then translated my octave code to C. 
-The symbols are decoded using Phil Karn's sequential decoder routine, 
+k9an-wspr was optimized to maximize the number of decodes on a crowded band. It 
+uses a looser selection criterion than K1JT's program.
+
+The symbols are decoded using Phil Karn's sequential decoder routine,
 fano.c. 
 
 Steve, k9an
-Urbana, Illinois 
 s.j.franke@icloud.com
 
 
