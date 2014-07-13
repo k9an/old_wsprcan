@@ -6,11 +6,13 @@
 */
 
 #include <stdio.h>
+#include <unistd.h>
 #include <stdlib.h>
 #include <sndfile.h>
 #include <math.h>
 #include <strings.h>
 #include <fftw3.h>
+#include "fano.h"
 
 unsigned char pr3[162]=
 {1,1,0,0,0,0,0,0,1,0,0,0,1,1,1,0,0,0,1,0,
@@ -771,7 +773,7 @@ definition
 
     int idrift,ifr,if0,ifd,k0;
     long int kindex;
-    float smax, pmax,ss,pow,p0,p1,p2,p3;
+    float smax,ss,pow,p0,p1,p2,p3;
     for(j=0; j<npk; j++) {
         smax=-1e30;
         if0=freq0[j]/df+256;
