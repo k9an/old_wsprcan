@@ -4,10 +4,10 @@ LDFLAGS = -L/opt/local/lib
 LIBS = -lsndfile -lfftw3
 
 DEPS = fano.h
-OBJ = wspr.o fano.o tab.o
+OBJ = wspr.o fano.o
 
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-k9an-wspr: $(OBJ) 
+k9an-wsprd: $(OBJ) 
 	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS) $(LIBS)
