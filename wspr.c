@@ -570,7 +570,7 @@ int floatcomp(const void* elem1, const void* elem2)
 
 void usage(void)
 {
-    printf("Usage: k9an-wspr [options...] infile\n");
+    printf("Usage: k9an-wsprd [options...] infile\n");
     printf("       infile must have suffix .wav or .c2\n");
     printf("\n");
     printf("Options:\n");
