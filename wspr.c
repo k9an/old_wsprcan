@@ -1,6 +1,9 @@
-// Andrew Greensted - Feb 2010
-// http://www.labbookpages.co.uk
-// Version 1
+/*
+ * k9an-wspr is a detector/demodulator/decoder for K1JT's 
+ * Weak Signal Propagation Reporter (WSPR) mode.
+ *
+ * Copyright 2014, Steven Franke, K9AN
+*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -49,6 +52,11 @@ unsigned long readc2file(char *ptr_to_infile, double *idat, double *qdat, float 
 
 unsigned long readwavfile(char *ptr_to_infile, double *idat, double *qdat )
 {
+    // This is based on work by:
+    // Andrew Greensted - Feb 2010
+    // http://www.labbookpages.co.uk
+    // Version 1
+
     float *buffer;
     int i, j;
     int nfft1=2*1024*1024;
@@ -208,7 +216,7 @@ int mode)
     // 1 no time lag or drift search. find best frequency.
     // 2 no frequency or time lag search. find best drift.
 
-    float dt=1.0/375.0, df=375.0/256.0;
+    float dt=1.0/375.0, df=375.0/256.0,fbest;
     long int i, j, k;
     double pi=4.*atan(1.0);
     float f0=0.0,fp,ss;
@@ -220,7 +228,7 @@ int mode)
     i2[162],q2[162],
     i3[162],q3[162];
     
-    double p0,p1,p2,p3,cmet,totp,covmax,pmax, phase, fac;
+    double p0,p1,p2,p3,cmet,totp,syncmax, phase, fac;
     double
     c0[256],s0[256],
     c1[256],s1[256],
@@ -232,14 +240,11 @@ int mode)
     dphi2, cdphi2, sdphi2,
     dphi3, cdphi3, sdphi3;
     float fsymb[162];
-    
-    df=375.0/256.0;
     int best_shift = 0, ifreq;
-    
-    covmax=-1e30;
-    pmax=-1e30;
-
     int ifmin=0, ifmax=0;
+    
+    syncmax=-1e30;
+
 
 // mode is the last argument:
 // 0 no frequency or drift search. find best time lag.
@@ -257,10 +262,12 @@ int mode)
         ifmin=-5;
         ifmax=5;
         f0=*f1;
+
     }
     if( mode == 2 ) {
         best_shift = *shift1;
         f0=*f1;
+
     }
 
     if( mode != 2 ) {
@@ -343,28 +350,23 @@ int mode)
                 ss=ss+cmet*(2*pr3[i]-1);
             }
             
-            if( ss > covmax ) {
-                covmax=ss;
-                pmax=totp;
-
+            if( ss/totp > syncmax ) {
+                syncmax=ss/totp;
+ 
                 best_shift=lag;
                 
-                pmax=totp;
-                *f1=f0;
+                fbest=f0;
             }
         } // lag loop
-        
-
     } //freq loop
-    *sync=covmax/pmax;
+    *sync=syncmax;
     *shift1=best_shift;
-        return;
+    *f1=fbest;
+    return;
     } //if not mode 2
     
     if( mode == 2 )
     {
-//    printf("fbest: %f t0: %f\n", *f1, best_shift*dt);
-
         for (i=0; i<162; i++)
         {
             i0[i]=0.0;
@@ -569,11 +571,12 @@ int floatcomp(const void* elem1, const void* elem2)
 void usage(void)
 {
     printf("Usage: k9an-wspr [options...] infile\n");
+    printf("       infile must have suffix .wav or .c2\n");
     printf("\n");
     printf("Options:\n");
     printf("       -f x Transceiver dial frequency is x (MHz)\n");
     printf("       -v verbose mode\n");
-    printf("       -w decode signals outside of the subband\n");
+    printf("       -w wideband mode - decode signals outside of the subband\n");
 }
 
 
@@ -588,15 +591,20 @@ int main(int argc, char *argv[])
     char *callsign,*grid;
     char *ptr_to_infile,*ptr_to_infile_suffix;
     char uttime[5],date[7];
-    int c, delta, ierr, nfft2=65536, verbose;
+    int c, delta, ierr, nfft2=65536, verbose=0;
+    int shift1, lagmin, lagmax, lagstep;
+
     int32_t n1,n2;
     unsigned int nbits;
     unsigned long npoints, metric, maxcycles, cycles;
     float df=375.0/256.0/2;
-    float freq0[200],snr0[200],drift0[200],shift0[200];
+    float freq0[200],snr0[200],drift0[200],sync0[200];
+    int shift0[200];
     float dt=1.0/375.0;
     float dialfreq_cmdline=0.0, dialfreq;
     float fmin=-105, fmax=105;
+    float f1, fstep, sync1, drift1;
+
     double *idat, *qdat;
     double mi, mq, mi2, mq2, miq;
 
@@ -626,7 +634,6 @@ int main(int argc, char *argv[])
     }
 
     if( optind+1 > argc ) {
-        printf("Error: missing filename\n");
         usage();
         return 1;
     } else {
@@ -641,7 +648,7 @@ int main(int argc, char *argv[])
         ptr_to_infile_suffix=strstr(ptr_to_infile,".c2");
         npoints=readc2file(ptr_to_infile, idat, qdat, &dialfreq);
     }   else {
-        printf("Error: infile must have suffice .wav or .c2\n");
+        printf("Error: infile must have suffix .wav or .c2\n");
         return 1;
     }
 
@@ -650,10 +657,12 @@ int main(int argc, char *argv[])
     strncpy(uttime,ptr_to_infile_suffix-4,4);
     date[6]='\0';
     uttime[4]='\0';
-//    printf("date %s uttime %s dialfreq %f \n",date, uttime, dialfreq);
+    if( verbose )
+        printf("date %s uttime %s dialfreq %f \n",date, uttime, dialfreq);
     
     getStats(idat, qdat, npoints, &mi, &mq, &mi2, &mq2, &miq);
-//    printf("total power: %4.1f dB\n",10*log10(mi2+mq2));
+    if( verbose )
+        printf("total power: %4.1f dB\n",10*log10(mi2+mq2));
 
 // Do ffts over 2 symbols, stepped by half symbols
     int nffts=4*floor(npoints/512)-1;
@@ -728,7 +737,8 @@ int main(int argc, char *argv[])
         freq0[i]=0.0;
         snr0[i]=0.0;
         drift0[i]=0.0;
-        shift0[i]=0.0;
+        shift0[i]=0;
+        sync0[i]=0.0;
     }
     int npk=0;
     for(j=1; j<410; j++) {
@@ -783,27 +793,28 @@ definition
                     p3=ps[ifd+3][kindex];
                     ss=ss+(2*pr3[k]-1)*(p3+p1-p0-p2);
                     pow=pow+p0+p1+p2+p3;
+                    sync1=ss/pow;
                     }
                 }
-                if( ss > smax ) {
-                    smax=ss;
-                    pmax=pow;
-                    shift0[j]=128*(k0+1)*dt;
+                if( sync1 > smax ) {
+                    smax=sync1;
+                    shift0[j]=128*(k0+1);
                     drift0[j]=idrift;
                     freq0[j]=(ifr-256)*df;
+                    sync0[j]=sync1;
                 }
-//                printf("drift %d  k0 %d  sync %f\n",idrift,k0,ss/pow);
+//                printf("drift %d  k0 %d  sync %f\n",idrift,k0,smax);
             }
         }
         }
-//        printf("npk %d freq %.1f drift %.1f t0 %.1f sync %.2f\n",j,freq0[j],drift0[j],shift0[j],smax/pmax);
+        if ( verbose ) {
+            printf("npk %2ld freq %6.1f drift %4.1f shift %5d sync %4.2f\n",
+                   j,freq0[j],drift0[j],shift0[j],sync0[j]); }
     }
 
     nbits=81;
     symbols=malloc(sizeof(char)*nbits*2);
     memset(symbols,0,sizeof(char)*nbits*2);
-    float f1, fstep, sync, drift1;
-    int shift1, lagmin, lagmax, lagstep;
     decdata=malloc((nbits+7)/8);
     grid=malloc(sizeof(char)*5);
     callsign=malloc(sizeof(char)*7);
@@ -820,31 +831,40 @@ definition
     
     for (j=0; j<npk; j++) {
 
-// now refine the estimates of freq, shift using sync (0<sync<1) as a metric.
-// use function sync_and_demodulate - it has three modes of operation:
+// now refine the estimates of freq, shift using sync as a metric.
+// sync is calculated such that it is a float taking values in the range
+// [0.0,1.0].
+        
+// function sync_and_demodulate has three modes of operation
 // mode is the last argument:
-// 0 no frequency or drift search. find best time lag.
-// 1 no time lag or drift search. find best frequency.
-// 2 no frequency or time lag search. calculate soft-decision symbols
-//   using passed frequency and shift.
+//      0 no frequency or drift search. find best time lag.
+//      1 no time lag or drift search. find best frequency.
+//      2 no frequency or time lag search. calculate soft-decision symbols
+//        using passed frequency and shift.
         f1=freq0[j];
         drift1=drift0[j];
+        shift1=shift0[j];
+        sync1=sync0[j];
+//        if( verbose ) {
+//            printf("coarse   : %7.2f %5d %4.1f %6.3f\n",f1,shift1,drift1,sync1); }
 
 // fine search for best sync lag (mode 0)
         fstep=0.0;
-        lagmin=shift0[j]/dt-128;
-        lagmax=shift0[j]/dt+128;
+        lagmin=shift1-144;
+        lagmax=shift1+144;
         lagstep=8;
-        sync_and_demodulate(idat, qdat, npoints, symbols, &f1, fstep, &shift1, lagmin, lagmax, lagstep, &drift1, &sync, 0);
-//        printf("after demodulate %f %d %f %f\n",f1,shift1,drift1,sync);
+        sync_and_demodulate(idat, qdat, npoints, symbols, &f1, fstep, &shift1, lagmin, lagmax, lagstep, &drift1, &sync1, 0);
+//        if( verbose ) {
+//            printf("fine sync: %7.2f %5d %4.1f %6.3f\n",f1,shift1,drift1,sync1); }
 
 // fine search for frequency peak (mode 1)
         fstep=0.1;
-        sync_and_demodulate(idat, qdat, npoints, symbols, &f1, fstep, &shift1, lagmin, lagmax, lagstep, &drift1, &sync, 1);
-//        printf("after demodulate %f %d %f %f\n",f1,shift1,drift1,sync);
+        sync_and_demodulate(idat, qdat, npoints, symbols, &f1, fstep, &shift1, lagmin, lagmax, lagstep, &drift1, &sync1, 1);
+//        if( verbose ) {
+//            printf("fine freq: %7.2f %5d %4.1f %6.3f\n",f1,shift1,drift1,sync1); }
 
 // use mode 2 to get soft-decision symbols
-        sync_and_demodulate(idat, qdat, npoints, symbols, &f1, fstep, &shift1, lagmin, lagmax, lagstep, &drift1, &sync, 2);
+        sync_and_demodulate(idat, qdat, npoints, symbols, &f1, fstep, &shift1, lagmin, lagmax, lagstep, &drift1, &sync1, 2);
         
         deinterleave(symbols);
 
@@ -896,11 +916,11 @@ definition
                    uttime, snr0[j],(shift1*dt-2.0), dialfreq+(1500+f1)/1e6,
                    (int)drift1, callsign, grid, ntype);
             fprintf(fall_wspr,"%6s %4s %3.0f %3.0f %4.1f %10.6f  %-s %4s %2d          %2.0f     %lu\n",
-                       date,uttime,sync*10,snr0[j],
+                       date,uttime,sync1*10,snr0[j],
                        shift1*dt-2.0, dialfreq+(1500+f1)/1e6,
                        callsign, grid, ntype, drift1, cycles/81);
             fprintf(fwsprd,"%6s %4s %3d %3.0f %4.1f %10.6f  %-s %4s %2d          %2d     %lu\n",
-                        date,uttime,(int)(sync*10),snr0[j],
+                        date,uttime,(int)(sync1*10),snr0[j],
                         shift1*dt-2.0, dialfreq+(1500+f1)/1e6,
                         callsign, grid, ntype, (int)drift1, cycles/81);
 

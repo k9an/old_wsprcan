@@ -16,11 +16,12 @@ k9an-wspr [-wv] [-f freq] infile
 
     -w wideband mode prints displays decoded signals within +/- 150 Hz 
     -v verbose
+    -f x (x is frequency in MHz)
 
 infile can be either .wav or .c2
 
 e.g. 
-./k9an-wspr -f 14.0956 140709_2258.wav
+./k9an-wspr -wf 14.0956 140709_2258.wav
 
 Note that for .c2 files, the frequency within the file overrides the command
 line value.
