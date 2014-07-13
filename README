@@ -14,7 +14,7 @@ with llvm and on Ubuntu 12.04 with gcc.
 USAGE:
 k9an-wspr [-wv] [-f freq] infile
 
-    -w wideband mode prints displays decoded signals within +/- 150 Hz 
+    -w wideband mode displays decoded signals within +/- 150 Hz 
     -v verbose
     -f x (x is frequency in MHz)
 
@@ -42,7 +42,7 @@ fano.c.
 NOTES:
 This program attempts to achieve a high probability of detection by trying to 
 decode virtually every peak in the averaged spectrum. As such, there will be 
-duplicate decodes when two closely spaced peaks come from the same signal. 
+duplicate decodes when two closely spaced peaks come from the same signal.
 The program removes dupes based on callsign. This means that test files 
 containing multiple signals, all with the same callsign, will produce only a 
 single decode. The dupe removal can be switched off with the verbose (-v) flag.
