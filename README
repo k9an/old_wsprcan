@@ -9,7 +9,7 @@ k9an-wspr requires only two external libraries: libsndfile and libfftw3
 
 COMPILING:
 A bare-bones Makefile is included. The program is known to compile on OS X 10.8
-with clang and on Ubuntu 12.04 with gcc.
+with llvm and on Ubuntu 12.04 with gcc.
 
 USAGE:
 k9an-wspr [-wv] [-f freq] infile
@@ -39,7 +39,18 @@ uses a looser selection criterion than K1JT's program.
 The symbols are decoded using Phil Karn's sequential decoder routine,
 fano.c. 
 
-Steve, k9an
+NOTES:
+This program attempts to achieve a high probability of detection by trying to 
+decode virtually every peak in the averaged spectrum. As such, there will be 
+duplicate decodes when two, closely spaced peaks come from the same signal. 
+The program removes dupes based on callsign. This means that test files 
+containing multiple signals, all with the same callsign, will produce only a 
+single decode. The dupe removal can be switched off with the verbose (-v) flag.
+
+Feedback and suggestions for improvement will be welcomed!
+
+Steve Franke, k9an
+Urbana, IL, USA
 s.j.franke@icloud.com
 
 

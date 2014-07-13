@@ -909,7 +909,7 @@ definition
                 if( !strcmp(callsign,allcalls[i]) )
                     dupe=1;
             }
-            if( !dupe && !noprint && f1>fmin && f1<fmax ) {
+            if( (verbose || !dupe) && !noprint && f1>fmin && f1<fmax ) {
                 uniques++;
                 strcpy(allcalls[uniques],callsign);
             printf("%4s %3.0f %4.1f %10.6f %2d  %-s %4s %2d \n",
