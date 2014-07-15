@@ -422,7 +422,7 @@ int mode)
         }
         fac=sqrt(f2sum-fsum*fsum);
         for (i=0; i<162; i++) {
-            fsymb[i]=120*fsymb[i]/fac;
+            fsymb[i]=128*fsymb[i]/fac;
             if( fsymb[i] > 127)
                 fsymb[i]=127.0;
             if( fsymb[i] < -128 )
@@ -598,7 +598,7 @@ int main(int argc, char *argv[])
     char *callsign,*grid;
     char *ptr_to_infile,*ptr_to_infile_suffix;
     char uttime[5],date[7];
-    int c, delta, ierr, nfft2=65536, verbose=0;
+    int c, delta, nfft2=65536, verbose=0;
     int shift1, lagmin, lagmax, lagstep, worth_a_try, not_decoded;
     int quickmode=0;
     int32_t n1,n2;
@@ -649,8 +649,7 @@ int main(int argc, char *argv[])
         }
     }
 
-    if( optind+1 > argc ) {
-        printf("* Need an input file name\n");
+    if( optind+1 > argc) {
         usage();
         return 1;
     } else {
