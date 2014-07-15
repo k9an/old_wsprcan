@@ -422,13 +422,13 @@ int mode)
         }
         fac=sqrt(f2sum-fsum*fsum);
         for (i=0; i<162; i++) {
-            fsymb[i]=128*fsymb[i]/fac;
+            fsymb[i]=120*fsymb[i]/fac;
             if( fsymb[i] > 127)
                 fsymb[i]=127.0;
             if( fsymb[i] < -128 )
                 fsymb[i]=-128.0;
             symbols[i]=fsymb[i]+128;
-//            printf("symb: %lu %5.1f\n",i, fsymb[i]);
+//            printf("symb: %lu %d\n",i, symbols[i]);
         }
     }
 }
@@ -496,7 +496,7 @@ void unpackcall( int32_t ncall, char *call )
         i=n;
         tmp[0]=c[i];
         j=0;
-// remove leadig whitespace
+// remove leading whitespace
         for(i=0; i<5; i++) {
             if( tmp[i] != c[36] )
                 break;
@@ -576,9 +576,14 @@ void usage(void)
     printf("       infile must have suffix .wav or .c2\n");
     printf("\n");
     printf("Options:\n");
-    printf("       -f x Transceiver dial frequency is x (MHz)\n");
+    printf("       -f x (x is transceiver dial frequency in MHz)\n");
+// blanking is not yet implemented. The options are accepted for compatibility
+// with development version of wsprd.
+//    printf("       -t n (n is blanking duration in milliseconds)\n");
+//    printf("       -b n (n is pct of time that is blanked)\n");
+    printf("       -q quick mode - doesn't dig deep for weak signals\n");
     printf("       -v verbose mode\n");
-    printf("       -w wideband mode - decode signals outside of the subband\n");
+    printf("       -w wideband mode - decode signals within +/- 150 Hz of center\n");
 }
 
 
@@ -594,8 +599,8 @@ int main(int argc, char *argv[])
     char *ptr_to_infile,*ptr_to_infile_suffix;
     char uttime[5],date[7];
     int c, delta, ierr, nfft2=65536, verbose=0;
-    int shift1, lagmin, lagmax, lagstep;
-
+    int shift1, lagmin, lagmax, lagstep, worth_a_try, not_decoded;
+    int quickmode=0;
     int32_t n1,n2;
     unsigned int nbits;
     unsigned long npoints, metric, maxcycles, cycles;
@@ -604,8 +609,8 @@ int main(int argc, char *argv[])
     int shift0[200];
     float dt=1.0/375.0;
     float dialfreq_cmdline=0.0, dialfreq;
-    float fmin=-105, fmax=105;
-    float f1, fstep, sync1, drift1;
+    float fmin=-110, fmax=110;
+    float f1, fstep, sync1, drift1, tblank, fblank;
 
     double *idat, *qdat;
     double mi, mq, mi2, mq2, miq;
@@ -617,25 +622,35 @@ int main(int argc, char *argv[])
     idat=malloc(sizeof(double)*nfft2);
     qdat=malloc(sizeof(double)*nfft2);
     
-    while ( (c = getopt(argc, argv, "f:wv")) !=-1 ) {
+    while ( (c = getopt(argc, argv, "b:f:qt:wv")) !=-1 ) {
         switch (c) {
-                case 'v':
-                verbose = 1;
+            case 'b':
+                fblank = strtof(optarg,NULL);
                 break;
-                case 'f':
+            case 'f':
                 dialfreq_cmdline = strtof(optarg,NULL);
                 break;
-                case 'w':
+            case 'q':
+                quickmode = 1;
+                break;
+            case 't':
+                tblank = strtof(optarg,NULL);
+                break;
+            case 'v':
+                verbose = 1;
+                break;
+            case 'w':
                 fmin=-150.0;
                 fmax=150.0;
                 break;
-                case '?':
+            case '?':
                 usage();
                 return 1;
         }
     }
 
     if( optind+1 > argc ) {
+        printf("* Need an input file name\n");
         usage();
         return 1;
     } else {
@@ -751,6 +766,17 @@ int main(int argc, char *argv[])
         }
     }
 
+// let's not waste time on signals outside of the range [fmin,fmax].
+    i=0;
+    for( j=0; j<npk; j++) {
+        if( freq0[j] >= fmin && freq0[j] <= fmax ) {
+            freq0[i]=freq0[j];
+            snr0[i]=snr0[j];
+            i++;
+        }
+    }
+    npk=i;
+    
 /* do coarse estimates of freq, drift and shift using k1jt's basic approach, 
 more or less.
 
@@ -810,8 +836,8 @@ definition
         }
         }
         if ( verbose ) {
-            printf("npk %2ld freq %6.1f drift %4.1f shift %5d sync %4.2f\n",
-                   j,freq0[j],drift0[j],shift0[j],sync0[j]); }
+            printf("npk %2ld snr %6.1f freq %6.1f drift %4.1f shift %5d sync %4.2f\n",
+                   j,snr0[j],freq0[j],drift0[j],shift0[j],sync0[j]); }
     }
 
     nbits=81;
@@ -847,8 +873,8 @@ definition
         drift1=drift0[j];
         shift1=shift0[j];
         sync1=sync0[j];
-//        if( verbose ) {
-//            printf("coarse   : %7.2f %5d %4.1f %6.3f\n",f1,shift1,drift1,sync1); }
+        if( verbose ) {
+            printf("coarse   : %7.2f %5d %4.1f %6.3f\n",f1,shift1,drift1,sync1); }
 
 // fine search for best sync lag (mode 0)
         fstep=0.0;
@@ -856,28 +882,46 @@ definition
         lagmax=shift1+144;
         lagstep=8;
         sync_and_demodulate(idat, qdat, npoints, symbols, &f1, fstep, &shift1, lagmin, lagmax, lagstep, &drift1, &sync1, 0);
-//        if( verbose ) {
-//            printf("fine sync: %7.2f %5d %4.1f %6.3f\n",f1,shift1,drift1,sync1); }
+        if( verbose ) {
+            printf("fine sync: %7.2f %5d %4.1f %6.3f\n",f1,shift1,drift1,sync1); }
 
 // fine search for frequency peak (mode 1)
         fstep=0.1;
         sync_and_demodulate(idat, qdat, npoints, symbols, &f1, fstep, &shift1, lagmin, lagmax, lagstep, &drift1, &sync1, 1);
-//        if( verbose ) {
-//            printf("fine freq: %7.2f %5d %4.1f %6.3f\n",f1,shift1,drift1,sync1); }
+        if( verbose ) {
+            printf("fine freq: %7.2f %5d %4.1f %6.3f\n",f1,shift1,drift1,sync1); }
 
-// use mode 2 to get soft-decision symbols
-        sync_and_demodulate(idat, qdat, npoints, symbols, &f1, fstep, &shift1, lagmin, lagmax, lagstep, &drift1, &sync1, 2);
-        
-        deinterleave(symbols);
+        if( sync1 > 0.2 ) {
+            worth_a_try = 1;
+        } else {
+            worth_a_try = 0;
+        }
 
+        int idt=0, ii, jiggered_shift;
         delta=50;
         maxcycles=10000;
+        not_decoded=1;
 
-        ierr = fano(&metric,&cycles,decdata,symbols,nbits,mettab,delta,maxcycles);
+        while ( worth_a_try && not_decoded && idt<=128) {
+            ii=(idt+1)/2;
+            if( idt%2 == 1 ) ii=-ii;
+            jiggered_shift=shift1+ii;
+        
+// use mode 2 to get soft-decision symbols
+            sync_and_demodulate(idat, qdat, npoints, symbols, &f1, fstep, &jiggered_shift, lagmin, lagmax, lagstep, &drift1, &sync1, 2);
+        
+            deinterleave(symbols);
 
-//        printf("ierr %d metric %d  cycles %d\n",ierr,metric,cycles/81);
+            not_decoded = fano(&metric,&cycles,decdata,symbols,nbits,mettab,delta,maxcycles);
+            
+            idt++;
 
-        if( !ierr )
+            if( quickmode ) {
+                break;
+            }
+        }
+        
+        if( worth_a_try && !not_decoded )
         {
             for(i=0; i<11; i++) {
                 if( decdata[i]>128 )
@@ -911,16 +955,16 @@ definition
                 if( !strcmp(callsign,allcalls[i]) )
                     dupe=1;
             }
-            if( (verbose || !dupe) && !noprint && f1>fmin && f1<fmax ) {
+            if( (verbose || !dupe) && !noprint) {
                 uniques++;
                 strcpy(allcalls[uniques],callsign);
             printf("%4s %3.0f %4.1f %10.6f %2d  %-s %4s %2d \n",
                    uttime, snr0[j],(shift1*dt-2.0), dialfreq+(1500+f1)/1e6,
                    (int)drift1, callsign, grid, ntype);
-            fprintf(fall_wspr,"%6s %4s %3.0f %3.0f %4.1f %10.6f  %-s %4s %2d          %2.0f     %lu\n",
+            fprintf(fall_wspr,"%6s %4s %3.0f %3.0f %4.1f %10.6f  %-s %4s %2d          %2.0f     %lu    %4d\n",
                        date,uttime,sync1*10,snr0[j],
                        shift1*dt-2.0, dialfreq+(1500+f1)/1e6,
-                       callsign, grid, ntype, drift1, cycles/81);
+                       callsign, grid, ntype, drift1, cycles/81, ii);
             fprintf(fwsprd,"%6s %4s %3d %3.0f %4.1f %10.6f  %-s %4s %2d          %2d     %lu\n",
                         date,uttime,(int)(sync1*10),snr0[j],
                         shift1*dt-2.0, dialfreq+(1500+f1)/1e6,

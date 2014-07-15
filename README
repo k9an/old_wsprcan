@@ -12,11 +12,12 @@ A bare-bones Makefile is included. The program is known to compile on OS X 10.8
 with llvm and on Ubuntu 12.04 with gcc.
 
 USAGE:
-k9an-wsprd [-wv] [-f freq] infile
+k9an-wsprd [-qwv] [-f freq] infile
 
+    -q quick mode doesn't dig deep for weak signals
     -w wideband mode displays decoded signals within +/- 150 Hz 
     -v verbose
-    -f x (x is frequency in MHz)
+    -f x (x is dial frequency in MHz)
 
 infile can be either .wav or .c2
 
@@ -27,14 +28,15 @@ Note that for .c2 files, the frequency within the file overrides the command
 line value.
 
 FEATURES:
-By default, k9an-wsprd reports signals that are within +/- 105 Hz of the
+By default, k9an-wsprd reports signals that are within +/- 110 Hz of the
 subband center frequency. The wideband option (-w) extends this to +/- 150 Hz.
 
 At present, k9an-wsprd does not maintain a hashtable, nor does it decode
 signals using the 6-digit locator.
 
 k9an-wsprd was optimized to maximize the number of decodes on a crowded band. It 
-uses a looser selection criterion than K1JT's program.
+uses a looser selection criterion than K1JT's program and therefore tries to 
+decode more potential signals. Sometimes, it gets lucky! 
 
 The symbols are decoded using Phil Karn's sequential decoder routine,
 fano.c. 
@@ -47,7 +49,7 @@ The program removes dupes based on callsign. This means that test files
 containing multiple signals, all with the same callsign, will produce only a 
 single decode. The dupe removal can be switched off with the verbose (-v) flag.
 
-Feedback and suggestions for improvement will be welcomed!
+Feedback and suggestions for improvement are welcome!
 
 Steve Franke, k9an
 Urbana, IL, USA
