@@ -42,12 +42,13 @@ The symbols are decoded using Phil Karn's sequential decoder routine,
 fano.c. 
 
 NOTES:
-This program attempts to achieve a high probability of detection by trying to 
-decode virtually every peak in the averaged spectrum. As such, there will be 
-duplicate decodes when two closely spaced peaks come from the same signal.
-The program removes dupes based on callsign. This means that test files 
-containing multiple signals, all with the same callsign, will produce only a 
-single decode. The dupe removal can be switched off with the verbose (-v) flag.
+This program attempts to maximize the number of successful decodes per transmit
+interval by trying to decode virtually every peak in the averaged spectrum.
+As such, there will be occasional duplicate decodes when two closely spaced 
+peaks come from the same signal. The program removes dupes based on callsign 
+and frequency. Two decodes that have the same callsign and estimated frequencies
+that are within 1 Hz will be treated as decodes of the same signal. This
+dupechecking is turned off with the -v flag.
 
 Feedback and suggestions for improvement are welcome!
 

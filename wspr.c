@@ -659,10 +659,16 @@ int main(int argc, char *argv[])
     if( strstr(ptr_to_infile,".wav") ) {
         ptr_to_infile_suffix=strstr(ptr_to_infile,".wav");
         npoints=readwavfile(ptr_to_infile, idat, qdat);
+        if( npoints == 1 ) {
+            return 1;
+        }
         dialfreq=dialfreq_cmdline;
     }    else if ( strstr(ptr_to_infile,".c2") !=0 )  {
         ptr_to_infile_suffix=strstr(ptr_to_infile,".c2");
         npoints=readc2file(ptr_to_infile, idat, qdat, &dialfreq);
+        if( npoints == 1 ) {
+            return 1;
+        }
     }   else {
         printf("Error: infile must have suffix .wav or .c2\n");
         return 1;
@@ -734,10 +740,12 @@ int main(int argc, char *argv[])
     qsort(tmpsort, 411, sizeof(float), floatcomp);
 
 // noise level of spectrum is estimated as 123/411= 30'th percentile
-// of the smoothed spectrum. on a very crowded band, estimated noise level will be
-// too high, reducing estimated snr's.
-// need to investigate why my SNRs differ from wspr/wspr-x when there are strong
-// signals in the band. One of us is biased.
+// of the smoothed spectrum. Matched filter sidelobes from very strong signals
+// will cause the estimated noise level to be biased high, causing estimated
+// snrs to be biased low.
+// my SNRs differ from wspr0/wspr-x when there are strong signals in the band.
+// This suggests that K1JT's approach and mine have different biases.
+    
     float noise_level = tmpsort[122];
     
 // renormalize spectrum so that (large) peaks represent an estimate of snr
@@ -845,6 +853,8 @@ definition
     decdata=malloc((nbits+7)/8);
     grid=malloc(sizeof(char)*5);
     callsign=malloc(sizeof(char)*7);
+    float allfreqs[npk];
+    memset(allfreqs,0,sizeof(float)*npk);
     char allcalls[npk][7];
     memset(allcalls,0,sizeof(char)*npk*7);
     memset(grid,0,sizeof(char)*5);
@@ -948,15 +958,16 @@ definition
                 noprint=1;
             }
             
-// de-dupe using callsign
+// de-dupe using callsign and freq (only a dupe if freqs are within 1 Hz
             int dupe=0;
             for (i=0; i<npk; i++) {
-                if( !strcmp(callsign,allcalls[i]) )
+                if( !strcmp(callsign,allcalls[i]) && (fabs( f1-allfreqs[i] ) < 1.0) )
                     dupe=1;
             }
             if( (verbose || !dupe) && !noprint) {
                 uniques++;
                 strcpy(allcalls[uniques],callsign);
+                allfreqs[uniques]=f1;
             printf("%4s %3.0f %4.1f %10.6f %2d  %-s %4s %2d \n",
                    uttime, snr0[j],(shift1*dt-2.0), dialfreq+(1500+f1)/1e6,
                    (int)drift1, callsign, grid, ntype);
