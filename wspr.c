@@ -472,7 +472,7 @@ void unpackcall( int32_t ncall, char *call )
     char c[]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',' '};
     int32_t n;
     int i,j;
-    char tmp[6];
+    char tmp[7];
     
     n=ncall;
     
@@ -496,6 +496,7 @@ void unpackcall( int32_t ncall, char *call )
         i=n;
         tmp[0]=c[i];
         j=0;
+        tmp[6]='\0';
 // remove leading whitespace
         for(i=0; i<5; i++) {
             if( tmp[i] != c[36] )

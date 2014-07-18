@@ -1,7 +1,7 @@
 CC=gcc
 CFLAGS= -I/usr/include -Wall 
 LDFLAGS = -L/usr/lib 
-LIBS = -lsndfile -lfftw3
+LIBS = -lsndfile -lfftw3 -lm
 
 DEPS = fano.h
 OBJ = wspr.o fano.o tab.o
