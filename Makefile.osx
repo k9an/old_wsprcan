@@ -1,5 +1,5 @@
 CC=clang
-CFLAGS= -I/opt/local/include -Wall 
+CFLAGS= -I/opt/local/include -Wall -O2
 LDFLAGS = -L/opt/local/lib 
 LIBS = -lsndfile -lfftw3 -lm
 

@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS= -I/usr/include -Wall 
+CFLAGS= -I/usr/include -Wall -O2
 LDFLAGS = -L/usr/lib 
 LIBS = -lsndfile -lfftw3 -lm
 
