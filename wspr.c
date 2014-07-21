@@ -216,7 +216,8 @@ int mode)
     // mode is the last argument:
     // 0 no frequency or drift search. find best time lag.
     // 1 no time lag or drift search. find best frequency.
-    // 2 no frequency or time lag search. find best drift.
+    // 2 no frequency or time lag search. calculate soft-decision symbols
+    //   using passed frequency and shift.
 
     float dt=1.0/375.0, df=375.0/256.0,fbest;
     long int i, j, k;
@@ -251,7 +252,8 @@ int mode)
 // mode is the last argument:
 // 0 no frequency or drift search. find best time lag.
 // 1 no time lag or drift search. find best frequency.
-// 2 no frequency or time lag search. find best drift.
+//      2 no frequency or time lag search. calculate soft-decision symbols
+//        using passed frequency and shift.
     if( mode == 0 ) {
         ifmin=0;
         ifmax=0;
@@ -280,8 +282,8 @@ int mode)
         
         for(lag=lagmin; lag<=lagmax; lag=lag+lagstep)
         {
-            ss=0;
-            totp=0;
+            ss=0.0;
+            totp=0.0;
             for (i=0; i<162; i++)
             {
                 fp = f0 + (*drift1/2.0)*(i-81)/81.0;
@@ -750,9 +752,10 @@ int main(int argc, char *argv[])
     float noise_level = tmpsort[122];
     
 // renormalize spectrum so that (large) peaks represent an estimate of snr
+    float min_snr_neg33db = pow(10.0,(-33+26.5)/10.0);
     for (j=0; j<411; j++) {
         smspec[j]=smspec[j]/noise_level - 1.0;
-        if( smspec[j] < pow(10.0,(-33+26.5)/10))
+        if( smspec[j] < min_snr_neg33db)
             smspec[j]=0.1;
             continue;
     }
