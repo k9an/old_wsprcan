@@ -979,10 +979,10 @@ definition
                        date,uttime,sync1*10,snr0[j],
                        shift1*dt-2.0, dialfreq+(1500+f1)/1e6,
                        callsign, grid, ntype, drift1, cycles/81, ii);
-            fprintf(fwsprd,"%6s %4s %3d %3.0f %4.1f %10.6f  %-s %4s %2d          %2d     %lu\n",
+            fprintf(fwsprd,"%6s %4s %3d %3.0f %4.1f %10.6f  %-s %4s %2d          %2d     %lu    %4d\n",
                         date,uttime,(int)(sync1*10),snr0[j],
                         shift1*dt-2.0, dialfreq+(1500+f1)/1e6,
-                        callsign, grid, ntype, (int)drift1, cycles/81);
+                        callsign, grid, ntype, (int)drift1, cycles/81, ii);
 
             }
         }
