@@ -381,6 +381,7 @@ int mode)
             q2[i]=0.0;
             i3[i]=0.0;
             q3[i]=0.0;
+    // compute cos and sin functions
             
             fp=f0+(*drift1/2.0)*(i-81.0)/81.0;
             for (j=0; j<256; j++)
