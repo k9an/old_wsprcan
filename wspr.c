@@ -242,7 +242,8 @@ int mode)
     dphi1, cdphi1, sdphi1,
     dphi2, cdphi2, sdphi2,
     dphi3, cdphi3, sdphi3;
-    float fsymb[162];
+    float fsum=0.0, f2sum=0.0, fsymb[162];
+
     int best_shift = 0, ifreq;
     int ifmin=0, ifmax=0;
     
@@ -266,27 +267,25 @@ int mode)
         ifmin=-5;
         ifmax=5;
         f0=*f1;
-
     }
     if( mode == 2 ) {
-        best_shift = *shift1;
+        lagmin = *shift1;
+        lagmax = *shift1;
+        ifmin=0;
+        ifmax=0;
         f0=*f1;
-
     }
 
-    if( mode != 2 ) {
     for(ifreq=ifmin; ifreq<=ifmax; ifreq++)
     {
         f0=*f1+ifreq*fstep;
-// search lag range
-        
         for(lag=lagmin; lag<=lagmax; lag=lag+lagstep)
         {
             ss=0.0;
             totp=0.0;
             for (i=0; i<162; i++)
             {
-                fp = f0 + (*drift1/2.0)*(i-81)/81.0;
+                fp = f0 + ((float)*drift1/2.0)*((float)i-81.0)/81.0;
                 
                 dphi0=2*pi*(fp-1.5*df)*dt;
                 cdphi0=cos(dphi0);
@@ -352,76 +351,36 @@ int mode)
                 totp=totp+p0+p1+p2+p3;
                 cmet=(p1+p3)-(p0+p2);
                 ss=ss+cmet*(2*pr3[i]-1);
+                
+                if( mode == 2)
+                {
+                    fsymb[i]=pr3[i]*(p3-p1)+(1-pr3[i])*(p2-p0);
+                }
+
             }
             
-            if( ss/totp > syncmax ) {
+            if( (mode <= 1) && (ss/totp > syncmax) ) {
                 syncmax=ss/totp;
- 
                 best_shift=lag;
-                
                 fbest=f0;
             }
+            
+
         } // lag loop
     } //freq loop
-    *sync=syncmax;
-    *shift1=best_shift;
-    *f1=fbest;
-    return;
-    } //if not mode 2
-    
-    if( mode == 2 )
-    {
-        for (i=0; i<162; i++)
-        {
-            i0[i]=0.0;
-            q0[i]=0.0;
-            i1[i]=0.0;
-            q1[i]=0.0;
-            i2[i]=0.0;
-            q2[i]=0.0;
-            i3[i]=0.0;
-            q3[i]=0.0;
-    // compute cos and sin functions
-            
-            fp=f0+(*drift1/2.0)*(i-81.0)/81.0;
-            for (j=0; j<256; j++)
-            {
-                k=best_shift+i*256+j;
-                if( (k>0) & (k<np) ) {
-                phase=2*pi*(fp-1.5*df)*k*dt;
-                i0[i]=i0[i]+id[k]*cos(phase)+qd[k]*sin(phase);
-                q0[i]=q0[i]-id[k]*sin(phase)+qd[k]*cos(phase);
-                phase=2*pi*(fp-0.5*df)*k*dt;
-                i1[i]=i1[i]+id[k]*cos(phase)+qd[k]*sin(phase);
-                q1[i]=q1[i]-id[k]*sin(phase)+qd[k]*cos(phase);
-                phase=2*pi*(fp+0.5*df)*k*dt;
-                i2[i]=i2[i]+id[k]*cos(phase)+qd[k]*sin(phase);
-                q2[i]=q2[i]-id[k]*sin(phase)+qd[k]*cos(phase);
-                phase=2*pi*(fp+1.5*df)*k*dt;
-                i3[i]=i3[i]+id[k]*cos(phase)+qd[k]*sin(phase);
-                q3[i]=q3[i]-id[k]*sin(phase)+qd[k]*cos(phase);
-                }
-            }
-            
-            p0=i0[i]*i0[i]+q0[i]*q0[i];
-            p1=i1[i]*i1[i]+q1[i]*q1[i];
-            p2=i2[i]*i2[i]+q2[i]*q2[i];
-            p3=i3[i]*i3[i]+q3[i]*q3[i];
 
-            
-            if( pr3[i] == 1 )
-            {
-                fsymb[i]=(p3-p1);
-            } else {
-                fsymb[i]=(p2-p0);
-            }
-            
-        }
-        float fsum=0.0, f2sum=0.0;
+    if( mode <=1 ) {
+        *sync=syncmax;
+        *shift1=best_shift;
+        *f1=fbest;
+        return;
+    }
+    
+    if( mode == 2 ) {
         for (i=0; i<162; i++) {
             fsum=fsum+fsymb[i]/162.0;
             f2sum=f2sum+fsymb[i]*fsymb[i]/162.0;
-//            printf("%d %f\n",i,fsymb[i]);
+            //            printf("%d %f\n",i,fsymb[i]);
         }
         fac=sqrt(f2sum-fsum*fsum);
         for (i=0; i<162; i++) {
@@ -431,9 +390,13 @@ int mode)
             if( fsymb[i] < -128 )
                 fsymb[i]=-128.0;
             symbols[i]=fsymb[i]+128;
-//            printf("symb: %lu %d\n",i, symbols[i]);
+            //            printf("symb: %lu %d\n",i, symbols[i]);
         }
-    }
+        return;
+        }
+
+    return;
+
 }
 
 void unpack50( signed char *dat, int32_t *n1, int32_t *n2 )
