@@ -231,7 +231,7 @@ int mode)
     i2[162],q2[162],
     i3[162],q3[162];
     
-    double p0,p1,p2,p3,cmet,totp,syncmax, phase, fac;
+    double p0,p1,p2,p3,cmet,totp,syncmax,fac;
     double
     c0[256],s0[256],
     c1[256],s1[256],
@@ -901,7 +901,7 @@ definition
         if( worth_a_try && !not_decoded )
         {
             for(i=0; i<11; i++) {
-                if( decdata[i]>128 )
+                if( decdata[i]>127 )
                 {
                     message[i]=decdata[i]-256;
                 } else {
