@@ -791,13 +791,13 @@ int main(int argc, char *argv[])
     float noise_level = tmpsort[122];
     
     if( verbose ) {
-        printf("noise level: %5.1f dB\n",10*log10(noise_level));
+        printf("noise level: %5.1f dB\n",10*log10(noise_level)-62.0);
     }
     
     if( writenoise ) {
         FILE *fnoise;
         fnoise=fopen("noise.dat","a");
-        fprintf(fnoise,"%s %s %f %5.1f\n",date,uttime,dialfreq,10*log10(noise_level));
+        fprintf(fnoise,"%s %s %f %5.1f %5.1f\n",date,uttime,dialfreq,10*log10(noise_level)-62.0,10*log10(mi2+mq2));
         fclose(fnoise);
     }
 
