@@ -620,6 +620,7 @@ void usage(void)
 // with development version of wsprd.
 //    printf("       -t n (n is blanking duration in milliseconds)\n");
 //    printf("       -b n (n is pct of time that is blanked)\n");
+    printf("       -n write noise estimates to file noise.dat\n");
     printf("       -q quick mode - doesn't dig deep for weak signals\n");
     printf("       -v verbose mode\n");
     printf("       -w wideband mode - decode signals within +/- 150 Hz of center\n");
