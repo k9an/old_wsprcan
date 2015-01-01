@@ -71,7 +71,7 @@ unsigned long readc2file(char *ptr_to_infile, double *idat, double *qdat, float 
 
 unsigned long readwavfile(char *ptr_to_infile, double *idat, double *qdat )
 {
-    // This is based on work by:
+    // The part that reads from a wav file is based on work by:
     // Andrew Greensted - Feb 2010
     // http://www.labbookpages.co.uk
     // Version 1
@@ -529,7 +529,7 @@ void unpackgrid( int32_t ngrid, char *grid)
 
 void unpackpfx( int32_t nprefix, char *call)
 {
-    char i, nc, pfx[3]="", tmpcall[6]="";
+    char i, nc, pfx[4]="", tmpcall[7]="";
     int32_t n;
     
     strcpy(tmpcall,call);

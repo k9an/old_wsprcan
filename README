@@ -8,8 +8,7 @@ for decoding.
 k9an-wsprd requires only two external libraries: libsndfile and libfftw3
 
 COMPILING:
-A bare-bones Makefile is included. The program is known to compile on OS X 10.8
-with llvm and on Ubuntu 12.04 with gcc.
+A bare-bones Makefile is included. 
 
 USAGE:
 k9an-wsprd [-nqwv] [-f freq] infile
