@@ -12,8 +12,9 @@ A bare-bones Makefile is included. The program is known to compile on OS X 10.8
 with llvm and on Ubuntu 12.04 with gcc.
 
 USAGE:
-k9an-wsprd [-qwv] [-f freq] infile
+k9an-wsprd [-nqwv] [-f freq] infile
 
+    -n write estimated noise level to file "noise.dat"
     -q quick mode doesn't dig deep for weak signals
     -w wideband mode displays decoded signals within +/- 150 Hz 
     -v verbose
@@ -31,8 +32,9 @@ FEATURES:
 By default, k9an-wsprd reports signals that are within +/- 110 Hz of the
 subband center frequency. The wideband option (-w) extends this to +/- 150 Hz.
 
-At present, k9an-wsprd does not maintain a hashtable, nor does it decode
-signals using the 6-digit locator.
+At present, k9an-wsprd does not maintain a hashtable, however it will decode
+all three types of wspr messages. In the case of a type 3 message containing
+a hash and a 6-digit locator the callsign will be displayed as <...>.
 
 k9an-wsprd was optimized to maximize the number of decodes on a crowded band. It 
 uses a looser selection criterion than K1JT's program and therefore tries to 

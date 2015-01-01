@@ -137,7 +137,7 @@ unsigned long readwavfile(char *ptr_to_infile, double *idat, double *qdat )
     sf_close(sndFile);
 
     if ( npoints < 12000*110 ) {
-        printf("file length is only %lu seconds\n",npoints/12000);
+        printf("file length is %lu seconds\n",npoints/12000);
         return 1;
     }
 
@@ -527,6 +527,61 @@ void unpackgrid( int32_t ngrid, char *grid)
     }
 }
 
+void unpackpfx( int32_t nprefix, char *call)
+{
+    char i, nc, pfx[3]="", tmpcall[6]="";
+    int32_t n;
+    
+    strcpy(tmpcall,call);
+
+    if( nprefix < 60000 ) {
+// add a prefix of 1 to 3 characters
+        n=nprefix;
+        for (i=2; i>=0; i--) {
+            nc=n%37;
+            if( nc >= 0 & nc <= 9 ) {
+                pfx[i]=nc+48;
+            }
+            else if( nc >=10 & nc <= 35 ) {
+                pfx[i]=nc+55;
+            }
+            else {
+                pfx[i]=' ';
+            }
+            n=n/37;
+        }
+
+        strcpy(call,pfx);
+        strncat(call,"/",1);
+        strncat(call,tmpcall,strlen(tmpcall));
+
+    }
+    else
+// add a suffix of 1 or 2 characters
+    {
+        nc=nprefix-60000;
+        if( nc >= 0 & nc <= 9 ) {
+            pfx[0]=nc+48;
+            strcpy(call,tmpcall);
+            strncat(call,"/",1);
+            strncat(call,pfx,1);
+        }
+        else if( nc >= 10 & nc <= 35) {
+            pfx[0]=nc+55;
+            strcpy(call,tmpcall);
+            strncat(call,"/",1);
+            strncat(call,pfx,1);
+        }
+        else if( nc >= 36 & nc <= 125 ) {
+            pfx[0]=(nc-26)/10;
+            pfx[1]=(nc-26)%10;
+            strcpy(call,tmpcall);
+            strncat(call,"/",1);
+            strncat(call,pfx,2);
+        }
+    }
+
+}
 void deinterleave(unsigned char *sym)
 {
     unsigned char tmp[162];
@@ -579,13 +634,12 @@ int main(int argc, char *argv[])
     long int i,j,k;
     unsigned char *symbols, *decdata;
     signed char message[]={-9,13,-35,123,57,-39,64,0,0,0,0};
-    char *callsign,*grid;
+    char *callsign,*grid,*grid6, *call_loc_pow, *cdbm;
     char *ptr_to_infile,*ptr_to_infile_suffix;
     char uttime[5],date[7];
-    int c, delta, nfft2=65536, verbose=0;
-    int shift1, lagmin, lagmax, lagstep, worth_a_try, not_decoded;
-    int quickmode=0;
-    int32_t n1,n2;
+    int c, delta, nfft2=65536, verbose=0, quickmode=0, writenoise=0;
+    int shift1, lagmin, lagmax, lagstep, worth_a_try, not_decoded, nadd, ndbm;
+    int32_t n1, n2, n3;
     unsigned int nbits;
     unsigned long npoints, metric, maxcycles, cycles;
     float df=375.0/256.0/2;
@@ -606,13 +660,16 @@ int main(int argc, char *argv[])
     idat=malloc(sizeof(double)*nfft2);
     qdat=malloc(sizeof(double)*nfft2);
     
-    while ( (c = getopt(argc, argv, "b:f:qt:wv")) !=-1 ) {
+    while ( (c = getopt(argc, argv, "b:f:nqt:wv")) !=-1 ) {
         switch (c) {
             case 'b':
                 fblank = strtof(optarg,NULL);
                 break;
             case 'f':
                 dialfreq_cmdline = strtof(optarg,NULL);
+                break;
+            case 'n':
+                writenoise = 1;
                 break;
             case 'q':
                 quickmode = 1;
@@ -668,7 +725,7 @@ int main(int argc, char *argv[])
     
     getStats(idat, qdat, npoints, &mi, &mq, &mi2, &mq2, &miq);
     if( verbose )
-        printf("total power: %4.1f dB\n",10*log10(mi2+mq2));
+        printf("total power: %5.1f dB\n",10*log10(mi2+mq2));
 
 // Do ffts over 2 symbols, stepped by half symbols
     int nffts=4*floor(npoints/512)-1;
@@ -732,6 +789,17 @@ int main(int argc, char *argv[])
     
     float noise_level = tmpsort[122];
     
+    if( verbose ) {
+        printf("noise level: %5.1f dB\n",10*log10(noise_level));
+    }
+    
+    if( writenoise ) {
+        FILE *fnoise;
+        fnoise=fopen("noise.dat","a");
+        fprintf(fnoise,"%s %s %f %5.1f\n",date,uttime,dialfreq,10*log10(noise_level));
+        fclose(fnoise);
+    }
+
 // renormalize spectrum so that (large) peaks represent an estimate of snr
     float min_snr_neg33db = pow(10.0,(-33+26.5)/10.0);
     for (j=0; j<411; j++) {
@@ -837,13 +905,19 @@ definition
     memset(symbols,0,sizeof(char)*nbits*2);
     decdata=malloc((nbits+7)/8);
     grid=malloc(sizeof(char)*5);
-    callsign=malloc(sizeof(char)*7);
+    grid6=malloc(sizeof(char)*7);
+    callsign=malloc(sizeof(char)*13);
+    call_loc_pow=malloc(sizeof(char)*23);
+    cdbm=malloc(sizeof(char)*3);
     float allfreqs[npk];
     memset(allfreqs,0,sizeof(float)*npk);
-    char allcalls[npk][7];
-    memset(allcalls,0,sizeof(char)*npk*7);
+    char allcalls[npk][13];
+    memset(allcalls,0,sizeof(char)*npk*13);
     memset(grid,0,sizeof(char)*5);
-    memset(callsign,0,sizeof(char)*7);
+    memset(grid6,0,sizeof(char)*6);
+    memset(callsign,0,sizeof(char)*13);
+    memset(call_loc_pow,0,sizeof(char)*23);
+    memset(cdbm,0,sizeof(char)*3);
 
     FILE *fall_wspr, *fwsprd;
     fall_wspr=fopen("ALL_WSPR.TXT","a");
@@ -931,16 +1005,62 @@ definition
             unpackgrid(n2, grid);
             int ntype = (n2&127) - 64;
 
-// this is where the extended messages would be taken care of
+//            printf("%s\n",callsign);
+//            printf("%s\n",grid);
+//            printf("%2d\n",ntype);
+
+// Type 1: 6 digit call, grid, power - ntype is positive and is a member of the set {0,3,7,10,13,17,20...}
+// Type 2: extended callsign, power - ntype is positive but not
+//         a member of the set of allowed powers
+// Type 3: hash, 6 digit grid, power - ntype is negative.
+
             if( (ntype >= 0) && (ntype <= 62) ) {
                 int nu=ntype%10;
                 if( nu == 0 || nu == 3 || nu == 7 ) {
+                    ndbm=ntype;
+                    memset(call_loc_pow,0,sizeof(char)*23);
+                    sprintf(cdbm,"%2d",ndbm);
+                    strncat(call_loc_pow,callsign,strlen(callsign));
+                    strncat(call_loc_pow," ",1);
+                    strncat(call_loc_pow,grid,4);
+                    strncat(call_loc_pow," ",1);
+                    strncat(call_loc_pow,cdbm,2);
+                    strncat(call_loc_pow,"\0",1);
+
                     noprint=0;
                 } else {
-                    noprint=1;
+                    nadd=nu;
+                    if( nu > 3 ) nadd=nu-3;
+                    if( nu > 7 ) nadd=nu-7;
+                    n3=n2/128+32768*(nadd-1);
+                    unpackpfx(n3,callsign);
+                    ndbm=ntype-nadd;
+
+                    memset(call_loc_pow,0,sizeof(char)*23);
+                    sprintf(cdbm,"%2d",ndbm);
+                    strncat(call_loc_pow,callsign,strlen(callsign));
+                    strncat(call_loc_pow," ",1);
+                    strncat(call_loc_pow,cdbm,2);
+                    strncat(call_loc_pow,"\0",1);
+
+                    noprint=0;
                 }
             } else if ( ntype < 0 ) {
-                noprint=1;
+                ndbm=-(ntype+1);
+                strncat(grid6,callsign+5,1);
+                strncat(grid6,callsign,5);
+                sprintf(callsign,"%5s","<...>");
+
+                memset(call_loc_pow,0,sizeof(char)*23);
+                sprintf(cdbm,"%2d",ndbm);
+                strncat(call_loc_pow,callsign,strlen(callsign));
+                strncat(call_loc_pow," ",1);
+                strncat(call_loc_pow,grid6,strlen(grid6));
+                strncat(call_loc_pow," ",1);
+                strncat(call_loc_pow,cdbm,2);
+                strncat(call_loc_pow,"\0",1);
+                
+                noprint=0;
             }
             
 // de-dupe using callsign and freq (only a dupe if freqs are within 1 Hz
@@ -953,17 +1073,17 @@ definition
                 uniques++;
                 strcpy(allcalls[uniques],callsign);
                 allfreqs[uniques]=f1;
-                printf("%4s %3.0f %4.1f %10.6f %2d  %-s %4s %2d \n",
+                printf("%4s %3.0f %4.1f %10.6f %2d  %-s\n",
                    uttime, snr0[j],(shift1*dt-2.0), dialfreq+(1500+f1)/1e6,
-                   (int)drift1, callsign, grid, ntype);
-                fprintf(fall_wspr,"%6s %4s %3.0f %3.0f %4.1f %10.6f  %-s %4s %2d          %2.0f     %lu    %4d\n",
+                   (int)drift1, call_loc_pow);
+                fprintf(fall_wspr,"%6s %4s %3.0f %3.0f %4.1f %10.6f  %-22s %2d %5lu %4d\n",
                        date,uttime,sync1*10,snr0[j],
                        shift1*dt-2.0, dialfreq+(1500+f1)/1e6,
-                       callsign, grid, ntype, drift1, cycles/81, ii);
-                fprintf(fwsprd,"%6s %4s %3d %3.0f %4.1f %10.6f  %-s %4s %2d          %2d     %lu    %4d\n",
+                       call_loc_pow, (int)drift1, cycles/81, ii);
+                fprintf(fwsprd,"%6s %4s %3d %3.0f %4.1f %10.6f  %-22s %2d %5lu %4d\n",
                         date,uttime,(int)(sync1*10),snr0[j],
                         shift1*dt-2.0, dialfreq+(1500+f1)/1e6,
-                        callsign, grid, ntype, (int)drift1, cycles/81, ii);
+                        call_loc_pow, (int)drift1, cycles/81, ii);
             }
         }
     }
