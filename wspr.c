@@ -940,9 +940,9 @@ definition
               strcpy(*hashtab+nh*13,hcall);
            }
         } else {
-            fhash=fopen("hashtable.txt","w");
-            fclose(fhash);
+            fhash=fopen("hashtable.txt","w+");
         }
+        fclose(fhash);
     }
     
     int uniques=0, noprint=0;
@@ -1128,7 +1128,6 @@ definition
     fclose(fwsprd);
 
     if( usehashtable ) {
-       fclose(fhash);
        fhash=fopen("hashtable.txt","w");
        for (i=0; i<32768; i++) {
            if( strncmp(hashtab[i],"\0",1) != 0 ) {
