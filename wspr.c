@@ -455,7 +455,7 @@ void unpackcall( int32_t ncall, char *call )
 {
     char c[]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',' '};
     int32_t n;
-    int i,j;
+    int i;
     char tmp[7];
     
     n=ncall;
@@ -479,7 +479,6 @@ void unpackcall( int32_t ncall, char *call )
         n=n/36;
         i=n;
         tmp[0]=c[i];
-        j=0;
         tmp[6]='\0';
 // remove leading whitespace
         for(i=0; i<5; i++) {
@@ -513,14 +512,12 @@ void unpackgrid( int32_t ngrid, char *grid)
         int nlong = 60.0*(180.0-dlong)/5.0;
         int n1 = nlong/240;
         int n2 = (nlong - 240*n1)/24;
-        int n3 = nlong -40*n1 - 24*n2;
         grid[0] = c[10+n1];
         grid[2]=  c[n2];
 
         int nlat = 60.0*(dlat+90)/2.5;
         n1 = nlat/240;
         n2 = (nlat-240*n1)/24;
-        n3 = nlong - 240*n1 - 24*n2;
         grid[1]=c[10+n1];
         grid[3]=c[n2];
     } else {
@@ -541,10 +538,10 @@ void unpackpfx( int32_t nprefix, char *call)
         n=nprefix;
         for (i=2; i>=0; i--) {
             nc=n%37;
-            if( nc >= 0 & nc <= 9 ) {
+            if( (nc >= 0) & (nc <= 9) ) {
                 pfx[i]=nc+48;
             }
-            else if( nc >=10 & nc <= 35 ) {
+            else if( (nc >= 10) & (nc <= 35) ) {
                 pfx[i]=nc+55;
             }
             else {
@@ -562,19 +559,19 @@ void unpackpfx( int32_t nprefix, char *call)
 // add a suffix of 1 or 2 characters
     {
         nc=nprefix-60000;
-        if( nc >= 0 & nc <= 9 ) {
+        if( (nc >= 0) & (nc <= 9) ) {
             pfx[0]=nc+48;
             strcpy(call,tmpcall);
             strncat(call,"/",1);
             strncat(call,pfx,1);
         }
-        else if( nc >= 10 & nc <= 35) {
+        else if( (nc >= 10) & (nc <= 35) ) {
             pfx[0]=nc+55;
             strcpy(call,tmpcall);
             strncat(call,"/",1);
             strncat(call,pfx,1);
         }
-        else if( nc >= 36 & nc <= 125 ) {
+        else if( (nc >= 36) & (nc <= 125) ) {
             pfx[0]=(nc-26)/10;
             pfx[1]=(nc-26)%10;
             strcpy(call,tmpcall);
