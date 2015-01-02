@@ -620,6 +620,7 @@ void usage(void)
 // with development version of wsprd.
 //    printf("       -t n (n is blanking duration in milliseconds)\n");
 //    printf("       -b n (n is pct of time that is blanked)\n");
+    printf("       -H do not use (or update) the hash table\n");
     printf("       -n write noise estimates to file noise.dat\n");
     printf("       -q quick mode - doesn't dig deep for weak signals\n");
     printf("       -v verbose mode\n");
@@ -638,7 +639,7 @@ int main(int argc, char *argv[])
     char *callsign,*grid,*grid6, *call_loc_pow, *cdbm;
     char *ptr_to_infile,*ptr_to_infile_suffix;
     char uttime[5],date[7];
-    int c, delta, nfft2=65536, verbose=0, quickmode=0, writenoise=0;
+    int c, delta, nfft2=65536, verbose=0, quickmode=0, writenoise=0, usehashtable=1;
     int shift1, lagmin, lagmax, lagstep, worth_a_try, not_decoded, nadd, ndbm;
     int32_t n1, n2, n3;
     unsigned int nbits;
@@ -661,13 +662,16 @@ int main(int argc, char *argv[])
     idat=malloc(sizeof(double)*nfft2);
     qdat=malloc(sizeof(double)*nfft2);
     
-    while ( (c = getopt(argc, argv, "b:f:nqt:wv")) !=-1 ) {
+    while ( (c = getopt(argc, argv, "b:f:Hnqt:wv")) !=-1 ) {
         switch (c) {
             case 'b':
                 fblank = strtof(optarg,NULL);
                 break;
             case 'f':
                 dialfreq_cmdline = strtof(optarg,NULL);
+                break;
+            case 'H':
+                usehashtable = 0;
                 break;
             case 'n':
                 writenoise = 1;
@@ -919,10 +923,28 @@ definition
     memset(callsign,0,sizeof(char)*13);
     memset(call_loc_pow,0,sizeof(char)*23);
     memset(cdbm,0,sizeof(char)*3);
-
-    FILE *fall_wspr, *fwsprd;
+    char hashtab[32768][13];
+    memset(hashtab,0,sizeof(char)*32768*13);
+    uint32_t nhash( const void *, size_t, uint32_t);
+    int nh;
+    
+    FILE *fall_wspr, *fwsprd, *fhash;
+    
     fall_wspr=fopen("ALL_WSPR.TXT","a");
     fwsprd=fopen("wsprd.out","w");
+    
+    if( usehashtable ) {
+        char line[80], hcall[12];
+        if( (fhash=fopen("hashtable.txt","r+")) ) {
+           while (fgets(line, sizeof(line), fhash) != NULL) {
+              sscanf(line,"%d %s",&nh,hcall);
+              strcpy(*hashtab+nh*13,hcall);
+           }
+        } else {
+            fhash=fopen("hashtable.txt","w");
+            fclose(fhash);
+        }
+    }
     
     int uniques=0, noprint=0;
     
@@ -967,6 +989,7 @@ definition
         }
 
         int idt=0, ii, jiggered_shift;
+        uint32_t ihash;
         delta=50;
         maxcycles=10000;
         not_decoded=1;
@@ -1027,6 +1050,9 @@ definition
                     strncat(call_loc_pow," ",1);
                     strncat(call_loc_pow,cdbm,2);
                     strncat(call_loc_pow,"\0",1);
+                    
+                    ihash=nhash(callsign,strlen(callsign),(uint32_t)146);
+                    strcpy(*hashtab+ihash*13,callsign);
 
                     noprint=0;
                 } else {
@@ -1050,7 +1076,12 @@ definition
                 ndbm=-(ntype+1);
                 strncat(grid6,callsign+5,1);
                 strncat(grid6,callsign,5);
-                sprintf(callsign,"%5s","<...>");
+                ihash=(n2-ntype-64)/128;
+                if( strncmp(hashtab[ihash],"\0",1) != 0 ) {
+                    sprintf(callsign,"<%s>",hashtab[ihash]);
+                } else {
+                    sprintf(callsign,"%5s","<...>");
+                }
 
                 memset(call_loc_pow,0,sizeof(char)*23);
                 sprintf(cdbm,"%2d",ndbm);
@@ -1096,6 +1127,18 @@ definition
     printf("<DecodeFinished>\n");
     fclose(fall_wspr);
     fclose(fwsprd);
-	return 0;
+
+    if( usehashtable ) {
+       fclose(fhash);
+       fhash=fopen("hashtable.txt","w");
+       for (i=0; i<32768; i++) {
+           if( strncmp(hashtab[i],"\0",1) != 0 ) {
+               fprintf(fhash,"%5ld %s\n",i,*hashtab+i*13);
+           }
+       }
+       fclose(fhash);
+    }
+
+    return 0;
 
 }

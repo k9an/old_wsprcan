@@ -13,6 +13,7 @@ A bare-bones Makefile is included.
 USAGE:
 k9an-wsprd [-nqwv] [-f freq] infile
 
+    -H don't use (or update) the hashtable
     -n write estimated noise level to file "noise.dat"
     -q quick mode doesn't dig deep for weak signals
     -w wideband mode displays decoded signals within +/- 150 Hz 
@@ -31,9 +32,8 @@ FEATURES:
 By default, k9an-wsprd reports signals that are within +/- 110 Hz of the
 subband center frequency. The wideband option (-w) extends this to +/- 150 Hz.
 
-At present, k9an-wsprd does not maintain a hashtable, however it will decode
-all three types of wspr messages. In the case of a type 3 message containing
-a hash and a 6-digit locator the callsign will be displayed as <...>.
+k9an-wsprd maintains a hashtable and will decode all three types of wspr messages.
+An option (-H) is available to turn off use of the hashtable. 
 
 k9an-wsprd was optimized to maximize the number of decodes on a crowded band. It 
 uses a looser selection criterion than K1JT's program and therefore tries to 
