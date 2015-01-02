@@ -529,7 +529,8 @@ void unpackgrid( int32_t ngrid, char *grid)
 
 void unpackpfx( int32_t nprefix, char *call)
 {
-    char i, nc, pfx[4]="", tmpcall[7]="";
+    char nc, pfx[4]="", tmpcall[7]="";
+    int i;
     int32_t n;
     
     strcpy(tmpcall,call);
