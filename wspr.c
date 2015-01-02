@@ -27,7 +27,7 @@
 #include <stdlib.h>
 #include <sndfile.h>
 #include <math.h>
-#include <strings.h>
+#include <string.h>
 #include <fftw3.h>
 #include "fano.h"
 
