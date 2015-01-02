@@ -19,7 +19,7 @@
  GNU General Public License for more details.
  
  You should have received a copy of the GNU General Public License
- along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include <stdio.h>
@@ -1010,7 +1010,7 @@ definition
 //            printf("%s\n",grid);
 //            printf("%2d\n",ntype);
 
-// Type 1: 6 digit call, grid, power - ntype is positive and is a member of the set {0,3,7,10,13,17,20...}
+// Type 1: 6 digit call, grid, power - ntype is positive and is a member of the set {0,3,7,10,13,17,20...60}
 // Type 2: extended callsign, power - ntype is positive but not
 //         a member of the set of allowed powers
 // Type 3: hash, 6 digit grid, power - ntype is negative.
@@ -1062,6 +1062,11 @@ definition
                 strncat(call_loc_pow,"\0",1);
                 
                 noprint=0;
+                
+// I don't know what to do with these... They show up as "A000AA" grids.
+                if( ntype == -64 ) {
+                    noprint=1;
+                }
             }
             
 // de-dupe using callsign and freq (only a dupe if freqs are within 1 Hz
