@@ -32,8 +32,8 @@ FEATURES:
 By default, k9an-wsprd reports signals that are within +/- 110 Hz of the
 subband center frequency. The wideband option (-w) extends this to +/- 150 Hz.
 
-k9an-wsprd maintains a hashtable and will decode all three types of wspr messages.
-An option (-H) is available to turn off use of the hashtable. 
+k9an-wsprd maintains a hashtable and will decode all three types of wspr
+messages. An option (-H) is available to turn off use of the hashtable.
 
 k9an-wsprd was optimized to maximize the number of decodes on a crowded band. It 
 uses a looser selection criterion than K1JT's program and therefore tries to 
