@@ -1068,6 +1068,9 @@ definition
                     strncat(call_loc_pow," ",1);
                     strncat(call_loc_pow,cdbm,2);
                     strncat(call_loc_pow,"\0",1);
+                    
+                    ihash=nhash(callsign,strlen(callsign),(uint32_t)146);
+                    strcpy(*hashtab+ihash*13,callsign);
 
                     noprint=0;
                 }
