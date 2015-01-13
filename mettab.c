@@ -4,7 +4,7 @@
  File name: mettab.c
  Description:
  
- Copyright 2014, Steven Franke, K9AN
+ Copyright 2014-2015, Steven Franke, K9AN
  License: GNU GPL v3
  
  This program is free software: you can redistribute it and/or modify
@@ -18,7 +18,7 @@
  GNU General Public License for more details.
  
  You should have received a copy of the GNU General Public License
- along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 int mettab[2][256]={

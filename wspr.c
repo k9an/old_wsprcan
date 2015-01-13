@@ -5,7 +5,7 @@
  Description: k9an-wsprd is a detector/demodulator/decoder for K1JT's
  Weak Signal Propagation Reporter (WSPR) mode.
  
- Copyright 2014, Steven Franke, K9AN
+ Copyright 2014-2015, Steven Franke, K9AN
  License: GNU GPL v3
  
  This program is free software: you can redistribute it and/or modify
@@ -1032,6 +1032,7 @@ definition
 //            printf("%s\n",grid);
 //            printf("%2d\n",ntype);
 
+// Based on the value of ntype, decide whether this is a Type 1, 2, or 3 message.
 // Type 1: 6 digit call, grid, power - ntype is positive and is a member of the set {0,3,7,10,13,17,20...60}
 // Type 2: extended callsign, power - ntype is positive but not
 //         a member of the set of allowed powers
@@ -1112,7 +1113,9 @@ definition
                 uniques++;
                 strcpy(allcalls[uniques],callsign);
                 allfreqs[uniques]=f1;
-                printf("%4s %3.0f %4.1f %10.6f %2d  %-s\n",
+// 150112 added an extra space at the end of each line so that wspr-x doesn't truncate the power
+// Thank you to Walter DL8FCL for point this out.
+                printf("%4s %3.0f %4.1f %10.6f %2d  %-s \n",
                    uttime, snr0[j],(shift1*dt-2.0), dialfreq+(1500+f1)/1e6,
                    (int)drift1, call_loc_pow);
                 fprintf(fall_wspr,"%6s %4s %3.0f %3.0f %4.1f %10.6f  %-22s %2d %5lu %4d\n",
