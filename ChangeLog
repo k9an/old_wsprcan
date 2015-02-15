@@ -1,0 +1,15 @@
+2-15-2015 Steve K9AN
+
+Applied patch file contributed by John, KD6EKQ. This adds the following:
+
+* Added the ability to read and incorporate fftw wisdom to speed up the
+DFT transforms when using PCM WAV input files. The code checks for the
+"WSPRD_FFTW_WISDOM" environment variable. If set, it specifies the
+file with fftw wisdom.
+
+* Relaxed the error checks on PCM WAV input files to allow 24, 32 bit and
+float sample formats (libsndfile handles the details of the conversion,
+so there is no real reason to exclude such files).
+
+* Added the -e command line option. It enables code that corrects for
+transceiver tuning error. The argument is the dial freq error in Hz.

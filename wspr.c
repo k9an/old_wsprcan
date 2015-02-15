@@ -95,16 +95,34 @@ unsigned long readwavfile(char *ptr_to_infile, double *idat, double *qdat )
     return 1;
     }
 
-// Check format - 16bit PCM
-    if (sndInfo.format != (SF_FORMAT_WAV | SF_FORMAT_PCM_16)) {
-        fprintf(stderr, "Input should be 16bit Wav\n");
+// Check file format - Microsoft WAV (or WAVEFORMATEX optionally)
+    if (((sndInfo.format & SF_FORMAT_WAV  ) != SF_FORMAT_WAV  ) &&
+        ((sndInfo.format & SF_FORMAT_WAVEX) != SF_FORMAT_WAVEX)) {
+        fprintf(stderr, "Incorrect source file format, must be Microsoft WAV\n");
+        sf_close(sndFile);
+        return 1;
+    }
+
+// Check sample size - signed 16, 24 or 32 bit integers or FLOAT
+    if (((sndInfo.format & SF_FORMAT_PCM_16) != SF_FORMAT_PCM_16) &&
+        ((sndInfo.format & SF_FORMAT_PCM_24) != SF_FORMAT_PCM_24) &&
+        ((sndInfo.format & SF_FORMAT_PCM_32) != SF_FORMAT_PCM_32) &&
+        ((sndInfo.format & SF_FORMAT_FLOAT)  != SF_FORMAT_FLOAT)) {
+        fprintf(stderr, "Incorrect sample size, must be 16/24/32 bits\n");
+        sf_close(sndFile);
+        return 1;
+    }
+
+// Check sample rate - 12 kHz
+    if (sndInfo.samplerate != 12000) {
+        fprintf(stderr, "Incorrect sample rate, must be 12 kHz\n");
         sf_close(sndFile);
         return 1;
     }
 
 // Check channels - mono
     if (sndInfo.channels != 1) {
-        fprintf(stderr, "Wrong number of channels\n");
+        fprintf(stderr, "Incorrect number of channels, must be mono\n");
         sf_close(sndFile);
         return 1;
     }
@@ -140,6 +158,16 @@ unsigned long readwavfile(char *ptr_to_infile, double *idat, double *qdat )
     if ( npoints < 12000*110 ) {
         printf("file length is %lu seconds\n",npoints/12000);
         return 1;
+    }
+
+// Check for an optional FFTW wisdom file
+    FILE *fp_fftw_wisdom_file;
+    char *fftw_wisdom_filename;
+    if ((fftw_wisdom_filename = getenv("WSPRD_FFTW_WISDOM"))) {
+        if ((fp_fftw_wisdom_file = fopen(fftw_wisdom_filename, "r"))) {
+          fftw_import_wisdom_from_file(fp_fftw_wisdom_file);
+          fclose(fp_fftw_wisdom_file);
+        }
     }
 
 //    printf("%d %d %d %d\n",i0, nfft1, nfft2, npoints);
@@ -614,6 +642,7 @@ void usage(void)
     printf("       infile must have suffix .wav or .c2\n");
     printf("\n");
     printf("Options:\n");
+    printf("       -e x (x is transceiver dial frequency error in Hz)\n");
     printf("       -f x (x is transceiver dial frequency in MHz)\n");
 // blanking is not yet implemented. The options are accepted for compatibility
 // with development version of wsprd.
@@ -648,6 +677,7 @@ int main(int argc, char *argv[])
     int shift0[200];
     float dt=1.0/375.0;
     float dialfreq_cmdline=0.0, dialfreq;
+    float dialfreq_error=0.0;
     float fmin=-110, fmax=110;
     float f1, fstep, sync1, drift1, tblank, fblank;
 
@@ -661,13 +691,17 @@ int main(int argc, char *argv[])
     idat=malloc(sizeof(double)*nfft2);
     qdat=malloc(sizeof(double)*nfft2);
     
-    while ( (c = getopt(argc, argv, "b:f:Hnqt:wv")) !=-1 ) {
+    while ( (c = getopt(argc, argv, "b:e:f:Hnqt:wv")) !=-1 ) {
         switch (c) {
             case 'b':
                 fblank = strtof(optarg,NULL);
                 break;
+            case 'e':
+                dialfreq_error = strtof(optarg,NULL);   // units of Hz
+                // dialfreq_error = dial reading - actual, correct frequency
+                break;
             case 'f':
-                dialfreq_cmdline = strtof(optarg,NULL);
+                dialfreq_cmdline = strtof(optarg,NULL); // units of MHz
                 break;
             case 'H':
                 usehashtable = 0;
@@ -707,13 +741,14 @@ int main(int argc, char *argv[])
         if( npoints == 1 ) {
             return 1;
         }
-        dialfreq=dialfreq_cmdline;
+        dialfreq=dialfreq_cmdline - (dialfreq_error*1.0e-06);
     }    else if ( strstr(ptr_to_infile,".c2") !=0 )  {
         ptr_to_infile_suffix=strstr(ptr_to_infile,".c2");
         npoints=readc2file(ptr_to_infile, idat, qdat, &dialfreq);
         if( npoints == 1 ) {
             return 1;
         }
+        dialfreq -= (dialfreq_error*1.0e-06);
     }   else {
         printf("Error: infile must have suffix .wav or .c2\n");
         return 1;
@@ -829,6 +864,10 @@ int main(int argc, char *argv[])
             npk++;
         }
     }
+
+// compute the corrected fmin, fmax (account for dial frequency error)
+    fmin += dialfreq_error;    // dialfreq_error is in units of Hz
+    fmax += dialfreq_error;
 
 // let's not waste time on signals outside of the range [fmin,fmax].
     i=0;
