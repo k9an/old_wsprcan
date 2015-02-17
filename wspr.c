@@ -957,7 +957,7 @@ definition
     char allcalls[npk][13];
     memset(allcalls,0,sizeof(char)*npk*13);
     memset(grid,0,sizeof(char)*5);
-    memset(grid6,0,sizeof(char)*6);
+    memset(grid6,0,sizeof(char)*7);
     memset(callsign,0,sizeof(char)*13);
     memset(call_loc_pow,0,sizeof(char)*23);
     memset(cdbm,0,sizeof(char)*3);
@@ -1116,6 +1116,7 @@ definition
                 }
             } else if ( ntype < 0 ) {
                 ndbm=-(ntype+1);
+                memset(grid6,0,sizeof(char)*7);
                 strncat(grid6,callsign+5,1);
                 strncat(grid6,callsign,5);
                 ihash=(n2-ntype-64)/128;

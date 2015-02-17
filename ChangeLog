@@ -1,3 +1,9 @@
+2-16-2015 Steve K9AN
+
+Applied grid6 patch contributed by John, KD6EKQ. This fixes a bug that
+caused the displayed 6-digit locator to be corrupted when there were two
+or more type 3 messages decoded.
+
 2-15-2015 Steve K9AN
 
 Applied patch file contributed by John, KD6EKQ. This adds the following:
