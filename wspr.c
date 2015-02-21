@@ -43,7 +43,7 @@ unsigned char pr3[162]=
     0,0,0,0,0,0,0,1,1,0,1,0,1,1,0,0,0,1,1,0,
     0,0};
 
-unsigned long readc2file(char *ptr_to_infile, double *idat, double *qdat, float *freq)
+unsigned long readc2file(char *ptr_to_infile, double *idat, double *qdat, double *freq)
 {
     float buffer[2*65536];
     double dfreq;
@@ -55,7 +55,7 @@ unsigned long readc2file(char *ptr_to_infile, double *idat, double *qdat, float 
     unsigned long nread=fread(c2file,sizeof(char),14,c2fh);
     nread=fread(&ntrmin,sizeof(int),1,c2fh);
     nread=fread(&dfreq,sizeof(double),1,c2fh);
-    *freq=(float)dfreq;
+    *freq=dfreq;
     nread=fread(buffer,sizeof(float),2*45000,c2fh);
     
     for(i=0; i<45000; i++) {
@@ -676,7 +676,7 @@ int main(int argc, char *argv[])
     float freq0[200],snr0[200],drift0[200],sync0[200];
     int shift0[200];
     float dt=1.0/375.0;
-    float dialfreq_cmdline=0.0, dialfreq;
+    double dialfreq_cmdline=0.0, dialfreq;
     float dialfreq_error=0.0;
     float fmin=-110, fmax=110;
     float f1, fstep, sync1, drift1, tblank, fblank;
@@ -701,7 +701,7 @@ int main(int argc, char *argv[])
                 // dialfreq_error = dial reading - actual, correct frequency
                 break;
             case 'f':
-                dialfreq_cmdline = strtof(optarg,NULL); // units of MHz
+                dialfreq_cmdline = strtod(optarg,NULL); // units of MHz
                 break;
             case 'H':
                 usehashtable = 0;
@@ -1158,7 +1158,7 @@ definition
                 printf("%4s %3.0f %4.1f %10.6f %2d  %-s \n",
                    uttime, snr0[j],(shift1*dt-2.0), dialfreq+(1500+f1)/1e6,
                    (int)drift1, call_loc_pow);
-                fprintf(fall_wspr,"%6s %4s %3.0f %3.0f %4.1f %10.6f  %-22s %2d %5lu %4d\n",
+                fprintf(fall_wspr,"%6s %4s %3.0f %3.0f %4.1f %10.7f  %-22s %2d %5lu %4d\n",
                        date,uttime,sync1*10,snr0[j],
                        shift1*dt-2.0, dialfreq+(1500+f1)/1e6,
                        call_loc_pow, (int)drift1, cycles/81, ii);
