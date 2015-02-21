@@ -1,3 +1,11 @@
+2-20-2015 Steve K9AN
+
+Fixed a bug that caused slight frequency error (less than 0.5 Hz). Thanks
+to Glenn, N6GN for pointing me toward this issue.
+
+Also added one more digit of precision to frequency reports in ALL_WSPR.TXT.
+This will be used to study the variability of frequency estimates.
+
 2-16-2015 Steve K9AN
 
 Applied grid6 patch contributed by John, KD6EKQ. This fixes a bug that
