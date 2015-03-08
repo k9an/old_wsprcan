@@ -600,8 +600,8 @@ void unpackpfx( int32_t nprefix, char *call)
             strncat(call,pfx,1);
         }
         else if( (nc >= 36) & (nc <= 125) ) {
-            pfx[0]=(nc-26)/10;
-            pfx[1]=(nc-26)%10;
+            pfx[0]=(nc-26)/10+48;
+            pfx[1]=(nc-26)%10+48;
             strcpy(call,tmpcall);
             strncat(call,"/",1);
             strncat(call,pfx,2);

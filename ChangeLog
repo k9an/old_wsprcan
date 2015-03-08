@@ -1,3 +1,7 @@
+3-7-2015 Steve K9AN
+
+Fixed a problem that affected extended callsigns with a 2-character suffix.
+
 2-20-2015 Steve K9AN
 
 Fixed a bug that caused slight frequency error (less than 0.5 Hz). Thanks
