@@ -1,10 +1,10 @@
 CC=gcc
 CFLAGS= -I/usr/include -Wall -O2
 LDFLAGS = -L/usr/lib 
-LIBS = -lsndfile -lfftw3 -lm
+LIBS = -lfftw3 -lm
 
-DEPS = fano.h
-OBJ = wspr.o fano.o tab.o nhash.o
+DEPS = fano.h wsprd_utils.h
+OBJ = wsprd.o wsprd_utils.o fano.o tab.o nhash.o
 
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
