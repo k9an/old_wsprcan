@@ -1,3 +1,10 @@
+5-8-2015 Joe Taylor, K1JT and Steve Franke, K9AN
+
+Merged in Joe Taylor's modifications which yield a huge speed improvement
+and also increase # of decodes by 2-3%. Speed improvement ranges from a
+factor of 4 to a factor of 8 depending on noise type, with the larger
+improvements associated with files that contain significant lightning events.
+
 3-7-2015 Steve K9AN
 
 Fixed a problem that affected extended callsigns with a 2-character suffix.
