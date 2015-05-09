@@ -8,9 +8,6 @@
  Copyright 2001-2015, Joe Taylor, K1JT
  Copyright 2014-2015, Steven Franke, K9AN
 
- Much of the present code is based on work by Steven Franke, K9AN, 
- which in turn was based on earlier work by K1JT.
-
  License: GNU GPL v3
  
  This program is free software: you can redistribute it and/or modify

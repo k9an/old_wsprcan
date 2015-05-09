@@ -5,7 +5,7 @@ The program is written in C and is a command-line program that reads from a
 it can be used as a drop-in replacement for the wsprd program that wspr-x uses 
 for decoding. 
 
-k9an-wsprd requires only two external libraries: libsndfile and libfftw3
+k9an-wsprd requires only one external library: libfftw3
 
 COMPILING:
 A bare-bones Makefile is included. 
